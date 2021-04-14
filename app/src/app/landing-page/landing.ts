@@ -9,6 +9,5 @@ export class LandingPageComponent {
   title = 'landing-page';
 
   constructor(){
-      console.log(1212)
   }
 }
