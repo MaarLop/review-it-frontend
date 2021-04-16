@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Review } from '../core/models/review-model';
+import { ReviewService } from '../services/review.service';
 
 @Component({
     selector: 'app-home-page',
@@ -19,6 +20,13 @@ reviews = [new Review('Esto es un titulo1', 'Esto es una descripcion de reseña'
     new Review('Esto es un titulo4', 'Esto es una descripcion de reseña', new Date(), 1, this.hashtags3),
 ];
     
-    constructor(){
+    constructor(private reviewService: ReviewService){ }
+
+    ngOnInit(): void {
+        this.reviewService.getReviews().subscribe(data => {
+            this.reviews = data.content;
+            this.loading = false;
+            console.log(data)
+        });
     }
 }
