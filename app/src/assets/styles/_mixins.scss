@@ -1,0 +1,508 @@
+@import '/src/assets/styles/_variables';
+@import '/src/assets/styles/_icons';
+@import '/src/assets/styles/shared';
+@mixin nav-font-family {
+  // font-family
+  color: $navigation-primary-color;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+////////////////////////////////////////////
+//    TRANSFORMACIONES                    //
+////////////////////////////////////////////
+@mixin transform($transforms) {
+  -moz-transform: $transforms;
+  -ms-transform: $transforms;
+  -o-transform: $transforms;
+  -webkit-transform: $transforms;
+  transform: $transforms;
+}
+
+////////////////////////////////////////////
+//     TRANSITIONES Y ANIMACIONES         //
+////////////////////////////////////////////
+////////////////////////////////////////////
+//     TIPO Y TIEMPO DE TRANSICION        //
+//     Por ej: all 0.5s ease-in-out       //
+//: transition:                           //
+// property   all/ fadeIn / fadeOut       //
+// duration   0.5s  (s, ms)               //
+// timing-function   easeIn/ easeOut      //
+//                                        //
+////////////////////////////////////////////
+@mixin transition($transitions) {
+  -moz-transition: $transitions;
+  -ms-transition: $transitions;
+  -o-transition: $transitions;
+  -webkit-transition: $transitions;
+  transition: $transitions;
+}
+
+// ANIMACION ROTACION
+@mixin rotate-animation($from: 0deg, $to: 360deg) {
+  @keyframes rotate {
+    from {
+      transform: rotate($from);
+    }
+    to {
+      transform: rotate($to);
+    }
+  }
+  @-webkit-keyframes rotate {
+    from {
+      -webkit-transform: rotate(0deg);
+    }
+    to {
+      -webkit-transform: rotate(360deg);
+    }
+  }
+}
+
+////////////////////////////////////////////
+//   / TIPO Y TIEMPO DE TRANSICION        //
+////////////////////////////////////////////
+////////////////////////////////////////////
+//  / TRANSFORMACIONES                    //
+////////////////////////////////////////////
+@mixin border-thin($color: $generic-border-color, $radius: 0) {
+  border: solid 1px $color;
+  border-radius: $radius;
+}
+
+@mixin border-thick($color: $generic-border-color) {
+  border: solid thick $color;
+}
+
+@mixin border-bottom-thin($color: $generic-border-color) {
+  border-bottom: solid 1px $color;
+}
+
+@mixin border-top-thin($color: $generic-border-color) {
+  border-top: solid 1px $color;
+}
+
+@mixin border-left-thin($color: $generic-border-color) {
+  border-left: solid 1px $color;
+}
+
+@mixin border-right-thin($color: $generic-border-color) {
+  border-right: solid 1px $color;
+}
+
+@mixin widget-common-elements(
+  $background-color: $widget-background-color,
+  $font-color: $content-primary-color
+) {
+  @include border-thin($widget-border-color, $border-radius);
+  @include common-texts($font-color);
+  background-color: $background-color;
+  margin: $widget-margins;
+}
+
+@mixin widget-header-base {
+  font-size: $title-font-size;
+  font-weight: $title-font-weight;
+  height: $section-heads-height;
+  padding: 5px 20px 5px 20px;
+}
+
+@mixin common-texts($color: $content-primary-color) {
+  color: $color;
+  font-family: inherit;
+  font-size: $common-texts-font-size;
+  font-weight: 500;
+}
+
+@mixin text-light-font {
+  font-weight: lighter;
+}
+
+@mixin text-regular-font {
+  font-weight: 500;
+}
+
+@mixin text-bold-font {
+  font-weight: 700;
+}
+
+@mixin text-no-decoration {
+  text-decoration: none;
+}
+
+@mixin text-resized($size) {
+  font-size: $size;
+}
+
+@mixin title-level-1 {
+  @include text-bold-font;
+}
+
+@mixin title-level-2 {
+  @include text-regular-font;
+}
+
+@mixin button($icon, $icon-after: true) {
+  @if $icon-after {
+    @include icon-after($icon);
+  } @else {
+    @include icon-before($icon);
+  }
+  background-color: $button-submit-background-color;
+  border-radius: 3px;
+  color: $button-submit-color;
+  min-height: 30px;
+  padding: 8px;
+}
+
+@mixin modal-icon($icon) {
+  @include icon-after($icon);
+  font-size: 120px;
+}
+
+@mixin form-button($icon) {
+  @include common-texts;
+  @include button($icon);
+  min-height: 40px;
+  min-width: 110px;
+  &--disabled {
+    background-color: $button-disabled;
+    cursor: not-allowed;
+  }
+}
+
+@mixin sort-icon($icon) {
+  @include icon-after($icon);
+  cursor: pointer;
+}
+
+@mixin search-icon($icon) {
+  @include icon-after($icon);
+}
+
+@mixin icon-button($icon) {
+  @include icon-after($icon);
+  border-radius: 5px;
+  font-size: 0;
+  height: 30px;
+  width: 30px;
+  &:hover {
+    background-color: $button-hover-background-color;
+  }
+  &::after {
+    font-size: 14px;
+  }
+}
+
+@mixin submit-button($icon: $icon-arrow-right) {
+  @include form-button($icon);
+  background-color: $button-submit-background-color;
+  color: $button-submit-color;
+}
+
+@mixin delete-button($icon: $icon-delete) {
+  @include form-button($icon);
+  background-color: $button-delete-background-color;
+  color: $button-delete-color;
+}
+
+@mixin cancel-button($icon) {
+  @include form-button($icon);
+}
+
+@mixin bar-button {
+  @include common-texts;
+  height: 100%;
+  padding: 0 15px;
+  float: right;
+  &:hover {
+    background-color: $button-hover-background-color;
+  }
+}
+
+@mixin bar-link {
+  @include common-texts;
+  display: inline-block;
+  padding: 10px 15px;
+  text-decoration: none;
+  &:hover {
+    background-color: $button-hover-background-color;
+  }
+}
+
+@mixin bar-icon-button($icon) {
+  @include bar-button;
+  @include icon-before($icon);
+  font-size: 0;
+  &::before {
+    font-size: 14px;
+  }
+}
+
+@mixin table-row-button($icon-clone) {
+  @include button($icon-clone);
+  font-size: 0;
+  padding: 0 10px;
+  cursor: pointer;
+  &::after {
+    font-size: initial;
+  }
+  width: 38px;
+}
+
+@mixin accept-button {
+  @include button($icon-accept);
+  background-color: $button-accept-background-color;
+  color: $button-accept-color;
+  margin: 0 15px;
+  width: 150px;
+  &::after {
+    margin-left: 10px;
+  }
+}
+
+@mixin button-disabled {
+  background: $button-disabled !important;
+  color: $disabled-text-color !important;
+  cursor: not-allowed;
+  &:hover {
+    background: $button-disabled !important;
+  }
+}
+
+@mixin link-button($icon) {
+  @include submit-button($icon);
+  text-decoration: none;
+  &::after {
+    margin-left: 5px;
+  }
+}
+
+@mixin input-field {
+  @include border-thin;
+  @include text-light-font;
+  font-size: 12px;
+  height: 40px;
+  margin: 0 auto;
+  margin-top: 4px;
+  padding: 10px;
+}
+
+@mixin select-field {
+  @include border-thin;
+  @include text-light-font;
+  font-size: 12px;
+  height: 40px;
+  margin: auto;
+  margin-top: 4px;
+  padding: 10px;
+}
+
+@mixin input-text-area {
+  @include border-thin;
+  @include text-light-font;
+  display: block;
+  font-size: 12px;
+  height: 152px;
+  margin: 0 auto;
+  margin-top: 4px;
+  padding: 10px;
+  resize: none;
+  width: calc(100% - 30px);
+}
+
+@mixin input-error-field {
+  @include text-light-font;
+  color: $error-text-color;
+  font-size: 12px;
+  margin: 0 auto;
+  margin-top: 4px;
+  outline-color: $error-border-color;
+  padding: 10px;
+}
+
+@mixin form-error-summary($background-color: $error-background-color) {
+  @include text-light-font;
+  @include border-thin($error-border-color-semi-transparente);
+  background: $background-color;
+  clear: both;
+  color: $error-text-color;
+  display: block;
+  font-size: 12px;
+  margin: 10px auto;
+  outline-color: $error-border-color;
+  overflow: hidden;
+  padding: 10px;
+  width: calc(100% - 30px);
+}
+
+@mixin toggle-switch {
+  display: inline-block;
+  height: 24px;
+  position: relative;
+  width: 100%;
+  input {
+    /// si o si, para esto requiere invocar al elemento y no su clase
+    display: none;
+    &:checked + .switch-slider {
+      background-color: $button-primary-background-color;
+      box-shadow: inset 0 0 12px $shadow-color;
+      &::before {
+        @include transform(translateX(15px));
+      }
+    }
+  }
+  .switch-slider {
+    @include transition(all 0.2s ease-out);
+    background-color: $button-disabled;
+    border-radius: 12px;
+    bottom: 0;
+    cursor: pointer;
+    height: 20px;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 35px;
+    &::before {
+      @include transition(all 0.2s ease-out);
+      background-color: $content-background-color;
+      border-radius: 50%;
+      bottom: 4px;
+      content: '';
+      height: 13px;
+      left: 4px;
+      position: absolute;
+      width: 13px;
+    }
+  }
+}
+
+@mixin loading-overlay {
+  @include rotate-animation;
+  position: relative;
+  &::before {
+    background-color: $widget-loading-background-color;
+    content: ' ';
+    height: 100%;
+    left: 0;
+    opacity: 0.5;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    border-radius: 10px;
+  }
+  &::after {
+    @include icon($icon-sync-alt);
+    -webkit-animation: 2s rotate linear infinite;
+    animation: 2s rotate linear infinite;
+    left: 50%;
+    position: absolute;
+    top: 50%;
+  }
+}
+
+@mixin modal-title {
+  @include title-level-1;
+  display: inline-block;
+  padding-top: 6px;
+}
+
+@mixin shadow-large {
+  box-shadow: -1px 16px 21px -6px $sombra;
+}
+
+@mixin box-shadow($type, $shadow, $propagation, $color) {
+  box-shadow: $type 0 0 $shadow $propagation $color;
+}
+
+@mixin notificatoin-blob($text-color, $background-color) {
+  @include border-thin($text-color);
+  background-color: $background-color;
+  border-radius: 3px;
+  color: $text-color;
+  padding: 20px;
+}
+
+@mixin box-sizing($bs) {
+  $bs: unquote($bs);
+  @include experimental(
+    box-sizing,
+    $bs,
+    -moz,
+    -webkit,
+    not(-o),
+    not(-ms),
+    not(-khtml),
+    official
+  );
+}
+
+// ANIMACION TOAST
+@mixin keyframesToast {
+  @-webkit-keyframes fadein {
+    from {
+      bottom: 0;
+      opacity: 0;
+    }
+    to {
+      bottom: 30px;
+      opacity: 0.85;
+    }
+  }
+  @keyframes fadein {
+    from {
+      bottom: 0;
+      opacity: 0;
+    }
+    to {
+      bottom: 30px;
+      opacity: 0.85;
+    }
+  }
+  @-webkit-keyframes fadeout {
+    from {
+      bottom: 30px;
+      opacity: 0.85;
+    }
+    to {
+      bottom: 0;
+      opacity: 0;
+    }
+  }
+  @keyframes fadeout {
+    from {
+      bottom: 30px;
+      opacity: 0.85;
+    }
+    to {
+      bottom: 0;
+      opacity: 0;
+    }
+  }
+}
+
+@mixin label-chip($text-color, $background-color) {
+  background: $background-color;
+  border-radius: 3px;
+  color: $text-color;
+  padding: 5px 10px;
+  border: 1px solid transparent;
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1px;
+  line-height: 1.5;
+  padding: 2px 5px 1px;
+  text-align: center;
+  text-transform: uppercase;
+  vertical-align: baseline;
+  white-space: nowrap;
+  width: 130px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@mixin backward-button($icon: $icon-angle-double-left) {
+  @include button($icon, false);
+}

@@ -1,25 +1,61 @@
-    <!-- <form class="example-form">
-        <mat-form-field class="example-full-width">
-          <mat-label>Favorite food</mat-label>
-          <input matInput placeholder="Ex. Pizza" value="Sushi">
-        </mat-form-field>
-      
-        <mat-form-field class="example-full-width">
-          <mat-label>Leave a comment</mat-label>
-          <textarea matInput placeholder="Ex. It makes me feel..."></textarea>
-        </mat-form-field>
-      </form> -->
 
-      <div class="pxc-feats">
-          <input matInput placeholder="Titulo">
-        <textarea cols="120" maxlength="500" minlength="1" required rows="5"></textarea>
-        <main>
+<div class="widget-post" aria-labelledby="post-header-title">
+  <div class="widget-post__header">
+        <app-input
+            [group]="form"
+            [key]="'descripcion'"
+            [inputType]="'text'"
+            [label]="'Titulo'"
+        >
+        </app-input>
+  </div>
+  <form id="widget-form" class="widget-post__form" name="form" aria-label="post widget">
+    <div class="widget-post__content">
+      <label for="post-content" class="sr-only">Share</label>
+      <textarea name="post" id="post-content" class="widget-post__textarea scroller" placeholder="What's wrong with r00tme?"></textarea>
+    </div>
+    <div class="widget-post__options is--hidden" id="stock-options">
+    </div>
+    <div class="widget-post__actions post--actions">
+      <div class="post-actions__attachments">
+       <!--      <button type="button" class="btn post-actions__stock attachments--btn" aria-controls="stock-options" aria-haspopup="true">
+          <i class="fa fa-usd" aria-hidden="true"></i>
+          stock
+        </button>
+        <button type="button" class="btn post-actions__upload attachments--btn">
+          <label for="upload-image" class="post-actions__label">
+             <i class="fa fa-upload" aria-hidden="true"></i> 
+            upload image
+          </label>
+        </button>
+        <input type="file" id="upload-image" accept="image/*" multiple> 
+       -->
+        <app-rate-stars (rateSelected)="catchRating($event)"></app-rate-stars>
+
+      </div>
+      <div class="post-actions__widget">
+        <button class="btn post-actions__publish">publish</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+ <!--     
+<div class="createReview">
+  <div class="row">
+    <input class="titulo" matInput placeholder="Titulo">
+    <button mat-flat-button>Crear</button>
+  </div>
+  <textarea class="body" cols="120" maxlength="500" minlength="1" required rows="5"></textarea>
+  <input class="hashtag" matInput placeholder="Hashtag">
+  
+</div> 
+   <main>
           <p>Separate your tags with a comma</p>
           <div class="tags-input"></div>
           <h1><span>Tags</span> Input</h1>
         </main>
-      </div>
-      <script>
+   <script>
         var TagsInput = function(element) { 
   var self = this;
   var initChar = "\u200B";
@@ -173,4 +209,4 @@
 };
 
 var input = new TagsInput('.tags-input');
-      </script>
+      </script>-->

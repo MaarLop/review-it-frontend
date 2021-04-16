@@ -1,0 +1,7 @@
+<div *ngFor="let field of childrenFieldsConfigs">
+  <ng-container
+    [ngComponentOutlet]="field.component"
+    [ndcDynamicInputs]="getInputProperties(field)"
+    [ndcDynamicOutputs]="getOutputProperties(field)"
+  ></ng-container>
+</div>

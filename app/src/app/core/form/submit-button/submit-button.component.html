@@ -1,0 +1,10 @@
+<div [formGroup]="group" class="formFieldSubmit">
+  <button
+    type="submit"
+    class="formFieldSubmit-button"
+    [ngClass]="buttonClasses"
+    [disabled]="isSubmitDisabled"
+  >
+    {{ label }}
+  </button>
+</div>

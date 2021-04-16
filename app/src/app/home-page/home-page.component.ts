@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Review } from '../models/review-model';
+import { Review } from '../core/models/review-model';
 
 @Component({
     selector: 'app-home-page',

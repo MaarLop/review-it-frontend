@@ -1,0 +1,5 @@
+<div class="labelTooltip-contenedor">
+  <span *ngIf="showLabel">{{ data }}</span>
+  <ng-content *ngIf="!showLabel"></ng-content>
+  <span *ngIf="data" class="labelTooltip-tooltip">{{ data }}</span>
+</div>

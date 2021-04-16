@@ -1,0 +1,48 @@
+@import '/src/assets/styles/_icons';
+@import '/src/assets/styles/_mixins';
+@import '/src/assets/styles/_variables';
+
+:host {
+  width: 100%;
+}
+
+.dynamicForm {
+  // ToDo: Tal vez sea mejor que el dynamicForm no esté emplazado
+  // directamente en el contenedor, sino que pueda o no estar dentro
+  // del widget. Analizar si se tuviera que usar el componente en
+  // otros contenedores
+  @include widget-common-elements;
+
+  &-header {
+    @include widget-header-base;
+  }
+  &-headerTitle {
+    float: left;
+    margin-top: 10px;
+  }
+  &-headerCloseButton {
+    @include bar-icon-button($icon-close);
+    float: right;
+  }
+  &-fields {
+    padding: 15px;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  &-fieldWrapper {
+    flex: 1 1 10ch;
+    min-width: 330px;
+    margin-left: 9px;
+    margin-right: 9px;
+  }
+
+  &-actionsContainer {
+    display: flex;
+    &-small {
+      display: flex;
+      justify-content: right;
+      margin-left: 870px;
+    }
+  }
+}

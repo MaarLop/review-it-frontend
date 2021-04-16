@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import { Review } from 'src/app/models/review-model';
+import { Review } from '../models/review-model';
 
 @Component({
   selector: 'app-review-card',

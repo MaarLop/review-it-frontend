@@ -1,0 +1,30 @@
+@import '/src/assets/styles/_icons';
+@import '/src/assets/styles/_mixins';
+@import '/src/assets/styles/_variables';
+
+.crudLayout {
+
+  &-addButton {
+    @include bar-button;
+  }
+
+  &-tableAndFormLayout {
+    display: flex;
+  }
+
+  &-table {
+    flex: 1 1 400px;
+    min-width: 400px;
+  }
+
+  &-form {
+    display: none;
+
+    &-active {
+      display: block;
+      flex: 2 1 400px;
+      margin-left: 10px;
+      min-width: 400px;
+    }
+  }
+}

@@ -1,0 +1,29 @@
+<div class="typeahead">
+  <mat-form-field class="typeahead" [formGroup]="group">
+    <mat-label [ngClass]="{'required': isRequiredField}">{{label}}</mat-label>
+    <input
+      matInput
+      [formControlName]="key"
+      [matAutocomplete]="auto"
+    />
+  
+    <mat-autocomplete
+      autoActiveFirstOption
+      class="mat-autocomplete-panel"
+      #auto="matAutocomplete"
+      [displayWith]="displayFn()"
+    >
+      <mat-option *ngIf="isLoading" class="typeahead-loading">
+        <mat-spinner diameter="50"></mat-spinner>
+      </mat-option>
+      <ng-container *ngIf="!isLoading">
+        <mat-option *ngFor="let item of items" [value]="item.id">
+          <span>{{ item.descripcion }}</span>
+        </mat-option>
+      </ng-container>
+    </mat-autocomplete>
+    <ng-container *ngFor="let error of errorList" ngProjectAs="mat-error">
+      <mat-error> {{ error.message }}</mat-error>
+    </ng-container>
+  </mat-form-field>
+</div>

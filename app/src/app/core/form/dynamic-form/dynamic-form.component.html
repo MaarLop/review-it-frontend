@@ -1,0 +1,52 @@
+<section class="dynamicForm" *ngIf="currentForm$.value != null">
+  <div class="dynamicForm-header">
+    <h2 class="dynamicForm-headerTitle" *ngIf="isEdit == null; else fullTitle">
+      {{ title }}
+    </h2>
+    <ng-template #fullTitle>
+      <h2 class="dynamicForm-headerTitle">
+        {{ isEdit ? 'Edición de ' : 'Creación de ' }}
+        {{ title }}
+      </h2>
+    </ng-template>
+    <button
+      title="Cancelar"
+      class="dynamicForm-headerCloseButton"
+      (click)="closeForm.emit($event)"
+    >
+      Cerrar
+    </button>
+  </div>
+  <form [formGroup]="currentForm$.value" (submit)="onSubmit($event)">
+    <div class="dynamicForm-fields">
+      <div class="dynamicForm-fieldWrapper" *ngFor="let field of fieldsConfig">
+        <ng-container
+          [ngComponentOutlet]="field.component"
+          [ndcDynamicInputs]="getInputProperties(field)"
+          [ndcDynamicOutputs]="getOutputProperties(field)"
+        >
+        </ng-container>
+      </div>
+      <div class="dynamicForm-fieldWrapper" *ngFor="let field of buttonsConfig">
+        <ng-container
+          [ngComponentOutlet]="field.component"
+          [ndcDynamicInputs]="getInputProperties(field)"
+          [ndcDynamicOutputs]="getOutputProperties(field)"
+        >
+        </ng-container>
+      </div>
+    </div>
+    <div
+      class="dynamicForm-actionsContainer"
+      [ngClass]="{ 'dynamicForm-actionsContainer-small': isSmallSize }"
+    >
+      <ng-container
+        *ngFor="let action of actionsConfig"
+        [ngComponentOutlet]="action.component"
+        [ndcDynamicInputs]="getInputProperties(action)"
+        [ndcDynamicOutputs]="getOutputProperties(action)"
+      >
+      </ng-container>
+    </div>
+  </form>
+</section>

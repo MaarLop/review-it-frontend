@@ -1,0 +1,20 @@
+<div class="formFieldDate">
+  <mat-form-field class="demo-full-width" [formGroup]="group">
+    <mat-label [ngClass]="{'required': isRequiredField}">{{label}}</mat-label>
+    <input
+      matInput
+      [matDatepicker]="datePicker"
+      [formControlName]="key"
+      [max]="maxDate"
+      [min]="minDate"
+      disabled
+    />
+
+    <mat-datepicker-toggle matSuffix [for]="datePicker">
+    </mat-datepicker-toggle>
+    <mat-datepicker #datePicker disabled="false"></mat-datepicker>
+    <ng-container *ngFor="let error of errorList" ngProjectAs="mat-error">
+      <mat-error> {{ error.message }}</mat-error>
+    </ng-container>
+  </mat-form-field>
+</div>

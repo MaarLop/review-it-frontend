@@ -1,0 +1,15 @@
+<div class="formFieldInput">
+  <mat-form-field [formGroup]="group">
+    <mat-label [ngClass]="{'required': isRequiredField}">{{label}}</mat-label>
+    <input [ngClass]="{'required': isRequiredField}"
+      matInput
+      [formControlName]="key"
+      [type]="inputType"
+      [readonly]="readonly"
+      [ngClass]="{ inputDisabled: readonly }"
+    />
+    <ng-container *ngFor="let error of errorList" ngProjectAs="mat-error">
+      <mat-error> {{ error.message }}</mat-error>
+    </ng-container>
+  </mat-form-field>
+</div>

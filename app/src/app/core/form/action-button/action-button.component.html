@@ -1,0 +1,11 @@
+<div class="{{ class }}" *ngIf="visible$ == null || (visible$ | async)">
+  <button
+    class="{{ class }}-button"
+    [ngClass]="{ 'buttonContainer-button--disabled': disabled$ | async }"
+    [disabled]="disabled$ != null && (disabled$ | async)"
+    (click)="clicked.emit($event)"
+    type="button"
+  >
+    {{ label }}
+  </button>
+</div>

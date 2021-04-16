@@ -1,5 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
-
+@import '/src/assets/styles/_resets';
+@import '/src/assets/styles/_fonts';
+@import '/src/assets/styles/crud-base.component';
+@import '/src/assets/styles/form-base.component';
+@import '/src/assets/styles/nested-crud-base.component';
+@import '~@angular/material/prebuilt-themes/indigo-pink';
 body {
     margin: 0;
     font-family: Roboto, "Helvetica Neue", sans-serif;

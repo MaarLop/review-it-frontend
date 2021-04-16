@@ -1,0 +1,236 @@
+@import '/src/assets/styles/_icons';
+@import '/src/assets/styles/_mixins';
+@import '/src/assets/styles/_variables';
+
+.modelForm {
+  @include widget-common-elements; // bg, border & margin.
+  overflow: hidden;
+  padding: 1px;
+  text-align: left;
+
+  &-title {
+    @include text-bold-font;
+    display: inline-block;
+    margin: 24px 0 0 20px;
+    text-align: left;
+    width: 88%;
+  }
+
+  &-formError {
+    @include form-error-summary;
+  }
+
+  &-form {
+    height: auto;
+    margin: auto;
+    margin-top: 40px;
+  }
+
+  &-actionPanel {
+    height: 90px;
+    margin: auto;
+    overflow: hidden;
+    padding: 15px;
+  }
+
+  &-resetButton,
+  &-submitButton,
+  &-deleteButton {
+    // TODO: esto hay que mejorarlo, resetButton no debería usar un mixin como submit-button() para luego sobrescribir
+    // algunas reglas. Además, culpa de esto tenemos que agregar las reglas para ``-disabled` mas abajo para
+    // asegurarnos que sobrescriban el background color solo porque figuran después en la hoja de estilos.
+    @include submit-button($icon-arrow-right);
+    float: right;
+    margin: 0 15px;
+
+    &::after {
+      margin-left: 10px;
+    }
+  }
+
+  &-deleteButton {
+    @include icon-after($icon-delete);
+    background: $button-delete-background-color;
+    color: $button-delete-color;
+    margin-right: 0;
+  }
+
+  &-resetButton {
+    @include icon-after($icon-close);
+    background: $button-reset-background;
+    margin-right: 0;
+  }
+
+  &-controlBar {
+    float: right;
+    margin-right: 12px;
+    margin-top: 27px;
+    width: 15px;
+
+    &.nestedControlBar {
+      margin-top: 27px;
+      width: 26px 20px;
+    }
+  }
+
+  &-cancelButton {
+    @include icon-before($icon-close);
+  }
+
+  &-submitButton-disabled,
+  &-resetButton-disabled {
+    background: $button-disabled;
+  }
+}
+
+.formFields {
+  display: flex;
+  flex-wrap: wrap;
+
+  &-formField {
+    flex: 1 1 300px;
+    min-width: 33%;
+  }
+
+  &-title {
+    @include text-bold-font;
+    display: inline;
+    font-size: 15px;
+    margin-left: 10px;
+    width: 50%;
+  }
+
+  &-fieldErrorItem,
+  &-fieldLabelErrorItem {
+    @include input-error-field;
+    height: auto;
+    margin: -15px 5px auto;
+  }
+
+  &-invalid {
+    &-select,
+    &-selectOrNewSelect {
+      @include input-error-field;
+      @include border-thin($error-border-color);
+      height: 42px;
+      margin-bottom: 15px;
+      min-height: 42px;
+      width: calc(100% - 15px);
+    }
+  }
+
+  &-field {
+    height: auto;
+    margin-top: 5px;
+    min-height: 74px;
+    padding-top: 22px;
+    padding-left: 22px;
+
+    &-invalid {
+      .formFields-inputText,
+      .formFields-textArea,
+      .formFields-inputPassword,
+      .formFields-select,
+      .formFields-selectOrNewSelect,
+      .formFields-selectOrNewNew,
+      .formFields-checkbox {
+        @include input-error-field;
+        @include border-thin($error-border-color);
+      }
+
+      .formFields-select,
+      .formFields-selectOrNewSelect {
+        height: 42px;
+      }
+    }
+  }
+
+  &-fieldLabel,
+  &-switchLabel {
+    font-size: 12px;
+    padding-left: 15px;
+    width: 100%;
+  }
+
+  &-comment {
+    @include text-bold-font;
+    display: block;
+    margin: 20px 17px;
+    width: 100%;
+  }
+
+  &-selectOrNewContainer {
+    margin: 4px 15px;
+  }
+
+  &-select,
+  &-selectMultiple {
+    @include select-field;
+    display: block;
+    margin-bottom: 15px;
+    width: calc(100% - 30px);
+  }
+
+  &-selectOrNewSelect {
+    @include select-field;
+    display: inline-block;
+    margin-bottom: 15px;
+    width: calc(100% - 54px);
+  }
+
+  &-selectMultiple {
+    height: auto;
+  }
+
+  &-inputText,
+  &-inputPassword {
+    @include input-field;
+    display: block;
+    width: calc(100% - 30px);
+  }
+
+  &-textArea {
+    @include input-text-area;
+  }
+
+  &-selectOrNewNew {
+    @include input-field;
+    display: inline-block;
+    width: calc(100% - 54px);
+  }
+
+  &-selectOrNewSelect,
+  &-selectOrNewNew {
+    &-inactive {
+      display: none;
+    }
+  }
+
+  .switch-container {
+    @include toggle-switch;
+    left: 180px;
+    top: -18px;
+  }
+
+  &-section {
+    background-color: $content-background-secondary-color;
+    display: flex;
+    flex: 1 1 100%;
+    flex-wrap: wrap;
+    margin: 10px;
+  }
+
+  &-sectionTitle {
+    @include title-level-2;
+    display: inline-block;
+    margin-left: 10px;
+    padding-top: 10px;
+    width: 100%;
+  }
+  &-typeahead {
+    padding-top: 0px;
+  }
+  &-chips {
+    height: auto;
+  }
+}

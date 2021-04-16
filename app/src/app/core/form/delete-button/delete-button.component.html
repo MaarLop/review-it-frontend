@@ -1,0 +1,11 @@
+<div class="formFieldDelete">
+  <button
+    type="button"
+    class="formFieldDelete-button"
+    [ngClass]="{ 'formFieldDelete-button--disabled': disabled$ | async }"
+    [disabled]="disabled$ != null && (disabled$ | async)"
+    (click)="clicked.emit($event)"
+  >
+    {{ label }}
+  </button>
+</div>

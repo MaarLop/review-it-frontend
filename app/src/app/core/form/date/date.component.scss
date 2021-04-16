@@ -1,0 +1,21 @@
+.formFieldDate {
+  width: 100%;
+  .mat-form-field {
+    width: 91%;
+    font-family: 'Open Sans', sans-serif;
+    line-height: 1.2;
+  }
+}
+
+// Este codigo es un workarround para que el input no tome el estilo desabilitado.
+// Debido a que desabilitamos el input para no permitir ingresar directamente el valor, dejando solamente la posibilidad desde el calendar
+::ng-deep .mat-input-element:disabled,
+.mat-form-field-type-mat-native-select.mat-form-field-disabled
+  .mat-form-field-infix::after {
+  color: rgba(0, 0, 0, 0.87);
+}
+
+.required:before {
+  content:"* ";
+  color: red;
+}

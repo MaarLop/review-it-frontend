@@ -1,0 +1,16 @@
+<div class="formFieldSelect">
+  <mat-form-field class="demo-full-width margin-top" [formGroup]="group">
+    <mat-label [ngClass]="{'required': isRequiredField}">{{label}}</mat-label>
+    <mat-select
+      [formControlName]="key"
+      [disabled]="disabled$ | async"
+    >
+      <mat-option *ngFor="let option of options$ | async" [value]="option.id">{{
+        option.descripcion
+      }}</mat-option>
+    </mat-select>
+    <ng-container *ngFor="let error of errorList" ngProjectAs="mat-error">
+      <mat-error> {{ error.message }}</mat-error>
+    </ng-container>
+  </mat-form-field>
+</div>

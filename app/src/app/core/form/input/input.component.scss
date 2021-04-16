@@ -1,0 +1,16 @@
+.formFieldInput {
+  max-height: 65px;
+  width: 100%;
+  .mat-form-field {
+    width: 91%;
+  }
+}
+
+.inputDisabled {
+  cursor: not-allowed;
+}
+
+.required:before {
+  content:"* ";
+  color: red;
+}
