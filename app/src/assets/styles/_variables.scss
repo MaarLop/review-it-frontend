@@ -1,0 +1,176 @@
+//////////////////////////
+// PALETA DE COLORES    //
+//////////////////////////
+//
+// Paleta de colores:
+// de mas claro a mas oscuro
+// Los colores se tomaron del template señalado y se los especificó en una paleta.
+// Para cada componente, elemento, tag, etc, se le asigna un color específico de esta paleta.
+// Conservar la tonalidad de menor a mayor. De mas oscuro a mas claro:
+// el color mas bajo 1 es el mas oscuro. 00 es negro, ff = blanco.
+// gris-1 = mas oscuro. gris-2 = mas claro.
+//
+$_gris-oscuro-1: #1a2226;
+$_gris-oscuro-2: #222d32;
+$_gris-oscuro-3: #263238;
+$_gris-oscuro-4: #333; /// sin color
+$_gris-oscuro-5: #364044;
+$_gris-oscuro-rgba: rgba(30, 30, 30, 1);
+
+$_gris-medio-1: #8d9aa0;
+$_gris-medio-2: #999; /// sin color
+$_gris-medio-3: #bbb; //ejemplo textos nav
+$_gris-medio-4: #c0c4c5; //ejemplo textos nav
+
+$_gris-claro-1: #ddd; // ejemplo: bordes widgets.
+$_gris-claro-2: #e0e0e0; //ejemplo: fondos destacados o separados
+
+$_blanco-pseudo-1: #f5f5f5; //ejemplo: fondo main content
+$_blanco-pseudo-2: #f9f9f9;
+$_blanco-pseudo-3: #fafafa;
+$_blanco-pleno: #fff;
+$_blanco-pleno-semitransparente: rgba(255, 255, 255, 0.5);
+$_blanco-pleno-semiopaco: rgba(255, 255, 255, 0.9);
+
+$_verde-1: #205823;
+$_verde-2: #4bca50;
+$_verde-3: #e8f5e9;
+
+$_azul-medio-1: #455a64;
+$_azul-medio-2: #607d8b;
+$_azul-medio-3: #00446a;
+$_azul-medio-1-rgba-transparente: rgba(69, 90, 100, 0.6);
+$_celeste-1: #1e88e5;
+$_celeste-2: #2196f3;
+$_celeste-3: #26a69a;
+$_celeste-4: #65beb6;
+
+$_rojo-1: #c7254e;
+$_rojo-2: #ec407a;
+$_rojo-2-transparente: rgba(236, 64, 122, 0.4);
+$_rojo-3: #f9f2f4;
+
+$_amarillo-1: #ebb40e;
+$-amarillo-2: #f3f9d0;
+
+$_naranja-1: #aa3510;
+$_naranja-2: #ef6c00;
+$_naranja-3: #ff9800;
+$_naranja-4: #fff3e0;
+
+//////////////////////////
+// /PALETA DE COLORES   //
+//////////////////////////
+
+//////////////////////////
+// SEMANTIC VARIABLES   //
+//////////////////////////
+
+//main color for texts//
+$navigation-primary-color: $_gris-medio-1;
+$navigation-primary-color-highlight: $_blanco-pleno;
+$content-primary-color: $_gris-oscuro-4;
+$content-secondary-color: $_gris-medio-2;
+$content-special-color: $_celeste-1;
+$success-text-color: $_verde-1;
+$warning-text-color: $_naranja-1;
+$error-text-color: $_rojo-1;
+$disabled-text-color: $_gris-medio-3;
+$navigation-selected-icon-color: $_gris-claro-1;
+$clear-font-color: $_blanco-pleno-semitransparente;
+$item-font-color: $_celeste-3;
+$button-accept-color: $_blanco-pleno;
+$button-cancel-color: $_blanco-pleno;
+$button-delete-color: $_blanco-pleno;
+$stock-list-weight-label: $_blanco-pleno-semiopaco;
+
+//main color for backgorunds//
+$content-background-color: $_blanco-pleno;
+$content-background-secondary-color: $_gris-claro-2;
+$navigation-primary-background-color: $_gris-oscuro-3;
+$navigation-primary-background-color-highlighted: $_gris-oscuro-1;
+$navigation-main-background-color: $_gris-oscuro-2;
+$navigation-section-background-color: $_celeste-3;
+$widget-background-color: $_blanco-pleno;
+$widget-loading-background-color: $_gris-medio-4;
+$main-content-background-color: $_blanco-pseudo-1;
+$button-hover-background-color: $_blanco-pseudo-2;
+$table-row-hover-background-color: $_blanco-pseudo-3;
+$table-row-changing-background-color: $_amarillo-2;
+$table-row-error-background-color: $_rojo-2-transparente;
+$item-active-color: $_blanco-pseudo-1;
+$button-primary-background-color: $_celeste-2;
+$button-primary-color: $_blanco-pleno;
+$button-submit-background-color: $_celeste-2;
+$button-submit-color: $_blanco-pleno;
+$button-disabled: $_gris-medio-1;
+$button-reset-background: $_azul-medio-1;
+$button-active-background: $_celeste-4;
+$success-background-color: $_verde-3;
+$warning-background-color: $_naranja-4;
+$error-background-color: $_rojo-1;
+$error-background-color-login: $_rojo-3;
+$modal-overlay-background-color: $_gris-oscuro-1;
+$modal-background-color: $_blanco-pleno;
+$pdf-background-color: $_gris-claro-1;
+$button-accept-background-color: $_verde-2;
+$button-cancel-background-color: $_gris-medio-3;
+$button-delete-background-color: $_rojo-1;
+$button-backward-background-color: $_celeste-2;
+$background-shadow: $_azul-medio-1-rgba-transparente;
+$informative-primary-background-color: $_celeste-2;
+//main color for borders//
+$widget-border-color: $_gris-claro-1;
+$table-row-border-color: $_gris-claro-1;
+$table-header-border-color: $_gris-medio-3;
+$navgiation-header-border-color: $_gris-oscuro-5;
+$navigation-item-border: $_gris-oscuro-1;
+$generic-border-color: $_gris-claro-1;
+$success-border-color: $_verde-2;
+$warning-border-color: $_naranja-3;
+$error-border-color: $_rojo-2;
+$error-border-color-semi-transparente: $_rojo-2-transparente;
+$shadow-color: $_gris-oscuro-1;
+
+//status lables general colors//
+$status-label-information-color: $_celeste-2;
+$status-label-warning-color: $_celeste-3;
+$status-label-error-color: $_rojo-2;
+
+//brand colors//
+$brand-primary-color: $_azul-medio-3;
+
+//Medidas fijas de componentes//
+$section-heads-height: 54px;
+$title-font-size: 14px;
+$title-font-weight: 700;
+$widget-margins: 10px;
+
+$border-radius: 10px;
+
+$common-texts-font-size: 16px;
+
+$sombra: $_gris-oscuro-rgba;
+//////////////////////////
+// /SEMANTIC VARIABLES  //
+//////////////////////////
+
+///////////////////////////
+// ENVIRONMENT VARIABLES //
+///////////////////////////
+
+//$fontawesome-path: './fonts';
+$fontawesome-path: '/assets/fonts';
+$logo-width: 168px;
+$logo-height: 39px;
+
+//Toast
+$toast-success-background-color: $_verde-2;
+$toast-warning-background-color: $_naranja-3;
+$toast-error-background-color: $_rojo-1;
+$toast-close-icon-color: $_blanco-pleno-semitransparente;
+$toast-close-icon-hover-color: $_gris-medio-2;
+
+////////////////////////////
+// /ENVIRONMENT VARIABLES //
+////////////////////////////

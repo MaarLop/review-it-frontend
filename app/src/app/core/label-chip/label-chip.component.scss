@@ -1,0 +1,14 @@
+@import '/src/assets/styles/_icons';
+@import '/src/assets/styles/_mixins';
+@import '/src/assets/styles/_variables';
+
+.ordenCompra {
+  &-status {
+    &-borrador {
+      @include label-chip(
+        $status-label-borrador-status-color,
+        $status-label-borrador-background-color
+      );
+    }
+  
+}

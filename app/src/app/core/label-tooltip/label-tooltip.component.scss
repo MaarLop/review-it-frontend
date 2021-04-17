@@ -1,0 +1,26 @@
+@import '/src/assets/styles/_icons';
+@import '/src/assets/styles/_mixins';
+@import '/src/assets/styles/_variables';
+
+.labelTooltip {
+  &-tooltip {
+    background: $modal-overlay-background-color;
+    border: solid 1px $widget-border-color;
+    border-radius: 8px;
+    color: $button-accept-color;
+    overflow: hidden;
+    padding: 10px;
+    position: absolute;
+    visibility: hidden;
+    width: auto;
+  }
+
+  &-contenedor {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &-contenedor:hover &-tooltip {
+    visibility: visible;
+  }
+}

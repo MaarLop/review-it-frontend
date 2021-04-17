@@ -1,0 +1,12 @@
+<div class="formFieldSelectMultiple">
+  <mat-form-field class="demo-full-width margin-top" [formGroup]="group">
+    <mat-select [placeholder]="label" [formControlName]="key" multiple>
+      <mat-option *ngFor="let option of options$ | async" [value]="option.id">{{
+        option.descripcion
+      }}</mat-option>
+    </mat-select>
+    <ng-container *ngFor="let error of errorList" ngProjectAs="mat-error">
+      <mat-error> {{ error.message }}</mat-error>
+    </ng-container>
+  </mat-form-field>
+</div>

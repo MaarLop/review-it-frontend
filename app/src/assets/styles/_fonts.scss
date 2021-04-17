@@ -1,0 +1,25 @@
+@import '/src/assets/styles/_variables';
+
+// TODO: reemplazar con fuente incluida en bundle propio
+@import url('https://fonts.googleapis.com/css?family=Roboto'); // sass-lint:disable-line no-url-domains no-url-protocols
+
+@font-face {
+  font-family: 'FontAwesome';
+  font-style: normal;
+  font-weight: 900;
+  src: url('#{$fontawesome-path}/fa-solid-900.eot');
+  src: url('#{$fontawesome-path}/fa-solid-900.eot?#iefix') format('embedded-opentype'), // sass-lint:disable-line no-duplicate-properties
+  url('#{$fontawesome-path}/fa-solid-900.woff2') format('woff2'),
+  url('#{$fontawesome-path}/fa-solid-900.woff') format('woff'),
+  url('#{$fontawesome-path}/fa-solid-900.ttf') format('truetype'),
+  url('#{$fontawesome-path}/fa-solid-900.svg#fontawesome') format('svg');
+}
+
+@font-face {
+  font-family: 'GestionDepositoIcons';
+  font-style: normal;
+  font-weight: 500;
+  src: url('#{$fontawesome-path}/sgd-icons.eot');
+  src: url('#{$fontawesome-path}/sgd-icons.eot?#iefix') format('embedded-opentype'), // sass-lint:disable-line no-duplicate-properties
+  url('#{$fontawesome-path}/sgd-icons.ttf') format('truetype');
+}

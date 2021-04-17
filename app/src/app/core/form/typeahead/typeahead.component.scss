@@ -1,0 +1,15 @@
+.typeahead {
+  max-height: 65px;
+  width: 96%;
+
+  // sass-lint:disable force-element-nesting, force-pseudo-nesting
+  &-loading::ng-deep .mat-option-text {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.required:before {
+  content:"* ";
+  color: red;
+}

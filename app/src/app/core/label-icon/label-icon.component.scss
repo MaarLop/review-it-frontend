@@ -1,0 +1,19 @@
+@import '/src/assets/styles/_icons';
+@import '/src/assets/styles/_mixins';
+@import '/src/assets/styles/_variables';
+
+.danger {
+  margin-left: 1rem;
+  @include icon-after($icon-exclamation-triangle);
+  &::after {
+    color: $toast-error-background-color;
+  }
+}
+
+.warning {
+  margin-left: 1rem;
+  @include icon-after($icon-exclamation-circle);
+  &::after {
+    color: $toast-warning-background-color;
+  }
+}

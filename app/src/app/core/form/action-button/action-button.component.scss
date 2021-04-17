@@ -1,0 +1,23 @@
+@import '/src/assets/styles/_variables';
+@import '/src/assets/styles/_mixins';
+@import '/src/assets/styles/_icons';
+
+:host {
+  margin-bottom: 10px;
+  display: block;
+  flex: 1 1;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.buttonContainer {
+  &-button {
+    @include form-button($icon-list);
+    width: 100%;
+  }
+}
+
+.addButtonContainer {
+  display: flex;
+  justify-content: flex-end;
+}

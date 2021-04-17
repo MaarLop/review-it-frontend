@@ -1,0 +1,15 @@
+<mat-form-field [formGroup]="group" class="text-area">
+  <textarea
+    matInput
+    [formControlName]="key"
+    [placeholder]="label"
+    cdkTextareaAutosize
+    #autosize="cdkTextareaAutosize"
+    cdkAutosizeMinRows="1"
+    cdkAutosizeMaxRows="15"
+    class="text-area-form"
+  ></textarea>
+  <ng-container *ngFor="let error of errorList" ngProjectAs="mat-error">
+    <mat-error> {{ error.message }}</mat-error>
+  </ng-container>
+</mat-form-field>

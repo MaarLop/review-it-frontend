@@ -1,4 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
-
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+@import '/src/assets/styles/_resets';
+@import '/src/assets/styles/_fonts';
+@import '/src/assets/styles/crud-base.component';
+@import '/src/assets/styles/form-base.component';
+@import '/src/assets/styles/nested-crud-base.component';
+@import '~@angular/material/prebuilt-themes/indigo-pink';
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    background-color: #2d3436;
+    background-image: linear-gradient(-315deg, #2d3436 0%, #000000 74%);
+}

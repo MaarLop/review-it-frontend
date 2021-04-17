@@ -1,0 +1,36 @@
+.formFieldSelect {
+  width: 103%;
+  max-height: 65px;
+  .mat-form-field {
+    width: 88%;
+    font-size: 14px;
+    font-family: 'Open Sans', sans-serif;
+    line-height: 1.29;
+  }
+
+  // Workarround para sobreescribir estilo del select de material
+  // que agrega un padding que lo desalinea con el resto de los inputs,
+  // cuando se muestra en la misma linea.
+  // Recordar estos hacks del horror la proxima vez que pensemos en
+  // usar angular materials.
+  ::ng-deep .mat-form-field-wrapper {
+    padding-bottom: 1.43em;
+  }
+}
+
+::ng-deep.mat-form-field-appearance-legacy.mat-form-field-disabled
+  .mat-form-field-underline {
+  background-color: rgba(0, 0, 0, 0.42) !important;
+}
+
+::ng-deep.mat-form-field-appearance-legacy.mat-form-field-disabled
+  .mat-form-field-underline {
+  background-image: none !important;
+  background-size: unset !important;
+  background-repeat: unset !important;
+}
+
+.required:before {
+  content:"* ";
+  color: red;
+}
