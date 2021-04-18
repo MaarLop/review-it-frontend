@@ -1,13 +1,17 @@
 <mat-form-field [formGroup]="group" class="text-area">
   <textarea
     matInput
+    name="post"
+    id="post-content"
+    class="widget-post__textarea scroller"
     [formControlName]="key"
     [placeholder]="label"
+    maxlength="250"
     cdkTextareaAutosize
     #autosize="cdkTextareaAutosize"
     cdkAutosizeMinRows="1"
-    cdkAutosizeMaxRows="15"
-    class="text-area-form"
+    cdkAutosizeMaxRows="1"
+    appearance="none"
   ></textarea>
   <ng-container *ngFor="let error of errorList" ngProjectAs="mat-error">
     <mat-error> {{ error.message }}</mat-error>
