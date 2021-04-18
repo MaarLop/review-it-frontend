@@ -11,7 +11,6 @@ $cardCol: #1D1D2B ;
     
 *{
   font-family: rounded, sans-serif
-
 }
   
 html{
@@ -23,11 +22,10 @@ html{
 .plx-card{
 
   transition: all 600ms ease;
-  max-width: 1100px;
   display: flex;
   position: relative;
   overflow: hidden;
-  margin: 30px 90px ;
+  
   filter: drop-shadow(0 2px 1rem #112);
   border-radius: 4px;
   &-bronze{
@@ -83,6 +81,13 @@ html{
         }
       }
     }
+  }
+
+  @media screen and (min-width: $break-small){
+    // max-width: 83.78%;
+    // margin: 30px 88px ;
+    max-width: 100%;
+    margin: 30px 157px 0px 90px;
   }
 }
 .pxc-avatar{
@@ -143,8 +148,6 @@ html{
     }
 }
 
-
-
 .pxc-bg{
   transition: all 600ms ease;
   border-radius: 2px;
@@ -195,7 +198,7 @@ html{
   transition: all 600ms ease;
   border-radius: 3px;
   background: $cardCol;
-  width: 650px;
+  width: 755px;
   margin: 25px 200px 25px -25px;
   z-index: 0;
   padding: 15px 25px 15px 40px;
@@ -241,10 +244,11 @@ html{
     }
   }
 }
+ 
 .pxc-stopper{
   transition: all 600ms ease;
   height: 100%;
-  width: calc(60%);
+  width: calc(70%);
   background: #FFC2;
   display: block;
   position: absolute;
@@ -270,6 +274,7 @@ html{
     }
   }
 }
+
 .pxc-tags{
   position: absolute;
   bottom: -15px;
@@ -289,7 +294,7 @@ html{
     padding: 2px 10px;
     line-height: 1.7;
     margin: 4px 4px;
-    font-size: 12px;
+    font-size: 19px;
     height: 20px;
   }
   @media screen and (max-width: $break-small){
@@ -328,6 +333,7 @@ html{
     text-overflow: initial;
   }
 }
+
 .pxc-sub{
   font-size: 14px;
   margin: 2px 0 8px 0;
@@ -343,8 +349,9 @@ html{
     font-size: 13px;
   }
 }
+
 .pxc-feats{
-  font-size: 13px;
+  font-size: 15px;
   color: $c2;
   flex: 1 1 auto;
   //max-height: 50px;
@@ -358,7 +365,7 @@ html{
     display: none;
   }
   @media screen and (max-width: $break-small){
-    font-size: 12px;
+    font-size: 19px;
     margin-top: 10px;
     text-align: center;
   }
@@ -367,6 +374,7 @@ html{
     margin: 3px;
   }
 }
+
 .bottom-row{
   flex: 0 1 auto;
   margin-top: 10px;

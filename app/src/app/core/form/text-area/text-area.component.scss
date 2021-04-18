@@ -5,9 +5,14 @@
   }
   ::ng-deep{
     .mat-form-field-appearance-legacy, .mat-form-field-underline {
-        height: 0px !important;
-      }
+      height: 0px !important;
+      outline:none;
+    }
   }
+}
+textarea:focus {
+  outline: none !important;
+  border-color: #39394d;
 }
 
 .widget-post__textarea {
@@ -15,7 +20,6 @@
   height: 100%;
   padding: .5em;
   background-color:#39394d;
-  color: #fff;
 
   border: none;
   resize: none;
