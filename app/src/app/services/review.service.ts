@@ -17,7 +17,7 @@ export class ReviewService {
   }
 
   public save(body: Review){
-    const path = this.basePath + '/create';
+    const path = this.basePath + '/save';
     return this.httpClient.post(path, body);
   }
   

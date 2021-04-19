@@ -1,37 +1,26 @@
-
 <form [formGroup]="formNewReview">
-  <div class="widget-post" aria-labelledby="post-header-title">
-    <div class="widget-post__header">
-          <app-input
-              [group]="formNewReview"
-              [key]="'title'"
-              [inputType]="'text'"
-              [label]="'Titulo'"
-          >
-          </app-input>
-    </div>
-    <div id="widget-form" class="widget-post__form" name="form" aria-label="post widget">
-      <div class="widget-post__content">
-         <app-text-area
-          [group]="formNewReview"
-          [key]="'body'"
-          [label]="'Compatí tu opinión'"
-        >
-        </app-text-area>
-      </div>
-      <div class="widget-post__options is--hidden" id="stock-options">
-      </div>
-      <div class="widget-post__actions post--actions">
-        <div class="post-actions__attachments">
-        
-          <app-rate-stars (rateSelected)="catchRating($event)"></app-rate-stars>
+    <div class="widget-post" aria-labelledby="post-header-title">
+        <div class="widget-post__header">
+            <app-input [group]="formNewReview" [key]="'title'" [inputType]="'text'" [label]="'Titulo'">
+            </app-input>
+        </div>
+        <div id="widget-form" class="widget-post__form" name="form" aria-label="post widget">
+            <div class="widget-post__content">
+                <app-text-area [group]="formNewReview" [key]="'description'" [label]="'Compatí tu opinión'">
+                </app-text-area>
+            </div>
+            <div class="widget-post__options is--hidden" id="stock-options">
+            </div>
+            <div class="widget-post__actions post--actions">
+                <div class="post-actions__attachments">
 
+                    <app-rate-stars (rateSelected)="catchRating($event)"></app-rate-stars>
+
+                </div>
+                <div class="post-actions__widget">
+                    <button class="btn post-actions__publish" (click)="createReview()">Publicar</button>
+                </div>
+            </div>
         </div>
-        <div class="post-actions__widget">
-          <button class="btn post-actions__publish" (click)="createReview()">Publicar</button>
-        </div>
-      </div>
     </div>
-  </div>
 </form>
- 

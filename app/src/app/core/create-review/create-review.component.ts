@@ -28,7 +28,7 @@ export class CreateReviewComponent implements OnInit {
     this.formNewReview = this.fb.group(
       {
         title: [{value: '', disabled: false}],
-        body: [{ value: '', disabled: false }],
+        description: [{ value: '', disabled: false }],
         points: [{value: 0}]
       }
     )
