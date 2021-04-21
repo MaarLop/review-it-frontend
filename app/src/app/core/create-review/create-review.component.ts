@@ -17,7 +17,7 @@ export class CreateReviewComponent implements OnInit {
   star_rate = 'star_rate';
 
   @Output() newReview = new EventEmitter<Review>();
-  
+
   constructor(private fb: FormBuilder, private reviewService: ReviewService){
   }
 
@@ -40,13 +40,26 @@ export class CreateReviewComponent implements OnInit {
   }
 
   createReview(){
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+      }
+    })
     if(this.formNewReview.valid){
       console.log(this.formNewReview.getRawValue())
       Swal.fire({
         title: 'Estas seguro?',
         text: 'Su acción no puede ser revertida.',
         icon: 'warning',
+        background: '#a2a6a7',
         showCancelButton: true,
+        confirmButtonColor:'#008391',
         confirmButtonText: 'Sí, reseñalo!.',
         cancelButtonText: 'No, aún no.'
       }).then((result) => {
@@ -55,17 +68,21 @@ export class CreateReviewComponent implements OnInit {
             this.newReview.emit(review);
             this.startForm();
           })
-          Swal.fire(
-            'Publicada!',
-            'Reseña subida con exito.',
-            'success'
-          )
+          Toast.fire({
+            icon: 'success',
+            background: '#a2a6a7',
+            title: 'Publicado exitosamente!'
+          })
         } else if (result.dismiss === Swal.DismissReason.cancel) {
-          Swal.fire(
-            'Cancelada',
-            'No se ha realizado la publicación :(',
-            'error'
-          )
+          Swal.fire({
+            title: 'Cancelada',
+            text: 'No se ha realizado la publicación 😟',
+            icon: 'error',
+            background: '#a2a6a7',
+            showConfirmButton: false,
+            timer: 2000,
+            timerProgressBar: true
+          })
         }
       })
     }
