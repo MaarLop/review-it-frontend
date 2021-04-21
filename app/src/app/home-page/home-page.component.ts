@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { Review } from '../core/models/review-model';
 import { ReviewService } from '../services/review.service';
+// import * as _ from 'loadash' es una libreria
 
 @Component({
     selector: 'app-home-page',
@@ -9,24 +11,40 @@ import { ReviewService } from '../services/review.service';
 })
 export class HomePageComponent {
 
-loading = false;
-hashtags1: string []= ['#Accion', '#Drama', '#Netflix', '#Hoy']
-hashtags2: string []= ['#hashtags']
-hashtags3: string []= ['#SorryButNoTSorry', '#estoEsUnaReseña', '#malisimaaa']
+    loading = true;
+    hashtags1: string []= ['#Accion', '#Drama', '#Netflix', '#Hoy']
+    hashtags2: string []= ['#hashtags']
+    hashtags3: string []= ['#SorryButNoTSorry', '#estoEsUnaReseña', '#malisimaaa']
 
-reviews = [new Review('Esto es un titulo1', 'Esto es una descripcion de reseña', new Date(), 5, this.hashtags1),
-    new Review('Esto es un titulo2', 'Esto es una descripcion de reseña', new Date(), 4, this.hashtags1),
-    new Review('Esto es un titulo3', 'Esto es una descripcion de reseña', new Date(), 3, this.hashtags2),
-    new Review('Esto es un titulo4', 'Esto es una descripcion de reseña', new Date(), 1, this.hashtags3),
-];
-    
+    reviews$ = new BehaviorSubject<Review[]>([]);
+
+    batch: number = 5;
+    page: number = 0;
+    finished = false;
+    showSpinner = false;
+
     constructor(private reviewService: ReviewService){ }
 
     ngOnInit(): void {
-        this.reviewService.getReviews().subscribe(data => {
-            this.reviews = data.content;
-            this.loading = false;
-            console.log(data)
+        this.getReviews();
+    }
+
+    getReviews(){
+        if(this.finished) return;
+
+        this.reviewService.getReviews(this.batch, this.page).subscribe((response)=>{
+            const reviewList = this.reviews$.value;
+            this.reviews$.next([...reviewList, ...response.content]);
+            this.finished = response.last;
+            this.showSpinner = !this.finished;
+            this.page+=1;
         });
+    }
+
+    onScroll(){
+        setTimeout(() => {
+            this.getReviews();
+            this.showSpinner = false;
+        }, 2000);
     }
 }
