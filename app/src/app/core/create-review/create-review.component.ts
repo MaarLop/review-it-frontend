@@ -1,6 +1,7 @@
 import {Component, ElementRef, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ReviewService } from 'src/app/services/review.service';
+import Swal from 'sweetalert2';
 import { Review } from '../models/review-model';
 
 @Component({
@@ -41,10 +42,31 @@ export class CreateReviewComponent implements OnInit {
   createReview(){
     if(this.formNewReview.valid){
       console.log(this.formNewReview.getRawValue())
-      this.reviewService.save(this.formNewReview.getRawValue() as Review).subscribe((review: Review)=>{
-        alert('Se creo correctamente');
-        this.newReview.emit(review);
-        this.startForm();
+      Swal.fire({
+        title: 'Estas seguro?',
+        text: 'Su acción no puede ser revertida.',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Sí, reseñalo!.',
+        cancelButtonText: 'No, aún no.'
+      }).then((result) => {
+        if (result.value) {
+          this.reviewService.save(this.formNewReview.getRawValue() as Review).subscribe((review: Review)=>{
+            this.newReview.emit(review);
+            this.startForm();
+          })
+          Swal.fire(
+            'Publicada!',
+            'Reseña subida con exito.',
+            'success'
+          )
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          Swal.fire(
+            'Cancelada',
+            'No se ha realizado la publicación :(',
+            'error'
+          )
+        }
       })
     }
   }
