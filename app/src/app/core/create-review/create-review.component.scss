@@ -168,3 +168,7 @@ ul {
 ::ng-deep.mat-form-field-appearance-legacy .mat-form-field-underline {
   background-color: #666 !important;
 }
+
+::ng-deep .mat-focused .mat-form-field-underline {
+  display: none;
+}
