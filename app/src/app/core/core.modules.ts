@@ -29,6 +29,7 @@ import { GroupComponent } from './form/group/group.component';
 import { CreateReviewComponent } from './create-review/create-review.component';
 import { ReviewCardComponent } from './review-card/review-card.component';
 import { RateStarsComponent } from './rate-stars/rate-stats.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,7 @@ import { RateStarsComponent } from './rate-stars/rate-stats.component';
     GroupComponent,
     ReviewCardComponent,
     CreateReviewComponent,
-    RateStarsComponent
+    RateStarsComponent,
   ],
   imports: [
     CommonModule,
@@ -59,6 +60,7 @@ import { RateStarsComponent } from './rate-stars/rate-stats.component';
     ReactiveFormsModule,
     MatAutocompleteModule,
     MatProgressSpinnerModule,
+    MatSnackBarModule,
 
   ],
   providers: [

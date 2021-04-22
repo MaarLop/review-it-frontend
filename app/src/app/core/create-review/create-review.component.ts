@@ -16,7 +16,7 @@ export class CreateReviewComponent implements OnInit {
   star_rate = 'star_rate';
 
   @Output() newReview = new EventEmitter<Review>();
-  
+
   constructor(private fb: FormBuilder, private reviewService: ReviewService){
   }
 
@@ -40,12 +40,10 @@ export class CreateReviewComponent implements OnInit {
 
   createReview(){
     if(this.formNewReview.valid){
-      console.log(this.formNewReview.getRawValue())
-      this.reviewService.save(this.formNewReview.getRawValue() as Review).subscribe((review: Review)=>{
-        alert('Se creo correctamente');
+      this.reviewService.save(this.formNewReview.getRawValue() as Review).subscribe((review: Review) => {
         this.newReview.emit(review);
         this.startForm();
-      })
+      });
     }
   }
 
