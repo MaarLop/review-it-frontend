@@ -1,3 +1,9 @@
+.notification{
+    &.is-warning{
+        color:whitesmoke;
+        text-align: center;
+    }
+}
 .success-snackbar{
     background: #1add6b;
     opacity: 40%;

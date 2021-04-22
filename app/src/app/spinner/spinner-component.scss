@@ -3,13 +3,15 @@
     transform-origin: center;
     height: 20vh;
     width: 20vh;
-    position: absolute;
+    // position: absolute;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
     margin: auto;
     animation: loading-spinner-img 7s linear infinite;
+
+    position: inherit;
 
 }
 

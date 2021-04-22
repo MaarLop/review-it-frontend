@@ -9,6 +9,7 @@ import { SpinnerComponent } from './spinner/spinner-component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { CoreModule } from './core/core.modules';
 import { HttpClientModule } from '@angular/common/http';
+import {InfiniteScrollModule} from 'ngx-infinite-scroll'
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     BrowserAnimationsModule,
     CoreModule,
-    HttpClientModule
+    HttpClientModule,
+    InfiniteScrollModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

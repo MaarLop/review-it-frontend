@@ -1,3 +1,6 @@
+$break-small: 700px;
+$break-medium: 1500px;
+
 .homeButton,
 .navbar{
     background-color: rgb(9, 11, 23);
@@ -11,4 +14,14 @@
     text-decoration: none;
     display: inline-block;
     outline: none;
+
+    @media screen and (max-width: $break-medium) and (min-width: $break-small){
+        margin-left: 245px;
+    }
+    @media screen and (min-width:$break-medium){
+        margin-left: 496px;
+    }
+    @media screen and (max-width: $break-small) {
+        margin-left: 114px;
+    }
 }
