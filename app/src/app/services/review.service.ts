@@ -7,13 +7,13 @@ import { Review } from '../core/models/review-model';
   providedIn: 'root'
 })
 export class ReviewService {
-  protected basePath = 'http://localhost:8090/review?sort=id&order=desc';
+  protected basePath = 'http://localhost:8090/review';
 
   constructor(private httpClient: HttpClient) { }
 
   public getReviews(size?:number, page?: number) : Observable<any> {
     const pageAndSize = size === null && page === null ? '' : `&page=${page}&size=${size}`;
-    const path = `${this.basePath}${pageAndSize}`;
+    const path = `${this.basePath}?sort=id&order=desc${pageAndSize}`;
     return this.httpClient.get(path);
   }
 
