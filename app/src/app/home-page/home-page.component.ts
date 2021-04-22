@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Review } from '../core/models/review-model';
 import { ReviewService } from '../services/review.service';
 
@@ -16,16 +17,29 @@ hashtags3: string []= ['#SorryButNoTSorry', '#estoEsUnaReseña', '#malisimaaa']
 
 reviews: Review[];
     
-    constructor(private reviewService: ReviewService){ }
+    
+    constructor(private reviewService: ReviewService, public snackBar: MatSnackBar){ }
 
     ngOnInit(): void {
-        this.reviewService.getReviews().subscribe(data => {
+        this.reviewService.getReviews().subscribe((data) => {
             this.reviews = data.content;
             this.loading = false;
         });
     }
 
     newReview(review: Review){
-        this.reviews.push(review);
+        if(review){
+            this.reviews.push(review);
+            this.snackBar.open('Publicado exitosamente!', 'x', {
+                duration: 3000,
+                panelClass: ['success-snackbar']
+             });
+        }
+        else{
+            this.snackBar.open('No se ha realizado la publicación 😟', 'x',{
+                duration: 3000,
+                panelClass: ['fail-snackbar']
+             });
+        }
     }
 }
