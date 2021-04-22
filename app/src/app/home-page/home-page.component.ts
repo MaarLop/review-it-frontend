@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { BehaviorSubject } from 'rxjs';
 import { Review } from '../core/models/review-model';
 import { ReviewService } from '../services/review.service';
 // import * as _ from 'loadash' es una libreria
@@ -23,7 +24,7 @@ export class HomePageComponent {
     finished = false;
     showSpinner = false;
 
-    constructor(private reviewService: ReviewService){ }
+    constructor(private reviewService: ReviewService, public snackBar: MatSnackBar){ }
 
     ngOnInit(): void {
         this.getReviews();
@@ -46,5 +47,25 @@ export class HomePageComponent {
             this.getReviews();
             this.showSpinner = false;
         }, 2000);
+    }
+
+    newReview(review: Review){
+        console.log(review)
+        if(review){
+            let snack = this.snackBar.open('Publicado exitosamente!', 'x', {
+                duration: 500,
+                panelClass: ['success-snackbar']
+            });
+            snack.afterDismissed().subscribe(()=>{
+                window.location.reload();
+            })
+
+        }
+        else{
+            this.snackBar.open('No se ha realizado la publicación 😟', 'x',{
+                duration: 3000,
+                panelClass: ['fail-snackbar']
+             });
+        }
     }
 }
