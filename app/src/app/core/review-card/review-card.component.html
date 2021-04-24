@@ -5,7 +5,9 @@
         <div class="pxc-stopper"> </div>
         <div class="pxc-subcard">
             <div class="pxc-title">{{review.title}}</div>
-            <div class="pxc-sub"> {{review.points}} </div>
+            <div class="pxc-sub">
+                <ngb-rating [max]="5" [(rate)]="currentRate" [readonly]="true"></ngb-rating>
+            </div>
             <div class="pxc-feats">
                 {{review.description}}
             </div>

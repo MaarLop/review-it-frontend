@@ -1,5 +1,6 @@
-import {Component, Input} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild, ViewChildren} from '@angular/core';
 import { Review } from '../models/review-model';
+import { element } from 'protractor';
 
 @Component({
   selector: 'app-review-card',
@@ -7,8 +8,16 @@ import { Review } from '../models/review-model';
   styleUrls: ['review-card.component.scss'],
 })
 
-export class ReviewCardComponent {
+export class ReviewCardComponent implements OnInit{
   @Input() review : Review;
+  currentRate: Number;
+
+  constructor(){ 
+   }
   
-  constructor(){  }
+  ngOnInit(): void {
+    this.currentRate=this.review.points
+  }
+
+
 }

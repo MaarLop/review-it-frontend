@@ -7,6 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MaterialModule } from '../material.module';
 import { RouterModule } from '@angular/router';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import {
   DynamicFormService,
@@ -61,7 +62,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatAutocompleteModule,
     MatProgressSpinnerModule,
     MatSnackBarModule,
-
+    NgbModule,
   ],
   providers: [
     DynamicFormService,
