@@ -1,33 +1,4 @@
-
-.ratings {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  direction: rtl;
-  text-align: left;
-}
-  
-.star {
-  position: relative;
-  line-height: 60px;
-  display: inline-block;
-  transition: color 0.2s ease;
-  color: #a09fb1;
-  cursor: pointer;
-}
-
-.star:before {
-  content: '\2605';
-  width: 10px;
-  height: 10px;
-  font-size: 30px;
-}
-
-.star:hover,
-.star.selected,
-.star:hover ~ .star,
-.star.selected ~ .star{
-  transition: color 0.8s ease;
-  color: rgb(800 0 0 / 70%);//#dabb31;
+ngb-rating {
+    font-size: 30px;
+    color: rgb(800 0 0 / 50%);
 }

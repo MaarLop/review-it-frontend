@@ -1,4 +1,4 @@
-import {Component, OnInit, EventEmitter, Output, ElementRef, ViewChild} from '@angular/core';
+import {Component, OnInit, EventEmitter, Output, ElementRef, ViewChild, Input} from '@angular/core';
 
 @Component({
   selector: 'app-rate-stars',
@@ -8,18 +8,11 @@ import {Component, OnInit, EventEmitter, Output, ElementRef, ViewChild} from '@a
 export class RateStarsComponent{
  
   @Output() rateSelected = new EventEmitter<number>();
-  @ViewChild('namebutton') namebutton: ElementRef;
-  
-  constructor(){}
+  currentRate: Number;
 
-  ngOnInit(): void {
-  }
-  setRate(rate: number){
+  constructor(){ }
 
-    this.namebutton.nativeElement.classList.add('selected')
-    setTimeout(() => {
-      this.namebutton.nativeElement.classList.remove('selected')
-    }, 1000);
+  onRateChange(rate: number){
     this.rateSelected.emit(rate);
   }
 

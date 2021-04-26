@@ -19,7 +19,7 @@ export class HomePageComponent {
 
     reviews$ = new BehaviorSubject<Review[]>([]);
 
-    batch: number = 5;
+    size: number = 5;
     page: number = 0;
     finished = false;
     showSpinner = false;
@@ -33,7 +33,7 @@ export class HomePageComponent {
     getReviews(){
         if(this.finished) return;
 
-        this.reviewService.getReviews(this.batch, this.page).subscribe((response)=>{
+        this.reviewService.getReviews(this.size, this.page).subscribe((response)=>{
             const reviewList = this.reviews$.value;
             this.reviews$.next([...reviewList, ...response.content]);
             this.finished = response.last;
