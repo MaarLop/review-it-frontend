@@ -10,6 +10,7 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { CoreModule } from './core/core.modules';
 import { HttpClientModule } from '@angular/common/http';
 import {InfiniteScrollModule} from 'ngx-infinite-scroll'
+import { SideNavComponent } from './nav/nav.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import {InfiniteScrollModule} from 'ngx-infinite-scroll'
     LandingPageComponent,
     SpinnerComponent,
     HomePageComponent,
+    SideNavComponent,
   ],
   imports: [
     BrowserModule,

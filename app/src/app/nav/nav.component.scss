@@ -1,0 +1,94 @@
+*,*:before,*:after {
+	box-sizing: border-box;
+}
+
+:after {
+	content: "";
+}
+body.push {
+	left:250px;
+  }
+
+nav {
+  	float: left;
+	position: sticky;
+	top: 0;
+  	left: 0;
+	background: transparent;
+	margin-top: 6px;
+	padding-top: 10px;
+	.profile{
+		font: 400 36px/20px Roboto, "Helvetica Neue", sans-serif;
+		text-shadow: 4px 5px rgb(41, 39, 39);
+	}
+	a{
+		color:#fff
+	}
+}
+
+nav ul {
+	text-align: center;
+	box-shadow:  0 0 10px rgb(82, 82, 82);
+}
+
+nav ul li {
+	position: relative;
+	color: #fff;
+	width: 70px;
+	cursor: pointer;
+  	background-color:#39394d;
+	text-transform: uppercase;
+	transition:all .4s ease-out;
+}
+
+nav ul li:after {
+	position: absolute;
+	background: #23232f;
+	color: rgb(800 0 0 / 69%);
+	top:0;
+	left: 70px;
+	width: 70px; height: 100%;
+	opacity:.5;
+	transform: perspective(400px) rotateY(90deg);
+	transform-origin: 0 100%;
+	transition:all .4s ease-out;
+}
+
+nav ul li:nth-child(1):after { 
+	content: "Perfil";
+	line-height: 88px;
+}
+nav ul li:nth-child(2):after { 
+	content: "Buscar";
+	line-height: 88px;
+}
+// nav ul li:nth-child(3):after { 
+// 	content: "Work";
+// 	line-height: 85px;
+// }
+// nav ul li:nth-child(4):after { 
+// 	content: "Say hi";
+// 	line-height: 70px;
+// }
+
+nav ul li:hover {
+	transform: translateX(-70px);
+}
+
+nav ul li:hover:after {
+  opacity: 1;
+	transform: perspective(400px) rotateY(0deg) scale(1) ;
+}
+
+
+nav ul li > div {
+	display: inline-block;
+	padding: 25px 0;
+	background: transparent;
+}
+
+nav ul li div { position: relative; }
+
+.mat-form-field + .mat-form-field {
+  margin-left: 8px;
+}
