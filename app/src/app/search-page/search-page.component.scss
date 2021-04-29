@@ -1,0 +1,193 @@
+$break-small: 700px;
+.notification{
+    &.is-warning{
+        color:whitesmoke;
+        text-align: center;
+    }
+}
+.success-snackbar{
+    background: #1add6b;
+    opacity: 40%;
+}
+
+.fail-snackbar{
+    background: #f32121;
+    opacity: 40%;
+}
+
+.scroll-to-top {
+    position: fixed;
+    bottom: 15px;
+    right: 15px;
+    opacity: 0;
+    transition: all .2s ease-in-out;
+   }
+   .show-scrollTop {
+    opacity: 1;
+    transition: all .2s ease-in-out;
+   }
+ .container {
+    margin: 16px 100px;
+    color: #fff;
+    @media screen and (max-width: 1000px) and (min-width: $break-small){
+        left: 120px;
+        margin: 21px 10px 0px 16px;
+        padding:15px 4px 15px 5px;
+      }
+      @media screen and (max-width: $break-small) {
+        height: auto;
+        padding: 15px;
+        margin: 17px ;
+        flex: 0 1 auto;
+      }
+    .no-gutters{
+        box-shadow: 0 0 10px rgb(82, 82, 82);
+        border-radius: 5%;
+    }
+ }
+
+ select,
+ input,
+ button
+ {
+    background-color: #fff;
+    height: calc(1.5em + 0.75rem + 12px);
+ }
+ .searchButton{
+        width: 0%;
+        text-align: right;
+        color: #fff;
+    }
+    
+    button{
+        width: 93px;
+        background-color:#39394d;
+        color: #fff;
+        text-shadow: 4px 5px rgb(41, 39, 39);
+ }
+
+////////////////////////////////////////////////
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+   }
+   
+   @import url('https://fonts.googleapis.com/css?family=Lato:100,300,400');
+   @import url('https://fonts.googleapis.com/css?family=Roboto:100');
+   
+   @mixin button($bcolor,
+   $url,
+   $x1,
+   $y1,
+   $bor,
+   $col) {
+    background: $bcolor;
+    -webkit-mask: url($url);
+    mask: url($url);
+    -webkit-mask-size: $x1 $y1;
+    mask-size: $x1 $y1;
+    border: $bor;
+    color: $col;
+   }
+   
+   .button-container-1 {
+    position: relative;
+    width: 94px;
+    height: 48px;
+    border: 1px solid;
+    
+    button {
+        border-radius: 8px;
+        float: right;
+     width: 101%;
+     height: 100%;
+     font-family: 'Lato', sans-serif;
+     font-weight: 300;
+     font-size: 11px;
+     letter-spacing: 1px;
+     font-weight: bold;
+   
+     @include button(#000,
+     "https://raw.githubusercontent.com/robin-dela/css-mask-animation/master/img/nature-sprite.png",
+     2300%,
+     100%,
+     none,
+     #fff);
+     cursor: pointer;
+     -webkit-animation: ani2 0.7s steps(22) forwards;
+     animation: ani2 0.7s steps(22) forwards;
+     box-shadow: 0 0 10px rgb(82, 82, 82);
+     &:hover {
+      -webkit-animation: ani 0.7s steps(22) forwards;
+      animation: ani 0.7s steps(22) forwards;
+     }
+    }
+   }
+   
+   .mas {
+       position: absolute;
+       color: #000;
+       text-align: center;
+       width: 101%;
+       font-family: 'Lato', sans-serif;
+       font-weight: 300;
+       position: absolute;
+       font-size: 11px;
+       margin-top: 17px;
+       overflow: hidden;
+         font-weight: bold;
+   
+   }
+   
+   @-webkit-keyframes ani {
+    from {
+     -webkit-mask-position: 0 0;
+     mask-position: 0 0;
+    }
+   
+    to {
+     -webkit-mask-position: 100% 0;
+     mask-position: 100% 0;
+    }
+   }
+   
+   @keyframes ani {
+    from {
+     -webkit-mask-position: 0 0;
+     mask-position: 0 0;
+    }
+   
+    to {
+     -webkit-mask-position: 100% 0;
+     mask-position: 100% 0;
+    }
+   }
+   
+   @-webkit-keyframes ani2 {
+    from {
+     -webkit-mask-position: 100% 0;
+     mask-position: 100% 0;
+    }
+   
+    to {
+     -webkit-mask-position: 0 0;
+     mask-position: 0 0;
+    }
+   }
+   
+   @keyframes ani2 {
+    from {
+     -webkit-mask-position: 100% 0;
+     mask-position: 100% 0;
+    }
+   
+    to {
+     -webkit-mask-position: 0 0;
+     mask-position: 0 0;
+    }
+   }
+   
+ 
+   
