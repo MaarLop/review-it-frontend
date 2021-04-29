@@ -7,7 +7,7 @@ import { Review } from '../core/models/review-model';
   providedIn: 'root'
 })
 export class ReviewService {
-  protected basePath = 'http://localhost:8090/review';
+  protected basePath = 'http://localhost:8090/reviews';
 
   constructor(private httpClient: HttpClient) { }
 

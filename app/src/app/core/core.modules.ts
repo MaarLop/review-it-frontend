@@ -70,6 +70,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
 import {OverlayModule} from '@angular/cdk/overlay';
+import { ScrollToTopComponent } from './scroll-up/scroll.component';
 
 @NgModule({
   declarations: [
@@ -91,6 +92,7 @@ import {OverlayModule} from '@angular/cdk/overlay';
     ReviewCardComponent,
     CreateReviewComponent,
     RateStarsComponent,
+    ScrollToTopComponent
   ],
   imports: [
     CommonModule,

@@ -3,6 +3,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
 import { HomePageComponent } from './home-page/home-page.component';
+import { SearchComponent } from './search-page/search-page.component';
 
 const routes: Routes = [];
 
@@ -10,8 +11,8 @@ const routes: Routes = [];
   imports: [
     RouterModule.forRoot([
       {path:'', component:HomePageComponent},
+      {path:'search', component:SearchComponent},
       
-      // routes
     ]),
     BrowserModule,
     ReactiveFormsModule

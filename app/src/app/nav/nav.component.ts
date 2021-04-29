@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-sidenav',
@@ -7,10 +8,16 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 
 export class SideNavComponent implements OnInit{
-  panelOpenState = false;
-
-  constructor(){
+  constructor(public router: Router){
   }
-    ngOnInit(): void {
-    }
+  ngOnInit(): void {
+  }
+
+  goSearch(){
+    this.router.navigate(['/search']);
+  }
+
+  goHome(){
+    this.router.navigate(['/']);
+  }
 }

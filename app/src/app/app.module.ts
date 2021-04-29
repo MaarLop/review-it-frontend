@@ -11,6 +11,8 @@ import { CoreModule } from './core/core.modules';
 import { HttpClientModule } from '@angular/common/http';
 import {InfiniteScrollModule} from 'ngx-infinite-scroll'
 import { SideNavComponent } from './nav/nav.component';
+import { SearchComponent } from './search-page/search-page.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +21,9 @@ import { SideNavComponent } from './nav/nav.component';
     SpinnerComponent,
     HomePageComponent,
     SideNavComponent,
+    SearchComponent,
+    FooterComponent
+
   ],
   imports: [
     BrowserModule,
