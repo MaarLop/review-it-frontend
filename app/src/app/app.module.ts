@@ -13,6 +13,8 @@ import {InfiniteScrollModule} from 'ngx-infinite-scroll'
 import { SideNavComponent } from './nav/nav.component';
 import { SearchComponent } from './search-page/search-page.component';
 import { FooterComponent } from './footer/footer.component';
+import { AuthModule } from '@auth0/auth0-angular';
+import { AuthButtonComponent } from './auth/auth-button/auth-button.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,8 @@ import { FooterComponent } from './footer/footer.component';
     HomePageComponent,
     SideNavComponent,
     SearchComponent,
-    FooterComponent
+    FooterComponent,
+    AuthButtonComponent
 
   ],
   imports: [
@@ -32,6 +35,10 @@ import { FooterComponent } from './footer/footer.component';
     CoreModule,
     HttpClientModule,
     InfiniteScrollModule,
+    AuthModule.forRoot({
+      domain: 'dev-d8bhv2ic.us.auth0.com',
+      clientId: 'OPF2R4rQ8M3OHOgZDooC4BJoK5kr12l2'
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]

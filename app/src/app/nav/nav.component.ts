@@ -1,5 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Component, Inject, Input, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
   selector: 'app-sidenav',
@@ -8,7 +10,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 
 export class SideNavComponent implements OnInit{
-  constructor(public router: Router){
+  constructor(public router: Router, @Inject(DOCUMENT) public document: Document, public auth: AuthService){
   }
   ngOnInit(): void {
   }

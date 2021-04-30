@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuthService } from '@auth0/auth0-angular';
 import { BehaviorSubject } from 'rxjs';
 import { Review } from '../core/models/review-model';
 import { ReviewService } from '../services/review.service';
@@ -24,7 +25,7 @@ export class HomePageComponent {
     finished = false;
     showSpinner = false;
 
-    constructor(private reviewService: ReviewService, public snackBar: MatSnackBar){ }
+    constructor(private reviewService: ReviewService, public snackBar: MatSnackBar, public auth:AuthService){ }
 
     ngOnInit(): void {
         this.getReviews();
