@@ -19,8 +19,6 @@ export class ReviewService {
   public getReviews(size?:number, page?: number) : Observable<any> {
     const pageAndSize = size === null && page === null ? '' : `&page=${page}&size=${size}`;
     const path = `${this.basePath}?sort=id&order=desc${pageAndSize}`;
-    console.log("token")
-    console.log(localStorage.getItem('auth_token'))
     return this.httpClient.get(path, { 
       headers: this.headers 
     });

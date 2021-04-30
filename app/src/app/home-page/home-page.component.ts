@@ -29,10 +29,22 @@ export class HomePageComponent {
     constructor(private reviewService: ReviewService, public snackBar: MatSnackBar, public auth:AuthService, private auth2:Auth2Service){ }
 
     ngOnInit(): void {
+        this.auth.user$.subscribe(data =>{
+            if(data){
+                this.auth2.signUp(data).subscribe(res => {
+                    console.log("res")
+                    console.log(res)
+                    //sessionStorage.setItem('userId', res.userId);
+                    // this.router.navigate(['/']);
+                },
+                    err => this.auth.logout()
+                )   
+            }
+        });
         this.auth.isAuthenticated$.subscribe(
             loggedIn =>{
                 if(loggedIn){
-                    this.auth2.login().subscribe(data => {
+                    this.auth2.getToken().subscribe(data => {
                         localStorage.setItem('auth_token', data.access_token);
                     });
                     this.getReviews();
