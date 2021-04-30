@@ -29,8 +29,9 @@ export class HomePageComponent {
     constructor(private reviewService: ReviewService, public snackBar: MatSnackBar, public auth:AuthService, private auth2:Auth2Service){ }
 
     ngOnInit(): void {
+        console.log(this.auth.isLoading$)
         this.auth.user$.subscribe(data =>{
-            if(data){
+            if(data && !this.auth.isAuthenticated$){
                 this.auth2.signUp(data).subscribe(res => {
                     console.log("res")
                     console.log(res)
