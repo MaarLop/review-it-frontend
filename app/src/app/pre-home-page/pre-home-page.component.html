@@ -1,0 +1,18 @@
+<input type='checkbox' id='mmeennuu'>
+<label class='menu' for='mmeennuu'>
+
+<div class='barry'>
+	<span class='bar'></span>
+	<span class='bar'></span>
+	<span class='bar'></span>
+	<span class='bar'></span>
+</div>
+	
+<ul class="navbar-nav ml-auto">
+	<li class="nav-item" *ngIf="auth.isAuthenticated$ | async; else loggedOut"><a id='home' (click)="auth.logout({ returnTo: document.location.origin })">Log Out</a></li>
+	<ng-template #loggedOut>
+		<li class="nav-item"><a id='about'(click)="auth.loginWithRedirect()">Log In</a></li>
+	</ng-template>
+</ul>
+
+</label>

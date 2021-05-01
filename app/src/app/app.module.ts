@@ -15,7 +15,8 @@ import { SearchComponent } from './search-page/search-page.component';
 import { FooterComponent } from './footer/footer.component';
 import { AuthModule } from '@auth0/auth0-angular';
 import { AuthButtonComponent } from './auth/auth-button/auth-button.component';
-import { AuthHttpInterceptor } from '@auth0/auth0-angular';
+import { PreHomePageComponent } from './pre-home-page/pre-home-page.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { AuthHttpInterceptor } from '@auth0/auth0-angular';
     SideNavComponent,
     SearchComponent,
     FooterComponent,
-    AuthButtonComponent
+    AuthButtonComponent,
+    PreHomePageComponent
 
   ],
   imports: [
@@ -40,6 +42,7 @@ import { AuthHttpInterceptor } from '@auth0/auth0-angular';
       domain: 'dev-d8bhv2ic.us.auth0.com',
       clientId: 'OPF2R4rQ8M3OHOgZDooC4BJoK5kr12l2'
     }),
+    NgbModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

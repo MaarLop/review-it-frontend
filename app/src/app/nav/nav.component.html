@@ -1,7 +1,4 @@
 <nav>
-    <ul>
-        <app-auth-button></app-auth-button>
-    </ul>
     <ul *ngIf="auth.isAuthenticated$ | async;">
         <li (click)="goSearch()">
             <div class="profile">

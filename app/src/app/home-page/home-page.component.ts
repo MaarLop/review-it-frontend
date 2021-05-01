@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from '@auth0/auth0-angular';
 import { BehaviorSubject } from 'rxjs';
@@ -12,7 +12,7 @@ import { Auth2Service } from '../services/auth2.service';
     templateUrl: './home-page.component.html',
     styleUrls: ['./home-page.component.scss']
 })
-export class HomePageComponent {
+export class HomePageComponent implements OnInit{
 
     loading = true;
     hashtags1: string []= ['#Accion', '#Drama', '#Netflix', '#Hoy']
