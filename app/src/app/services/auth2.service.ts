@@ -1,5 +1,7 @@
+import { DOCUMENT } from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
+import { AuthService } from '@auth0/auth0-angular';
 import { Observable } from 'rxjs';
 
 
@@ -20,7 +22,7 @@ export class Auth2Service {
             audience:"https://dev-d8bhv2ic.us.auth0.com/api/v2/"
           };
     
-    constructor(private httpClient: HttpClient)  { }
+    constructor(private httpClient: HttpClient, private auth: AuthService, @Inject(DOCUMENT) private doc: Document)  { }
         
     getToken(): Observable<any> {
       const path = this.path;
@@ -30,8 +32,6 @@ export class Auth2Service {
     }
 
     signUp(data: any): Observable<any> {
-      console.log("data")
-      console.log(data)
       const headers = this.headers;
       const path = this.basePath + '/signUp';
       return this.httpClient.post(path, {
@@ -43,6 +43,5 @@ export class Auth2Service {
           avatar: data.picture
       });
     }
-
 
 }

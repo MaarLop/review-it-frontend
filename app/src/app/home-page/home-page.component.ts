@@ -25,20 +25,17 @@ export class HomePageComponent {
     page: number = 0;
     finished = false;
     showSpinner = false;
+    isLoggedIn = false;
 
     constructor(private reviewService: ReviewService, public snackBar: MatSnackBar, public auth:AuthService, private auth2:Auth2Service){ }
 
     ngOnInit(): void {
-        console.log(this.auth.isLoading$)
         this.auth.user$.subscribe(data =>{
-            if(data && !this.auth.isAuthenticated$){
+            if(data){
                 this.auth2.signUp(data).subscribe(res => {
-                    console.log("res")
                     console.log(res)
-                    //sessionStorage.setItem('userId', res.userId);
-                    // this.router.navigate(['/']);
                 },
-                    err => this.auth.logout()
+                    err => console.log("Usuario ya dado de alta.")
                 )   
             }
         });

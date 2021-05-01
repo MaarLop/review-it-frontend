@@ -1,6 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
 import { DOCUMENT } from '@angular/common';
+import { Auth2Service } from 'src/app/services/auth2.service';
 
 @Component({
   selector: 'app-auth-button',
