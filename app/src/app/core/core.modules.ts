@@ -71,6 +71,9 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
 import {OverlayModule} from '@angular/cdk/overlay';
 import { ScrollToTopComponent } from './scroll-up/scroll.component';
+import { ReviewListComponent } from './review-list/review-list.component';
+import { SpinnerComponent } from './spinner/spinner-component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @NgModule({
   declarations: [
@@ -92,7 +95,10 @@ import { ScrollToTopComponent } from './scroll-up/scroll.component';
     ReviewCardComponent,
     CreateReviewComponent,
     RateStarsComponent,
-    ScrollToTopComponent
+    ScrollToTopComponent,
+    ReviewListComponent,
+    SpinnerComponent,
+
   ],
   imports: [
     CommonModule,
@@ -104,6 +110,7 @@ import { ScrollToTopComponent } from './scroll-up/scroll.component';
     MatProgressSpinnerModule,
     MatSnackBarModule,
     NgbModule,
+    InfiniteScrollModule,
   ],
   providers: [
     DynamicFormService,
@@ -174,6 +181,10 @@ import { ScrollToTopComponent } from './scroll-up/scroll.component';
     OverlayModule,
     PortalModule,
     ScrollingModule,
+    ReviewListComponent,
+    SpinnerComponent,
+    FormsModule,
+
   ],
 })
 export class CoreModule {}
