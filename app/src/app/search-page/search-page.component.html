@@ -1,32 +1,32 @@
 
-<div class="container">
 <div class="row">
     <div class="col-lg-12 card-margin">
-        <div class="card search-form">
-            <div class="card-body p-0">
-                <form id="search-form">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="row no-gutters">
-                                <div class="col-lg-3 col-md-3 col-sm-12 p-0">
-                                    <select class="form-control" id="exampleFormControlSelect1">
-                                        <option>Título</option>
-                                        <option>Descripción</option>
-                                        <option>Punaje</option>
-                                    </select>
-                                </div>
-                                <div class="col-lg-8 col-md-6 col-sm-12 p-0">
-                                    <input type="text" placeholder="Search..." class="form-control" id="search" name="search">
-                                </div>
-                                <div class="button-container-1">
-                                    <span class="mas">Buscar</span>
-                                    <button id='work' type="button" name="Hover"> <i class="fa fa-search"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
+        <div class="row no-gutters">
+            <div class="col-lg-3 col-md-2 col-sm-12">
+                <app-select
+                  [group]="formGroup"
+                  [key]="'option'"
+                  [options$]="options$"
+                  [defaultValue] ="defaultValue"
+                >
+                </app-select>
+            </div>
+            <div class="col-lg-6 col-md-5 col-sm-12">
+                 <app-input
+                    [group]="formGroup"
+                    [key]="'filter'"
+                    [inputType]="'text'"
+                    [label]="'Filtrar'">
+                </app-input>
+            </div>
+            <div class="col-md-2 button-container" >
+                <a  class="col-md-1 col-md-offset-1"(click)="goSearch()">
+                    <span class="mas" style="color:#fff">Buscar</span>
+                    <button id='work'type="button" name="Hover" > <i class="fa fa-search"></i></button>
+                </a>
             </div>
         </div>
     </div>
 </div>
+
+<app-review-list [filter$]="filter$"></app-review-list>

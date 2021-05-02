@@ -11,9 +11,9 @@ export class ReviewService {
 
   constructor(private httpClient: HttpClient) { }
 
-  public getReviews(size?:number, page?: number) : Observable<any> {
+  public getReviews(size?:number, page?: number, filter?: string) : Observable<any> {
     const pageAndSize = size === null && page === null ? '' : `&page=${page}&size=${size}`;
-    const path = `${this.basePath}?sort=id&order=desc${pageAndSize}`;
+    const path = `${this.basePath}?sort=id&order=desc${pageAndSize}&${filter ?? ''}`;
     return this.httpClient.get(path);
   }
 
