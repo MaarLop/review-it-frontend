@@ -1,13 +1,3 @@
 
 <app-create-review (newReview)="newReview($event)"></app-create-review>
-<div class="homePage" *ngFor="let item of (reviews$ | async); let i = index">
-    <app-review-card [review]="item"></app-review-card>
-</div>
-
-<div infiniteScroll [infiniteScrollDistance]="5" [infiniteScrollThrottle]="1000" (scrolled)="onScroll()"></div>
-
-<app-spinner [shows]="showSpinner" [isSmallSize]="true"></app-spinner>
-
-<div class="notification is-warning" *ngIf="finished && (reviews$ | async).length > 0">
-    Eso es todo amigues!
-</div>
+<app-review-list></app-review-list>
