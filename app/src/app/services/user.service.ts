@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class Auth2Service {
+export class UserService {
 
   protected path = 'https://dev-d8bhv2ic.us.auth0.com/oauth/token';
   protected basePath = 'http://localhost:8090/users';

@@ -22,4 +22,8 @@ export class SideNavComponent implements OnInit{
   goHome(){
     this.router.navigate(['/']);
   }
+
+  goProfile(){
+    this.router.navigate(['/profile']);
+  }
 }

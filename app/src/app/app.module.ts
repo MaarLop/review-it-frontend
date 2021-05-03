@@ -14,9 +14,9 @@ import { SideNavComponent } from './nav/nav.component';
 import { SearchComponent } from './search-page/search-page.component';
 import { FooterComponent } from './footer/footer.component';
 import { AuthModule } from '@auth0/auth0-angular';
-import { AuthButtonComponent } from './auth/auth-button/auth-button.component';
 import { PreHomePageComponent } from './pre-home-page/pre-home-page.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { UserComponent } from './core/user/user.component';
 
 @NgModule({
   declarations: [
@@ -27,8 +27,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     SideNavComponent,
     SearchComponent,
     FooterComponent,
-    AuthButtonComponent,
-    PreHomePageComponent
+    PreHomePageComponent,
+    UserComponent
 
   ],
   imports: [

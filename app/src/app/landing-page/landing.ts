@@ -9,6 +9,6 @@ import { AuthService } from '@auth0/auth0-angular';
 export class LandingPageComponent {
   title = 'landing-page';
 
-  constructor(public auth: AuthService){
+  constructor(){
   }
 }

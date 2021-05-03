@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
   selector: 'app-root',
@@ -12,5 +11,5 @@ export class AppComponent {
   loading = true;
   title = 'ReviewIt!';
 
-  constructor(public auth: AuthService){}
+  constructor(){}
 }

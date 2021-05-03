@@ -5,7 +5,7 @@ import { BehaviorSubject } from 'rxjs';
 import { Review } from '../core/models/review-model';
 import { ReviewService } from '../services/review.service';
 // import * as _ from 'loadash' es una libreria
-import { Auth2Service } from '../services/auth2.service';
+import { UserService } from '../services/user.service';
 
 @Component({
     selector: 'app-home-page',
@@ -27,12 +27,12 @@ export class HomePageComponent implements OnInit{
     showSpinner = false;
     isLoggedIn = false;
 
-    constructor(private reviewService: ReviewService, public snackBar: MatSnackBar, public auth:AuthService, private auth2:Auth2Service){ }
+    constructor(private reviewService: ReviewService, public snackBar: MatSnackBar, public auth:AuthService, private userService:UserService){ }
 
     ngOnInit(): void {
         this.auth.user$.subscribe(data =>{
             if(data){
-                this.auth2.signUp(data).subscribe(res => {
+                this.userService.signUp(data).subscribe(res => {
                     console.log(res)
                 },
                     err => console.log("Usuario ya dado de alta.")
@@ -42,7 +42,7 @@ export class HomePageComponent implements OnInit{
         this.auth.isAuthenticated$.subscribe(
             loggedIn =>{
                 if(loggedIn){
-                    this.auth2.getToken().subscribe(data => {
+                    this.userService.getToken().subscribe(data => {
                         localStorage.setItem('auth_token', data.access_token);
                     });
                     this.getReviews();
