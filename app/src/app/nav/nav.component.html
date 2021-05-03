@@ -1,19 +1,19 @@
 <nav>
-  <ul>
-    <li (click)="goSearch()">
-      <div class="profile">
-        <i class="fa fa-child"></i>
-      </div>
-    </li>
-    <li (click)="goHome()" >
-      <div class="profile">
-       <i class="fa fa-home fa-fw"></i>
-      </div>
-    </li>
-    <li (click)="goSearch()">
-      <div class="profile">
-       <i class="fa fa-search"></i>
-      </div>
-    </li>
-  </ul>
+    <ul *ngIf="auth.isAuthenticated$ | async;">
+        <li (click)="goProfile()">
+            <div class="profile">
+                <i class="fa fa-child"></i>
+            </div>
+        </li>
+        <li (click)="goHome()">
+            <div class="profile">
+                <i class="fa fa-home fa-fw"></i>
+            </div>
+        </li>
+        <li (click)="goSearch()">
+            <div class="profile">
+                <i class="fa fa-search"></i>
+            </div>
+        </li>
+    </ul>
 </nav>
