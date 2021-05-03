@@ -23,7 +23,6 @@ export class HomePageComponent {
     constructor(public snackBar: MatSnackBar){ }
 
     newReview(review: Review){
-        console.log(review)
         if(review){
             let snack = this.snackBar.open('Publicado exitosamente!', 'x', {
                 duration: 500,

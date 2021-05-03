@@ -6,9 +6,6 @@
 
 <app-spinner [shows]="showSpinner" [isSmallSize]="true"></app-spinner>
 
-<div class="notification is-warning" *ngIf="finished && (reviews$ | async).length > 0">
-    Eso es todo amigues!
-</div>
 
 <div class="notification is-warning" *ngIf="(reviews$ | async).length == 0 && filter$">
     No se encontraron datos

@@ -96,7 +96,8 @@ transition: all .2s ease-in-out;
     background-color: #39394d;
     border-radius: 8px;
     color: #fff;
-
+    float: right;
+    margin-right: 71px;
     button {
         border-radius: 8px;
         float: right;
@@ -109,87 +110,12 @@ transition: all .2s ease-in-out;
         font-weight: bold;
         
    
-        @include button(#fff,
-        "https://raw.githubusercontent.com/robin-dela/css-mask-animation/master/img/nature-sprite.png",
-            2300%,
-            100%,
-            none,
-            #fff);
-        cursor: pointer;
-        -webkit-animation: ani2 0.7s steps(22) forwards;
-        animation: ani2 0.7s steps(22) forwards;
-        box-shadow: 0 0 10px rgb(82, 82, 82);
-        background-color: #008391;
-        &:hover {
-            -webkit-animation: ani 0.7s steps(22) forwards;
-            animation: ani 0.7s steps(22) forwards;
-            border-radius: 1.5em;
-        }
+      
     }
    }
    
-   .mas {
-        position: absolute;
-        color: #fff;
-        text-align: center;
-        width: 101%;
-        font-family: 'Lato', sans-serif;
-        font-weight: 300;
-        position: absolute;
-        font-size: 11px;
-        margin-top: 17px;
-        overflow: hidden;
-        font-weight: bold;
    
-   }
    
-   @-webkit-keyframes ani {
-    from {
-     -webkit-mask-position: 0 0;
-     mask-position: 0 0;
-    }
-   
-    to {
-     -webkit-mask-position: 100% 0;
-     mask-position: 100% 0;
-    }
-   }
-   
-   @keyframes ani {
-    from {
-     -webkit-mask-position: 0 0;
-     mask-position: 0 0;
-    }
-   
-    to {
-     -webkit-mask-position: 100% 0;
-     mask-position: 100% 0;
-    }
-   }
-   
-   @-webkit-keyframes ani2 {
-    from {
-     -webkit-mask-position: 100% 0;
-     mask-position: 100% 0;
-    }
-   
-    to {
-     -webkit-mask-position: 0 0;
-     mask-position: 0 0;
-    }
-   }
-   
-   @keyframes ani2 {
-    from {
-     -webkit-mask-position: 100% 0;
-     mask-position: 100% 0;
-    }
-   
-    to {
-     -webkit-mask-position: 0 0;
-     mask-position: 0 0;
-    }
-   }
 
 
 ::ng-deep.mat-input-element {

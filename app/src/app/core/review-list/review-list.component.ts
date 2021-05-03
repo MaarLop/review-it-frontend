@@ -20,26 +20,33 @@ export class ReviewListComponent implements OnInit {
     showSpinner = false;
 
     @Input() filter$?: BehaviorSubject<string>;
+    @Input() initFilter$?: BehaviorSubject<boolean>;
 
     constructor(private reviewService: ReviewService, public snackBar: MatSnackBar){ }
 
     ngOnInit(): void {
-        if(this.filter$ !== undefined){
-            this.filter$.subscribe((_)=>{
-                this.getReviews();
-            });
-        }
-        else{
-            this.getReviews();
-        }
-
+        this.filter$?.subscribe((f)=>{
+            this.page = 0;
+            this.searchOption();
+        });
     }
 
     getReviews(){
         if(this.finished) return;
-
         this.reviewService.getReviews(this.size, this.page, this.filter$?.value).subscribe((response)=>{
-            const reviewList = this.reviews$.value;
+            const reviewList = this.filter$?.value !== '' ? [] : this.reviews$.value;
+
+            this.reviews$.next([...reviewList, ...response.content]);
+            this.finished = response.last;
+            this.showSpinner = !this.finished;
+            this.page+=1;
+        });
+    }
+
+    searchOption(){
+        this.reviewService.getSearchReviews(this.size, this.page, this.filter$?.value).subscribe((response)=>{
+            const reviewList = this.page === 0 ? [] : this.reviews$.value;
+
             this.reviews$.next([...reviewList, ...response.content]);
             this.finished = response.last;
             this.showSpinner = !this.finished;

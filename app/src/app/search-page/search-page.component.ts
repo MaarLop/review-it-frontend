@@ -12,40 +12,61 @@ import { SimpleOption } from '../core/models/simple-option';
 export class SearchComponent implements OnInit{
 
     options$: Observable<SimpleOption[]> = of([
-        { descripcion: "Todo", id: "Todo"},
+        { descripcion: "Todo", id: "search"},
         { descripcion: "Título" , id: "title"},
         { descripcion: "Descripción" , id: "description"},
         { descripcion: "Puntaje", id: "points"},
       ]);
-      defaultValue: SimpleOption =  { descripcion: "Todo", id: "Todo"};
-      
-      filterToApply: string = '';
 
-      filter$: BehaviorSubject<string>;
+    defaultValue: SimpleOption =  { descripcion: "Todo", id: "search"};
+    
+    filterToApply: string = '';
 
-      formGroup:FormGroup
+    filter$: BehaviorSubject<string> = new BehaviorSubject('');
 
+    formGroup:FormGroup
       
     constructor(private fb: FormBuilder){ }
     
     ngOnInit(): void {
         this.formGroup = this.fb.group(
         {
-            option: [{value: '', disabled: false}],
-            filter: [{ value: '', disabled: false }],
+            todo: [{value: '', disabled: false}],
+            genre: [{ value: '', disabled: false }],
+            title: [{ value: '', disabled: false }],
+            description: [{ value: '', disabled: false }],
+            points: [{ value: '', disabled: false }],
         });
     }
         
     
     goSearch(){
-        const option = this.formGroup.get('option').value;
-        const filter = this.formGroup.get('filter').value;
+        const todo = this.formGroup.get('todo').value.replace(/\s/g, '%');
+        const genre = this.formGroup.get('genre').value.replace(/\s/g, '%');
+        const title = this.formGroup.get('title').value.replace(/\s/g, '%');
+        const description = this.formGroup.get('description').value.replace(/\s/g, '%');
+        const points = this.formGroup.get('points').value.replace(/\s/g, '%');
 
-        console.log(`option: ${option}`)
-        console.log(`filter: ${filter}`)
 
-        if(!!option || !!filter){
-            alert('Seleccionar algo')
+
+        if(!!title || !!genre || !!description || !!points || !!todo){
+            const searchFilter = !!todo ? `search=${todo}` : '';
+            const titleSearch = !!title ? `title=${title}` : '';
+            const genresFilter = !!genre ? `genre=${genre}` : '';
+            const descriptionFilter = !!description ? `description=${description}` : '';
+            const pointsFilter = !!points ? `points=${points}` : '';
+
+            const arrayFilter = [searchFilter, titleSearch, genresFilter,descriptionFilter, pointsFilter];
+
+            const filtrerToApply = arrayFilter.filter((filter)=> !!filter).join('&');
+
+
+            this.filter$.next(filtrerToApply);
         }
+
+        // else{
+        //     alert('Seleccionar algo');
+        //     return;
+        // }   
     } 
 }
