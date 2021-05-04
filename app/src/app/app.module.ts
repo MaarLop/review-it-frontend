@@ -17,6 +17,7 @@ import { AuthModule } from '@auth0/auth0-angular';
 import { PreHomePageComponent } from './pre-home-page/pre-home-page.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UserComponent } from './core/user/user.component';
+import { UserReviewCardComponent } from './core/user-review-card/user-review-card.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { UserComponent } from './core/user/user.component';
     SearchComponent,
     FooterComponent,
     PreHomePageComponent,
-    UserComponent
+    UserComponent,
+    UserReviewCardComponent
 
   ],
   imports: [
