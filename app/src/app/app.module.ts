@@ -7,11 +7,16 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LandingPageComponent } from './landing-page/landing';
 import { HomePageComponent } from './home-page/home-page.component';
 import { CoreModule } from './core/core.modules';
-import { HttpClientModule } from '@angular/common/http';
+import { ReviewListComponent } from './core/review-list/review-list.component';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import {InfiniteScrollModule} from 'ngx-infinite-scroll'
 import { SideNavComponent } from './nav/nav.component';
 import { SearchComponent } from './search-page/search-page.component';
 import { FooterComponent } from './footer/footer.component';
-import { ReviewListComponent } from './core/review-list/review-list.component';
+import { AuthModule } from '@auth0/auth0-angular';
+import { PreHomePageComponent } from './pre-home-page/pre-home-page.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { UserComponent } from './core/user/user.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +25,10 @@ import { ReviewListComponent } from './core/review-list/review-list.component';
     HomePageComponent,
     SideNavComponent,
     SearchComponent,
-    FooterComponent
+    FooterComponent,
+    PreHomePageComponent,
+    UserComponent
+
   ],
   imports: [
     BrowserModule,
@@ -28,6 +36,12 @@ import { ReviewListComponent } from './core/review-list/review-list.component';
     BrowserAnimationsModule,
     CoreModule,
     HttpClientModule,
+    InfiniteScrollModule,
+    AuthModule.forRoot({
+      domain: 'dev-d8bhv2ic.us.auth0.com',
+      clientId: 'OPF2R4rQ8M3OHOgZDooC4BJoK5kr12l2'
+    }),
+    NgbModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
