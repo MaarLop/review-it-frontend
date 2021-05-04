@@ -1,11 +1,10 @@
-
-
 <div class="container">
-      <button class="btn-slide-line center" (click)="auth.loginWithRedirect()" *ngIf="auth.isAuthenticated$ | async">
+    <button class="btn-slide-line center" *ngIf="auth.isAuthenticated$ | async; else loggedOut" (click)="auth.logout({ returnTo: document.location.origin })">
         <span>LogOut</span>
       </button>
-		<button class="btn-slide-line center" (click)="auth.loginWithRedirect()" *ngIf="!(auth.isAuthenticated$ | async)">
+    <ng-template #loggedOut>
+        <button class="btn-slide-line center" (click)="auth.loginWithRedirect()" *ngIf="!(auth.isAuthenticated$ | async)">
         	<span>LogIn</span>
       	</button>
-      
+    </ng-template>
 </div>

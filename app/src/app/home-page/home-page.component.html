@@ -1,3 +1,14 @@
+<app-create-review *ngIf="auth.isAuthenticated$ | async;" (newReview)="newReview($event)">
+</app-create-review>
+<div class="homePage" *ngFor="let item of (reviews$ | async); let i = index">
+    <app-review-card [review]="item"></app-review-card>
+</div>
 
-<app-create-review *ngIf="auth.isAuthenticated$ | async;" (newReview)="newReview($event)"></app-create-review>
-<app-review-list></app-review-list>
+<div infiniteScroll [infiniteScrollDistance]="5" [infiniteScrollThrottle]="1000" (scrolled)="onScroll()"></div>
+
+<app-spinner [shows]="showSpinner" [isSmallSize]="true"></app-spinner>
+
+
+<div class="notification is-warning" *ngIf="(reviews$ | async).length == 0 && filter$">
+    No se encontraron datos
+</div>
