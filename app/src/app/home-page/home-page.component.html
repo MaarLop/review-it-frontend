@@ -9,6 +9,6 @@
 <app-spinner [shows]="showSpinner" [isSmallSize]="true"></app-spinner>
 
 
-<div class="notification is-warning" *ngIf="(reviews$ | async).length == 0 && filter$">
+<div class="notification is-warning" *ngIf="(reviews$ | async).length == 0">
     No se encontraron datos
 </div>

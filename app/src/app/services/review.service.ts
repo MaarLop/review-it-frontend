@@ -33,7 +33,8 @@ export class ReviewService {
 
   public save(body: Review){
     const path = this.basePath + '/save';
-    return this.httpClient.post(path, body);
+    const headers = this.headers;
+    return this.httpClient.post(path, body, { headers });
   }
   
 }

@@ -74,6 +74,9 @@ import { ScrollToTopComponent } from './scroll-up/scroll.component';
 import { ReviewListComponent } from './review-list/review-list.component';
 import { SpinnerComponent } from './spinner/spinner-component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { UserReviewCardComponent } from './user-review-card/user-review-card.component';
+import { UserComponent } from './user/user.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -98,7 +101,9 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     ScrollToTopComponent,
     ReviewListComponent,
     SpinnerComponent,
-
+    UserComponent,
+    SpinnerComponent,
+    UserReviewCardComponent
   ],
   imports: [
     CommonModule,
@@ -111,6 +116,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     MatSnackBarModule,
     NgbModule,
     InfiniteScrollModule,
+    FontAwesomeModule,
   ],
   providers: [
     DynamicFormService,
@@ -121,6 +127,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     MatProgressSpinnerModule,
   ],
   exports: [
+    SpinnerComponent,
     DynamicFormComponent,
     SelectComponent,
     InputComponent,

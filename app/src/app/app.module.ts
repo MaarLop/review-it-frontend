@@ -8,15 +8,15 @@ import { LandingPageComponent } from './landing-page/landing';
 import { HomePageComponent } from './home-page/home-page.component';
 import { CoreModule } from './core/core.modules';
 import { ReviewListComponent } from './core/review-list/review-list.component';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import {InfiniteScrollModule} from 'ngx-infinite-scroll'
+import { HttpClientModule } from '@angular/common/http';
+import {InfiniteScrollModule} from 'ngx-infinite-scroll';
 import { SideNavComponent } from './nav/nav.component';
 import { SearchComponent } from './search-page/search-page.component';
 import { FooterComponent } from './footer/footer.component';
 import { AuthModule } from '@auth0/auth0-angular';
 import { PreHomePageComponent } from './pre-home-page/pre-home-page.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { UserComponent } from './core/user/user.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -26,9 +26,7 @@ import { UserComponent } from './core/user/user.component';
     SideNavComponent,
     SearchComponent,
     FooterComponent,
-    PreHomePageComponent,
-    UserComponent
-
+    PreHomePageComponent
   ],
   imports: [
     BrowserModule,
@@ -42,6 +40,7 @@ import { UserComponent } from './core/user/user.component';
       clientId: 'OPF2R4rQ8M3OHOgZDooC4BJoK5kr12l2'
     }),
     NgbModule,
+    FontAwesomeModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

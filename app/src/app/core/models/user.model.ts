@@ -1,16 +1,24 @@
-import { Deposito } from 'app/admin/models/deposito.model';
 import { Model, genderTypes } from './model.model';
 
-export class User implements Model {
-  static modelName = 'Usuario';
-  static modelPluralName = 'Usuarios';
-  static modelGender = 'M' as genderTypes;
+export class User {
   id: number;
-  username: string;
+  userName: string;
+  name: string;
   firstName: string;
   lastName: string;
   isSuperuser: boolean;
   telefono: string;
-  mail?: string;
-  depositoDeTrabajo: Deposito;
+  email?: string;
+  avatar: string;
+  password: string;
+
+  constructor(id: number, userName: string, name: string, lastName: string, email, avatar: string, password: string){
+    this.id=id;
+    this.userName= userName;
+    this.name= name;
+    this.lastName = lastName;
+    this.email = email;
+    this.avatar = avatar;
+    this.password = password;
+  }
 }

@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
 import { Observable } from 'rxjs';
+import { User } from '../core/models/user.model';
 
 
 @Injectable({
@@ -14,7 +15,8 @@ export class UserService {
   protected basePath = 'http://localhost:8090/users';
   
   headers = new HttpHeaders({
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer ' + localStorage.getItem('auth_token')
   });
     body ={ grant_type:"client_credentials",
             client_id:"3hdg1KzxgUSBXq1UTePxjov5dgVKRg9g",
@@ -35,13 +37,26 @@ export class UserService {
       const headers = this.headers;
       const path = this.basePath + '/signUp';
       return this.httpClient.post(path, {
-          name: data.name,
+          name: data.given_name,
           userName: data.nickname,
           lastName: data.family_name,
           email: data.email,
           password: data.sub,
           avatar: data.picture
       });
+    }
+
+    public save(body: User){
+      const path = this.basePath + '/save';
+      const headers = this.headers;
+      return this.httpClient.post(path, body, { headers });
+    }
+
+    public get(id: any): Observable<any>{
+      const path = this.basePath + '/info';
+      const headers = this.headers;
+      const body = id;
+      return this.httpClient.post(path, body, { headers });
     }
 
 }
