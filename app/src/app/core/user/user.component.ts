@@ -1,17 +1,21 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, EventEmitter, forwardRef, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { ControlValueAccessor, FormBuilder, FormControl, FormGroup, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AuthService } from '@auth0/auth0-angular';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { ReviewService } from 'src/app/services/review.service';
+import { UserService } from '../../services/user.service';
+import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 import { Review } from '../models/review-model';
+import { User } from '../models/user.model';
 
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.scss']
 })
+
 export class UserComponent implements OnInit {
   formUser: FormGroup;
   
@@ -21,11 +25,17 @@ export class UserComponent implements OnInit {
   page: number = 0;
   finished = false;
   showSpinner = false;
+  disabled = true;
+  user: User;
+  faCoffee = faCoffee;
 
-  constructor(private reviewService: ReviewService, public snackBar: MatSnackBar, private fb: FormBuilder, public auth: AuthService) { }
+  @Output() newUser = new EventEmitter<User>();
+
+  constructor(private reviewService: ReviewService, public snackBar: MatSnackBar, private fb: FormBuilder, public auth: AuthService, private userService: UserService) { 
+  }
 
   ngOnInit(): void {
-    this.startForm();
+    this.startForm(this.disabled);
     this.getReviews();
   }
 
@@ -49,22 +59,49 @@ export class UserComponent implements OnInit {
     }, 2000);
   }
 
-  startForm(){
-    this.formUser = this.fb.group(
-      {
-        name: [{value: '', disabled: true}],
-        email: [{value: '', disabled: true }]
+  startForm(disabled: Boolean){
+    this.userService.get(sessionStorage.getItem('userId')).subscribe(data => {
+      this.user = data;
+      this.formUser = this.fb.group(
+        {
+          id: [{value: this.user.id, disabled: true}],
+          name: [{value: this.user.name, disabled: disabled}],
+          lastName: [{value: this.user.lastName, disabled: disabled}],
+          userName: [{value: this.user.userName, disabled: disabled}],
+          password: [{value: this.user.password, disabled: disabled}],
+          email: [{value: this.user.email, disabled: disabled } ],
+          avatar: [{value: this.user.avatar, disabled: disabled}]
+        }
+      )
+    })
+    /*this.auth.user$.subscribe(
+      user => {
+        this.formUser = this.fb.group(
+          {
+            id: [{value: this.user.id, disabled: disabled}],
+            name: [{value: user.given_name, disabled: disabled}],
+            userName: [{value: this.user.userName, disabled: disabled}],
+            password: [{value: user.sub, disabled: disabled}],
+            email: [{value: this.user.email, disabled: disabled }, Validators.required ]
+          }
+        )
       }
-    )
+    )*/  
   }
 
-  createReview(){
-    /*if(this.formNewReview.valid){
-      this.reviewService.save(this.formNewReview.getRawValue() as Review).subscribe((review: Review) => {
-        this.newReview.emit(review);
-        this.startForm();
+  edit(){
+    this.disabled = false;
+    this.startForm(this.disabled);
+  }
+
+  update(){
+    if(this.formUser.valid){
+      this.userService.save(this.formUser.getRawValue() as User).subscribe((user: User) => {
+        this.newUser.emit(user);
+        this.disabled = true;
+        this.startForm(this.disabled);
       });
-    }*/
+    }
   }
 
 }

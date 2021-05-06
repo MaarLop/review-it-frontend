@@ -80,64 +80,6 @@ html {
     }
 }
 
-.pxc-avatar {
-    transition: all 600ms ease;
-    display: flex;
-    flex-direction: column;
-    height: auto;
-    width: 150px;
-    justify-content: space-around;
-    .bronze & {
-        img {
-            width: 90px;
-            height: 90px;
-            top: -15px;
-            left: -20px;
-            position: absolute;
-        }
-    }
-    @media screen and (max-width: $break-small) {
-        width: 100%;
-        height: 100px;
-        justify-content: space-around;
-        align-items: center;
-        .silver & {
-            img {
-                position: absolute;
-                width: 100px;
-                height: 100px;
-                top: -80px;
-                right: 20px;
-            }
-        }
-        .bronze & {
-            height: 150px;
-            img {
-                top: -105px;
-                left: -10px;
-                height: 80px;
-                width: 80px;
-            }
-        }
-    }
-    img {
-        transition: all 600ms ease;
-        width: 150px;
-        height: 150px;
-        border-radius: 100%;
-        box-shadow: 0 1px 1rem rgba(10, 10, 25, .5);
-        position: relative;
-        z-index: 1;
-        @media screen and (max-width: $break-med) {
-            width: 125px;
-            height: 125px;
-        }
-        @media screen and (max-width: $break-small) {
-            margin-top: 100px;
-        }
-    }
-}
-
 .pxc-bg {
     transition: all 600ms ease;
     border-radius: 2px;
@@ -189,7 +131,7 @@ html {
     border-radius: 3px;
     background: $cardCol;
     width: 755px;
-    margin: 25px 200px 25px -25px;
+    margin: 25px 200px 25px 50px;
     z-index: 0;
     padding: 15px 25px 15px 40px;
     position: relative;
@@ -241,7 +183,7 @@ html {
     display: block;
     position: absolute;
     z-index: 0;
-    left: 75px;
+    left: 0px;
     .bronze & {
         display: none;
     }

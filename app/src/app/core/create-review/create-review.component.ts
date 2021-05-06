@@ -29,7 +29,8 @@ export class CreateReviewComponent implements OnInit {
       {
         title: [{value: '', disabled: false}],
         description: [{ value: '', disabled: false }],
-        points: [{value: 0}]
+        points: [{value: 0}],
+        userId: sessionStorage.getItem('userId')
       }
     )
   }

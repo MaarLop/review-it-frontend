@@ -1,39 +1,46 @@
-<!--<form *ngIf="auth.user$ | async as user" [formGroup]="formUser">
-    <div class="widget-post" aria-labelledby="post-header-title">
-        <div class="widget-post__header">
-            <app-input [group]="formUser" [key]="'name'" [inputType]="'text'" [label]="'Nombre'">
-            </app-input>
-            {{ user.name }}
-        </div>
-        <div id="widget-form" class="widget-post__form" name="form" aria-label="post widget">
-            <div class="widget-post__content">
-                <app-text-area [group]="formUser" [key]="'email'" [label]="'Correo electrónico'">
-                </app-text-area>
-                {{ user.email }}
+<form [formGroup]="formUser" *ngIf="this.formUser">
+    <div translate="no" class="animate__animated animate__lightSpeedInRight">
+        <div class="plx-card gold">
+            <div class="pxc-bg" style="background-image:url('https://png.pngtree.com/thumb_back/fw800/background/20190221/ourmid/pngtree-texture-geometric-black-metal-gradient-image_17809.jpg')"> </div>
+            <div class="pxc-avatar"><img src="{{user.avatar}}"></div>
+            <div class="pxc-stopper"> </div>
+            <div class="pxc-subcard">
+                <div class="pxc-title">
+                </div>
+                <div class="pxc-feats">
+                    <app-input [group]="formUser" [key]="'name'" [inputType]="'text'" [label]="'Nombre:'">
+                    </app-input>
+                </div>
+                <div class="pxc-feats">Nombre de usuario: {{user.userName}}</div>
+                <div class="pxc-feats">Correo electrónico: {{user.email}}</div>
+                <div class="pxc-feats">
+                    <div class="bg p-4 d-flex justify-content text-center">
+                        <ul class="list-inline mb-0">
+                            <li class="list-inline-item">
+                                <h5 class="font-weight-bold mb-0 d-block">215</h5><small class="text-muted"> <i class="fas fa-image mr-1"></i>Publicaciones</small>
+                            </li>
+                            <li class="list-inline-item">
+                                <h5 class="font-weight-bold mb-0 d-block">745</h5><small class="text-muted"> <i class="fas fa-user mr-1"></i>Seguidores</small>
+                            </li>
+                            <li class="list-inline-item">
+                                <h5 class="font-weight-bold mb-0 d-block">340</h5><small class="text-muted"> <i class="fas fa-user mr-1"></i>Seguidos</small>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-            <div class="widget-post__options is--hidden" id="stock-options">
+            <div class="widget-post__actions post--actions">
+                <div *ngIf="disabled" class="post-actions__widget">
+                    <button class="btn post-actions__publish" (click)="edit()">Editar</button>
+                </div>
+                <div *ngIf="!disabled" class="post-actions__widget">
+                    <button class="btn post-actions__publish" (click)="update()">Actualizar</button>
+                </div>
             </div>
         </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.3/js/uikit.min.js"></script>
     </div>
-</form>-->
-<div *ngIf="auth.user$ | async as user" translate="no" class="animate__animated animate__lightSpeedInRight">
-    <div class="plx-card gold">
-        <div class="pxc-bg" style="background-image:url('https://png.pngtree.com/thumb_back/fw800/background/20190221/ourmid/pngtree-texture-geometric-black-metal-gradient-image_17809.jpg')"> </div>
-        <div class="pxc-avatar"><img src="{{user.picture}}"></div>
-        <div class="pxc-stopper"> </div>
-        <div class="pxc-subcard">
-            <div class="pxc-title">{{user.name}}</div>
-            <div class="pxc-feats">Nombre de usuario: {{user.nickname}}</div>
-            <div class="pxc-feats">Correo electrónico: {{user.email}}</div>
-        </div>
-        <div class="widget-post__actions post--actions">
-            <div class="post-actions__widget">
-                <button class="btn post-actions__publish" (click)="createReview()">Editar</button>
-            </div>
-        </div>
-    </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.3/js/uikit.min.js"></script>
-</div>
+</form>
 <div>
     <h1> Reseñas</h1>
     <div class="homePage" *ngFor="let item of (reviews$ | async); let i = index">
@@ -44,5 +51,7 @@
 
     <app-spinner [shows]="showSpinner" [isSmallSize]="true"></app-spinner>
 
-    <div class="notification is-warning" *ngIf="finished && (reviews$ | async).length > 0"></div>
+</div>
+<div class="notification is-warning" *ngIf="finished && (reviews$ | async).length > 0">
+    Eso es todo amigues!
 </div>

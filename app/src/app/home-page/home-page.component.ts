@@ -25,18 +25,15 @@ export class HomePageComponent implements OnInit{
     page: number = 0;
     finished = false;
     showSpinner = false;
-    isLoggedIn = false;
 
     constructor(private reviewService: ReviewService, public snackBar: MatSnackBar, public auth:AuthService, private userService:UserService){ }
 
     ngOnInit(): void {
         this.auth.user$.subscribe(data =>{
             if(data){
-                this.userService.signUp(data).subscribe(res => {
-                    console.log(res)
-                },
-                    err => console.log("Usuario ya dado de alta.")
-                )   
+                this.userService.signUp(data).subscribe(user => {
+                    sessionStorage.setItem('userId', user.id);
+                })
             }
         });
         this.auth.isAuthenticated$.subscribe(
