@@ -4,7 +4,6 @@ import { AuthService } from '@auth0/auth0-angular';
 import { BehaviorSubject } from 'rxjs';
 import { Review } from '../core/models/review-model';
 import { ReviewService } from '../services/review.service';
-// import * as _ from 'loadash' es una libreria
 import { UserService } from '../services/user.service';
 
 @Component({
@@ -15,9 +14,6 @@ import { UserService } from '../services/user.service';
 export class HomePageComponent implements OnInit{
 
     loading = true;
-    hashtags1: string []= ['#Accion', '#Drama', '#Netflix', '#Hoy']
-    hashtags2: string []= ['#hashtags']
-    hashtags3: string []= ['#SorryButNoTSorry', '#estoEsUnaReseña', '#malisimaaa']
 
     reviews$ = new BehaviorSubject<Review[]>([]);
 
@@ -70,7 +66,6 @@ export class HomePageComponent implements OnInit{
     }
 
     newReview(review: Review){
-        console.log(review)
         if(review){
             let snack = this.snackBar.open('Publicado exitosamente!', 'x', {
                 duration: 500,

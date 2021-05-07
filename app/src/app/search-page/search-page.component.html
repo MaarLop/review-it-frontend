@@ -1,32 +1,47 @@
 
-<div class="container">
 <div class="row">
     <div class="col-lg-12 card-margin">
-        <div class="card search-form">
-            <div class="card-body p-0">
-                <form id="search-form">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="row no-gutters">
-                                <div class="col-lg-3 col-md-3 col-sm-12 p-0">
-                                    <select class="form-control" id="exampleFormControlSelect1">
-                                        <option>Título</option>
-                                        <option>Descripción</option>
-                                        <option>Punaje</option>
-                                    </select>
-                                </div>
-                                <div class="col-lg-8 col-md-6 col-sm-12 p-0">
-                                    <input type="text" placeholder="Search..." class="form-control" id="search" name="search">
-                                </div>
-                                <div class="button-container-1">
-                                    <span class="mas">Buscar</span>
-                                    <button id='work' type="button" name="Hover"> <i class="fa fa-search"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
+        <div class="row no-gutters">
+            <div class="col-lg-6 col-md-2 col-sm-12">
+                <app-input
+                    [group]="formGroup"
+                    [key]="'todo'"
+                    [inputType]="'text'"
+                    [label]="'Todo'">
+                </app-input>
+                <app-input
+                    [group]="formGroup"
+                    [key]="'title'"
+                    [inputType]="'text'"
+                    [label]="'Titulo'">
+                </app-input>
+                <app-input
+                    [group]="formGroup"
+                    [key]="'points'"
+                    [inputType]="'text'"
+                    [label]="'Puntaje'">
+                </app-input>
             </div>
+            <div class="col-lg-6 col-md-5 col-sm-12" style="padding-right: 35px;">
+                <app-input
+                    [group]="formGroup"
+                    [key]="'genre'"
+                    [inputType]="'text'"
+                    [label]="'Género'">
+                </app-input>
+                <app-input
+                    [group]="formGroup"
+                    [key]="'description'"
+                    [inputType]="'text'"
+                    [label]="'Descripcion'">
+                </app-input>
+            
+                <div class="col-md-2 button-container" >
+                    <button (click)="goSearch()"> <i class="fa fa-search"></i></button>
+                </div>
+           </div>
         </div>
     </div>
 </div>
+
+<app-review-list [filter$]="filter$" ></app-review-list>

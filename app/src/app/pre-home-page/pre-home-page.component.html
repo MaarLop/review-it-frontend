@@ -1,18 +1,10 @@
-<input type='checkbox' id='mmeennuu'>
-<label class='menu' for='mmeennuu'>
-
-<div class='barry'>
-	<span class='bar'></span>
-	<span class='bar'></span>
-	<span class='bar'></span>
-	<span class='bar'></span>
+<div class="container">
+    <button class="btn-slide-line center" *ngIf="auth.isAuthenticated$ | async; else loggedOut" (click)="auth.logout({ returnTo: document.location.origin })">
+        <span>LogOut</span>
+      </button>
+    <ng-template #loggedOut>
+        <button class="btn-slide-line center" (click)="auth.loginWithRedirect()" *ngIf="!(auth.isAuthenticated$ | async)">
+        	<span>LogIn</span>
+      	</button>
+    </ng-template>
 </div>
-	
-<ul class="navbar-nav ml-auto">
-	<li class="nav-item" *ngIf="auth.isAuthenticated$ | async; else loggedOut"><a id='home' (click)="auth.logout({ returnTo: document.location.origin })">Log Out</a></li>
-	<ng-template #loggedOut>
-		<li class="nav-item"><a id='about'(click)="auth.loginWithRedirect()">Log In</a></li>
-	</ng-template>
-</ul>
-
-</label>

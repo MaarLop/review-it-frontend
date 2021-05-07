@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LandingPageComponent } from './landing-page/landing';
 import { HomePageComponent } from './home-page/home-page.component';
 import { CoreModule } from './core/core.modules';
+import { ReviewListComponent } from './core/review-list/review-list.component';
 import { HttpClientModule } from '@angular/common/http';
 import {InfiniteScrollModule} from 'ngx-infinite-scroll';
 import { SideNavComponent } from './nav/nav.component';

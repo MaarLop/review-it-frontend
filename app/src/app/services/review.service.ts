@@ -16,12 +16,19 @@ export class ReviewService {
 
   constructor(private httpClient: HttpClient) { }
 
-  public getReviews(size?:number, page?: number) : Observable<any> {
+  public getReviews(size?:number, page?: number, filter?: string) : Observable<any> {
     const pageAndSize = size === null && page === null ? '' : `&page=${page}&size=${size}`;
     const path = `${this.basePath}?sort=id&order=desc${pageAndSize}`;
     return this.httpClient.get(path, { 
       headers: this.headers 
     });
+  }
+
+  public getSearchReviews(size?:number, page?: number, filter?: string) : Observable<any> {
+    const pageAndSize = size === null && page === null ? '' : `&page=${page}&size=${size}`;
+    const endpoint = filter?.includes('search') ? `/search?${filter}&` : `?${filter}&`;
+    const path = `${this.basePath}${endpoint}sort=id&order=desc${pageAndSize}`;
+    return this.httpClient.get(path);
   }
 
   public save(body: Review){

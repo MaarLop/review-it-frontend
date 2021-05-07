@@ -71,6 +71,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
 import {OverlayModule} from '@angular/cdk/overlay';
 import { ScrollToTopComponent } from './scroll-up/scroll.component';
+import { ReviewListComponent } from './review-list/review-list.component';
 import { SpinnerComponent } from './spinner/spinner-component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { UserReviewCardComponent } from './user-review-card/user-review-card.component';
@@ -98,6 +99,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     CreateReviewComponent,
     RateStarsComponent,
     ScrollToTopComponent,
+    ReviewListComponent,
+    SpinnerComponent,
     UserComponent,
     SpinnerComponent,
     UserReviewCardComponent
@@ -185,6 +188,10 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     OverlayModule,
     PortalModule,
     ScrollingModule,
+    ReviewListComponent,
+    SpinnerComponent,
+    FormsModule,
+
   ],
 })
 export class CoreModule {}

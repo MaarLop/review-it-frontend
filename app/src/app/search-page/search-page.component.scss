@@ -21,11 +21,11 @@ $break-small: 700px;
     right: 15px;
     opacity: 0;
     transition: all .2s ease-in-out;
-   }
-   .show-scrollTop {
-    opacity: 1;
-    transition: all .2s ease-in-out;
-   }
+}
+.show-scrollTop {
+opacity: 1;
+transition: all .2s ease-in-out;
+}
  .container {
     margin: 16px 100px;
     color: #fff;
@@ -58,20 +58,17 @@ $break-small: 700px;
         text-align: right;
         color: #fff;
     }
-    
-    button{
-        width: 93px;
-        background-color:#39394d;
-        color: #fff;
-        text-shadow: 4px 5px rgb(41, 39, 39);
- }
 
 ////////////////////////////////////////////////
 
 * {
-    margin: 0;
+    margin: 0px;
     padding: 0;
     box-sizing: border-box;
+   }
+
+   .no-gutters{
+    margin: 14px 50px 6px 90px;
    }
    
    @import url('https://fonts.googleapis.com/css?family=Lato:100,300,400');
@@ -92,102 +89,46 @@ $break-small: 700px;
     color: $col;
    }
    
-   .button-container-1 {
+   .button-container {
     position: relative;
     width: 94px;
     height: 48px;
-    border: 1px solid;
-    
+    background-color: #39394d;
+    border-radius: 8px;
+    color: #fff;
+    float: right;
+    margin-right: 71px;
     button {
         border-radius: 8px;
         float: right;
-     width: 101%;
-     height: 100%;
-     font-family: 'Lato', sans-serif;
-     font-weight: 300;
-     font-size: 11px;
-     letter-spacing: 1px;
-     font-weight: bold;
+        width: 101%;
+        height: 100%;
+        font-family: 'Lato', sans-serif;
+        font-weight: 300;
+        font-size: 11px;
+        letter-spacing: 1px;
+        font-weight: bold;
+        
    
-     @include button(#000,
-     "https://raw.githubusercontent.com/robin-dela/css-mask-animation/master/img/nature-sprite.png",
-     2300%,
-     100%,
-     none,
-     #fff);
-     cursor: pointer;
-     -webkit-animation: ani2 0.7s steps(22) forwards;
-     animation: ani2 0.7s steps(22) forwards;
-     box-shadow: 0 0 10px rgb(82, 82, 82);
-     &:hover {
-      -webkit-animation: ani 0.7s steps(22) forwards;
-      animation: ani 0.7s steps(22) forwards;
-     }
+      
     }
    }
    
-   .mas {
-       position: absolute;
-       color: #000;
-       text-align: center;
-       width: 101%;
-       font-family: 'Lato', sans-serif;
-       font-weight: 300;
-       position: absolute;
-       font-size: 11px;
-       margin-top: 17px;
-       overflow: hidden;
-         font-weight: bold;
    
-   }
    
-   @-webkit-keyframes ani {
-    from {
-     -webkit-mask-position: 0 0;
-     mask-position: 0 0;
-    }
-   
-    to {
-     -webkit-mask-position: 100% 0;
-     mask-position: 100% 0;
-    }
-   }
-   
-   @keyframes ani {
-    from {
-     -webkit-mask-position: 0 0;
-     mask-position: 0 0;
-    }
-   
-    to {
-     -webkit-mask-position: 100% 0;
-     mask-position: 100% 0;
-    }
-   }
-   
-   @-webkit-keyframes ani2 {
-    from {
-     -webkit-mask-position: 100% 0;
-     mask-position: 100% 0;
-    }
-   
-    to {
-     -webkit-mask-position: 0 0;
-     mask-position: 0 0;
-    }
-   }
-   
-   @keyframes ani2 {
-    from {
-     -webkit-mask-position: 100% 0;
-     mask-position: 100% 0;
-    }
-   
-    to {
-     -webkit-mask-position: 0 0;
-     mask-position: 0 0;
-    }
-   }
-   
- 
-   
+
+
+::ng-deep.mat-input-element {
+    color: #fff !important;
+}
+::ng-deep.mat-select-value{
+    color: #fff !important;
+}
+
+::ng-deep.mat-select-arrow{
+    color: #fff !important;
+}
+
+::ng-deep.mat-form-field-label, .mat-form-field-empty, .mat-form-field-label{
+    color: white !important;
+}

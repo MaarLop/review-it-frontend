@@ -16,4 +16,10 @@
 
 <app-sidenav></app-sidenav>
 
-<app-spinner></app-spinner>
+
+<div (click)="scrollToTop()" class="scroll-to-top" *ngIf="pageYoffset > 0" >
+    <button class="button-top">
+	    <i class="fa fa-angle-double-up"></i>
+    </button>
+</div>
+    

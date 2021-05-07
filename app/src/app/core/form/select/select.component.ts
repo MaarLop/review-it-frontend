@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ValidatorFn } from '@angular/forms';
 import { FieldConfig } from '..';
@@ -10,14 +10,23 @@ import { SimpleOption } from '../../models/simple-option';
   templateUrl: './select.component.html',
   styleUrls: ['./select.component.scss'],
 })
-export class SelectComponent extends BaseFieldComponent {
+export class SelectComponent extends BaseFieldComponent implements OnInit{
   @Input() label: string;
   @Input() options$: Observable<SimpleOption[]>;
   @Input() disabled$: Observable<boolean>;
+  @Input() defaultValue?: any;
 
   constructor() {
     super();
   }
+
+  ngOnInit() {
+    if(this.defaultValue){
+      this.group.get(this.key).setValue(this.defaultValue.id);
+    }
+  }
+
+
   static getFieldConfig = (params: {
     key: string;
     label: string;

@@ -1,0 +1,24 @@
+.notification{
+    &.is-warning{
+        color:whitesmoke;
+        text-align: center;
+    }
+}
+.success-snackbar{
+    background: #1add6b;
+    opacity: 40%;
+}
+
+.fail-snackbar{
+    background: #f32121;
+    opacity: 40%;
+}
+
+::ng-deep.mat-form-field-empty.mat-form-field-label {
+    color: #666 !important;
+  }
+  
+  ::ng-deep.mat-form-field-appearance-legacy .mat-form-field-underline {
+    background-color: #666 !important;
+  }
+  
