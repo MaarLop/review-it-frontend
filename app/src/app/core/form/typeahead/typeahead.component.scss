@@ -13,3 +13,9 @@
   content:"* ";
   color: red;
 }
+
+::ng-deep .mat-autocomplete-panel, .mat-option {
+  background-color:#39394d;
+  color: #fff !important;
+  
+}

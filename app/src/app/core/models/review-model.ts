@@ -8,8 +8,13 @@ export class Review{
     hashtags: string[];
     user: User;
     userId: string;
+    overview: string;
+    img: string;
+    genresId: any;
 
-    constructor(titulo: string, descripcion: string, fecha: Date, puntaje: number, hashtags, user: User, userId: string){
+    constructor(titulo: string, descripcion: string, fecha: Date,
+        puntaje: number, hashtags, user: User, userId: string, overview?: string,
+        img?: string, genres?: any){
         this.title=titulo;
         this.description= descripcion;
         this.date= fecha;
@@ -17,5 +22,8 @@ export class Review{
         this.hashtags = hashtags;
         this.user = user;
         this.userId = userId;
+        this.overview = overview;
+        this.img = img;
+        this.genresId = genres;
     }
 }

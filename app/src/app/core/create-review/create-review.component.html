@@ -1,8 +1,13 @@
 <form [formGroup]="formNewReview">
     <div class="widget-post" aria-labelledby="post-header-title">
         <div class="widget-post__header">
-            <app-input [group]="formNewReview" [key]="'title'" [inputType]="'text'" [label]="'Titulo'">
-            </app-input>
+            <app-typeahead 
+                [group]="formNewReview"
+                [key]="'title'"
+                [label]="'Titulo'"
+                [fetchItems]="fetchTitle"
+            >
+               </app-typeahead>
         </div>
         <div id="widget-form" class="widget-post__form" name="form" aria-label="post widget">
             <div class="widget-post__content">

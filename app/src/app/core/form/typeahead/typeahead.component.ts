@@ -64,11 +64,6 @@ export class TypeaheadComponent extends BaseFieldComponent
         switchMap((text) =>
           this.fetchItems(text).pipe(finalize(() => (this.isLoading = false))),
         ),
-        tap((_) => {
-          if (typeof this.group.controls[this.key].value === 'string') {
-            this.group.controls[this.key].setErrors({ invalidSelect: true });
-          }
-        }),
       )
       .subscribe((items) => (this.items = items));
     // Se necesita reaccionar cuando llega un default value, reseteando el valor del form control,
