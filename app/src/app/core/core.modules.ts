@@ -77,6 +77,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { UserReviewCardComponent } from './user-review-card/user-review-card.component';
 import { UserComponent } from './user/user.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ApiClientService } from './api-client.service';
 
 @NgModule({
   declarations: [
@@ -125,6 +126,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     MatFormFieldModule,
     MatInputModule,
     MatProgressSpinnerModule,
+    ApiClientService,
   ],
   exports: [
     SpinnerComponent,
