@@ -7,6 +7,7 @@ import { AuthModule } from '@auth0/auth0-angular';
 import { of } from 'rxjs';
 import { ReviewService } from '../services/review.service';
 import { HomePageComponent } from './home-page.component';
+import { filter } from 'rxjs/internal/operators/filter';
 
 describe('HomePageComponent', () => {
   let component: HomePageComponent;
@@ -97,6 +98,7 @@ describe('HomePageComponent', () => {
     component.getReviews();
     expect(reviews).toHaveBeenCalled();  
   });
+  
 
   it('should call the method getReviews and return the reviews', async () => {
     let mockReviews: any = [
@@ -130,6 +132,8 @@ describe('HomePageComponent', () => {
           }
       ]
     service.getReviews(10, 0).subscribe(reviews => {
+        let totalReview = reviews.filter(review => review.points > 0).length;
+        expect(totalReview).toBe(2);
         expect(reviews).toEqual(mockReviews)
     })
     const req = httpTestingController.expectOne('http://localhost:8090/reviews?sort=id&order=desc&page=0&size=10')

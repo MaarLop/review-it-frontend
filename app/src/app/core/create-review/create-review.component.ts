@@ -21,7 +21,7 @@ export class CreateReviewComponent implements OnInit {
 
   constructor( 
     private fb: FormBuilder,
-    private reviewService: ReviewService,
+    public reviewService: ReviewService,
     public apiClient: ApiClientService,
     ){
   }
