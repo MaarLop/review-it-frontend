@@ -26,9 +26,11 @@ export class ReviewService {
 
   public getSearchReviews(size?:number, page?: number, filter?: string) : Observable<any> {
     const pageAndSize = size === null && page === null ? '' : `&page=${page}&size=${size}`;
-    const endpoint = filter?.includes('search') ? `/search?${filter}&` : `?${filter}&`;
+    const endpoint = `?${filter}&`;
     const path = `${this.basePath}${endpoint}sort=id&order=desc${pageAndSize}`;
-    return this.httpClient.get(path);
+    return this.httpClient.get(path, { 
+      headers: this.headers 
+    });
   }
 
   public save(body: Review){
