@@ -1,17 +1,12 @@
 <form [formGroup]="formNewReview">
     <div class="widget-post" aria-labelledby="post-header-title">
         <div class="widget-post__header">
-            <app-typeahead 
-                [group]="formNewReview"
-                [key]="'title'"
-                [label]="'Titulo'"
-                [fetchItems]="fetchTitle"
-            >
-               </app-typeahead>
+            <app-typeahead [group]="formNewReview" [key]="'title'" [label]="'Titulo'" [fetchItems]="fetchTitle">
+            </app-typeahead>
         </div>
         <div id="widget-form" class="widget-post__form" name="form" aria-label="post widget">
             <div class="widget-post__content">
-                <app-text-area [group]="formNewReview" [key]="'description'" [label]="'Compartí tu opinión'">
+                <app-text-area [group]="formNewReview" [key]="'description'" [label]="'Compartí tu opinión'" data-testid="descriptionReview">
                 </app-text-area>
             </div>
             <div class="widget-post__options is--hidden" id="stock-options">
@@ -23,7 +18,7 @@
 
                 </div>
                 <div class="post-actions__widget">
-                    <button class="btn post-actions__publish" (click)="createReview()">Publicar</button>
+                    <button class="btn post-actions__publish" (click)="createReview()" data-testid="createReview">Publicar</button>
                 </div>
             </div>
         </div>

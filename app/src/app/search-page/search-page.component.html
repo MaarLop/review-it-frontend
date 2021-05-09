@@ -1,47 +1,28 @@
-
 <div class="row">
     <div class="col-lg-12 card-margin">
         <div class="row no-gutters">
             <div class="col-lg-6 col-md-2 col-sm-12">
-                <app-input
-                    [group]="formGroup"
-                    [key]="'todo'"
-                    [inputType]="'text'"
-                    [label]="'Todo'">
+                <app-input [group]="formGroup" [key]="'todo'" [inputType]="'text'" [label]="'Todo'">
                 </app-input>
-                <app-input
-                    [group]="formGroup"
-                    [key]="'title'"
-                    [inputType]="'text'"
-                    [label]="'Titulo'">
+                <app-input [group]="formGroup" [key]="'title'" [inputType]="'text'" [label]="'Titulo'">
                 </app-input>
-                <app-input
-                    [group]="formGroup"
-                    [key]="'points'"
-                    [inputType]="'text'"
-                    [label]="'Puntaje'">
+                <app-input [group]="formGroup" [key]="'points'" [inputType]="'text'" [label]="'Puntaje'">
                 </app-input>
             </div>
             <div class="col-lg-6 col-md-5 col-sm-12" style="padding-right: 35px;">
-                <app-input
-                    [group]="formGroup"
-                    [key]="'genre'"
-                    [inputType]="'text'"
-                    [label]="'Género'">
+                <app-input [group]="formGroup" [key]="'genre'" [inputType]="'text'" [label]="'Género'">
                 </app-input>
-                <app-input
-                    [group]="formGroup"
-                    [key]="'description'"
-                    [inputType]="'text'"
-                    [label]="'Descripcion'">
+                <app-input [group]="formGroup" [key]="'description'" [inputType]="'text'" [label]="'Descripcion'">
                 </app-input>
-            
-                <div class="col-md-2 button-container" >
+                <app-input [group]="formGroup" [key]="'userName'" [inputType]="'text'" [label]="'Usuario'">
+                </app-input>
+
+                <div class="col-md-2 button-container">
                     <button (click)="goSearch()"> <i class="fa fa-search"></i></button>
                 </div>
-           </div>
+            </div>
         </div>
     </div>
 </div>
 
-<app-review-list [filter$]="filter$" ></app-review-list>
+<app-review-list [filter$]="filter$"></app-review-list>

@@ -4,11 +4,11 @@ export class User {
   id: number;
   userName: string;
   name: string;
-  firstName: string;
+  firstName?: string;
   lastName: string;
-  isSuperuser: boolean;
-  telefono: string;
-  email?: string;
+  isSuperuser?: boolean;
+  telefono?: string;
+  email: string;
   avatar: string;
   password: string;
 

@@ -16,6 +16,7 @@ export class SearchComponent implements OnInit{
         { descripcion: "Título" , id: "title"},
         { descripcion: "Descripción" , id: "description"},
         { descripcion: "Puntaje", id: "points"},
+        { descripcion: "Usuario", id: "userName"},
       ]);
 
     defaultValue: SimpleOption =  { descripcion: "Todo", id: "search"};
@@ -36,33 +37,32 @@ export class SearchComponent implements OnInit{
             title: [{ value: '', disabled: false }],
             description: [{ value: '', disabled: false }],
             points: [{ value: '', disabled: false }],
+            userName: [{ value: '', disabled: false }],
         });
     }
         
     
     goSearch(){
-        const todo = this.formGroup.get('todo').value.replace(/\s/g, '%');
-        const genre = this.formGroup.get('genre').value.replace(/\s/g, '%');
-        const title = this.formGroup.get('title').value.replace(/\s/g, '%');
-        const description = this.formGroup.get('description').value.replace(/\s/g, '%');
-        const points = this.formGroup.get('points').value.replace(/\s/g, '%');
+        const todo = this.formGroup.get('todo').value.replace(/\s/g, '%20');
+        const genre = this.formGroup.get('genre').value.replace(/\s/g, '%20');
+        const title = this.formGroup.get('title').value.replace(/\s/g, '%20');
+        const description = this.formGroup.get('description').value.replace(/\s/g, '%20');
+        const points = this.formGroup.get('points').value.replace(/\s/g, '%20');
+        const userName = this.formGroup.get('userName').value.replace(/\s/g, '%20');
 
-
-
-        if(!!title || !!genre || !!description || !!points || !!todo){
+        let arrayFilter = [];
+        if(!!title || !!genre || !!description || !!points || !!userName || !!todo){
             const searchFilter = !!todo ? `search=${todo}` : '';
             const titleSearch = !!title ? `title=${title}` : '';
             const genresFilter = !!genre ? `genre=${genre}` : '';
             const descriptionFilter = !!description ? `description=${description}` : '';
             const pointsFilter = !!points ? `points=${points}` : '';
+            const userNameFilter = !!userName ? `userName=${userName}` : '';
+            arrayFilter = [searchFilter, titleSearch, genresFilter,descriptionFilter, pointsFilter, userNameFilter];
 
-            const arrayFilter = [searchFilter, titleSearch, genresFilter,descriptionFilter, pointsFilter];
-
-            const filtrerToApply = arrayFilter.filter((filter)=> !!filter).join('&');
-
-
-            this.filter$.next(filtrerToApply);
         }
+        const filtrerToApply = arrayFilter.filter((filter)=> !!filter).join('&');
+        this.filter$.next(filtrerToApply);
 
         // else{
         //     alert('Seleccionar algo');

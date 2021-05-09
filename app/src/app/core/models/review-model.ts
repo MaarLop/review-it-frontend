@@ -4,13 +4,13 @@ export class Review{
     title: string;
     description: string;
     points: number;
-    date: Date;
-    hashtags: string[];
+    date?: Date;
+    hashtags?: string[];
     user: User;
     userId: string;
-    overview: string;
-    img: string;
-    genresId: any;
+    overview?: string;
+    img?: string;
+    genresId?: any;
 
     constructor(titulo: string, descripcion: string, fecha: Date,
         puntaje: number, hashtags, user: User, userId: string, overview?: string,

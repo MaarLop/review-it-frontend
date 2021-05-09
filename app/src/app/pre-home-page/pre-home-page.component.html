@@ -3,7 +3,7 @@
         <span>LogOut</span>
       </button>
     <ng-template #loggedOut>
-        <button class="btn-slide-line center" (click)="auth.loginWithRedirect()" *ngIf="!(auth.isAuthenticated$ | async)">
+        <button class="btn-slide-line center" (click)="auth.loginWithRedirect()">
         	<span>LogIn</span>
       	</button>
     </ng-template>
