@@ -1,4 +1,4 @@
-import { User } from 'app/entities/user';
+/*import { User } from 'app/entities/user';*/
 
 const ONE_DAY_MILISECONDS = 1000 * 60 * 60 * 24;
 const ONE_MINUTE_MILISECONDS = 1000 * 60;
@@ -24,7 +24,7 @@ export class JWTHelper {
     return new Date(tokenInfo.exp * 1000);
   }
 
-  public static getUserInfo(token): User {
+  /*public static getUserInfo(token): User {
     const tokenClaims = this.parseJwt(token);
     return new User(
       tokenClaims.user_id,
@@ -33,7 +33,7 @@ export class JWTHelper {
       tokenClaims.last_name,
       tokenClaims.email,
     );
-  }
+  }*/
   public static getRefreshExpirationDate() {
     const currentDate = new Date(Date.now());
     currentDate.setDate(currentDate.getDate() + 7);

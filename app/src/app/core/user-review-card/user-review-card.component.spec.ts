@@ -1,4 +1,8 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { AuthModule } from '@auth0/auth0-angular';
+import { of } from 'rxjs';
+import { Review } from '../models/review-model';
 
 import { UserReviewCardComponent } from './user-review-card.component';
 
@@ -8,7 +12,14 @@ describe('UserReviewCardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ UserReviewCardComponent ]
+      declarations: [ UserReviewCardComponent ],
+      imports: [
+        HttpClientTestingModule,
+        AuthModule.forRoot({
+          domain: 'dev-d8bhv2ic.us.auth0.com',
+          clientId: 'OPF2R4rQ8M3OHOgZDooC4BJoK5kr12l2'
+        }),
+      ],
     })
     .compileComponents();
   });
@@ -16,10 +27,13 @@ describe('UserReviewCardComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(UserReviewCardComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
+  afterEach(() => {
+    TestBed.resetTestingModule();
+});
+
   it('should create', () => {
-    expect(component).toBeTruthy();
+      expect(component).toBeTruthy();
   });
 });
