@@ -27,6 +27,7 @@ describe('ReviewService', () => {
   afterEach(() => {
     // After every test, assert that there are no more pending requests.
     httpTestingController.verify();
+    TestBed.resetTestingModule();
   });
 
   afterAll(() => {
@@ -38,54 +39,42 @@ describe('ReviewService', () => {
   });
 
   it('should return Observable<Review>', () => {
-    let mockReview: any = [
+    let mockReviews: any = [
       {
-        createdDate: 1620259938000,
-        lastModifiedDate: 1620259938000,
         id: 1,
-        title: "prueba con usuario",
-        description: "sdasad",
+        title: "Cars",
+        description: "Muy buena",
         points: 4,
         user: {
-        createdDate: 1620251964000,
-        lastModifiedDate: 1620251964000,
-        id: 1,
-        name: "Martín",
-        lastName: "Castello",
-        email: "castellomn94@gmail.com",
-        userName: "castellomn94",
-        password: "google-oauth2|115876121203654924468",
-        avatar: "https://lh3.googleusercontent.com/a/AATXAJxDiyks0qyYHf6oWUsFWkUWk5JqpU_zBdksddLj=s96-c"
-        },
-        userId: null
-        },
+          id: 1,
+          name: "Martín",
+          lastName: "Castello",
+          email: "castellomn94@gmail.com",
+          userName: "castellomn94",
+          avatar: "https://lh3.googleusercontent.com/a/AATXAJxDiyks0qyYHf6oWUsFWkUWk5JqpU_zBdksddLj=s96-c"
+        }
+      },
         {
-        createdDate: 1620447464000,
-        lastModifiedDate: 1620447464000,
         id: 2,
         title: "FRED 3: Camp Fred",
         description: "buenarda",
         points: 3,
         user: {
-        createdDate: 1620251964000,
-        lastModifiedDate: 1620251964000,
-        id: 1,
-        name: "Martín",
-        lastName: "Castello",
-        email: "castellomn94@gmail.com",
-        userName: "castellomn94",
-        password: "google-oauth2|115876121203654924468",
-        avatar: "https://lh3.googleusercontent.com/a/AATXAJxDiyks0qyYHf6oWUsFWkUWk5JqpU_zBdksddLj=s96-c"
-        },
-        userId: null
+          id: 1,
+          name: "Martín",
+          lastName: "Castello",
+          email: "castellomn94@gmail.com",
+          userName: "castellomn94",
+          avatar: "https://lh3.googleusercontent.com/a/AATXAJxDiyks0qyYHf6oWUsFWkUWk5JqpU_zBdksddLj=s96-c"
+        }
         }
     ]
     service.getReviews(10, 0).subscribe((data) => {
-      expect(data).toEqual(mockReview);
+      expect(data).toEqual(mockReviews);
     });
 
     const httpRequest = httpTestingController.expectOne('http://localhost:8090/reviews?sort=id&order=desc&page=0&size=10');
     expect(httpRequest.request.method).toBe('GET');
-    httpRequest.flush(mockReview);
+    httpRequest.flush(mockReviews);
   });
 });
