@@ -1,10 +1,12 @@
 import {Component, ElementRef, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { tap, map } from 'rxjs/operators';
 import { ReviewService } from 'src/app/services/review.service';
 import { ApiClientService } from '../api-client.service';
 import { Review } from '../models/review-model';
 import { SimpleOption } from '../models/simple-option';
+import { NotificationService } from '../shared/errors/notification.service';
 
 @Component({
   selector: 'app-create-review',
@@ -23,6 +25,8 @@ export class CreateReviewComponent implements OnInit {
     private fb: FormBuilder,
     public reviewService: ReviewService,
     public apiClient: ApiClientService,
+    public snackBar: MatSnackBar,
+    private notifier: NotificationService
     ){
   }
 
@@ -69,7 +73,14 @@ export class CreateReviewComponent implements OnInit {
       this.reviewService.save(this.formNewReview.getRawValue() as Review).subscribe((review: Review) => {
         this.newReview.emit(review);
         this.startForm();
-      });
+      },
+        err => {
+          const title = err.error.title ? err.error.title+'\n' : '';
+          const description = err.error.description ? err.error.description+'\n' : '';
+          const points = err.error.points ? err.error.points : ''
+          this.notifier.showError(title+description+points);
+        }
+      );
     }
   }
 

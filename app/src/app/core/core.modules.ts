@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgModule } from '@angular/core';
+import { ErrorHandler, NgModule } from '@angular/core';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -78,6 +78,9 @@ import { UserReviewCardComponent } from './user-review-card/user-review-card.com
 import { UserComponent } from './user/user.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ApiClientService } from './api-client.service';
+import { GlobalErrorHandler } from './errors/global-error-handler';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpErrorInterceptor } from './errors/http-error.interceptor';
 
 @NgModule({
   declarations: [
@@ -127,6 +130,17 @@ import { ApiClientService } from './api-client.service';
     MatInputModule,
     MatProgressSpinnerModule,
     ApiClientService,
+    { 
+      // processes all errors
+      provide: ErrorHandler, 
+      useClass: GlobalErrorHandler 
+    },
+    { 
+      // interceptor for HTTP errors
+      provide: HTTP_INTERCEPTORS, 
+      useClass: HttpErrorInterceptor, 
+      multi: true // multiple interceptors are possible
+    }
   ],
   exports: [
     SpinnerComponent,
