@@ -5,6 +5,7 @@ import { BehaviorSubject } from 'rxjs';
 import { Review } from '../core/models/review-model';
 import { ReviewService } from '../services/review.service';
 import { UserService } from '../services/user.service';
+import { NotificationService } from '../core/shared/errors/notification.service';
 
 @Component({
     selector: 'app-home-page',
@@ -22,7 +23,11 @@ export class HomePageComponent implements OnInit{
     finished = false;
     showSpinner = false;
 
-    constructor(public reviewService: ReviewService, public snackBar: MatSnackBar, public auth:AuthService, private userService:UserService){ }
+    constructor(public reviewService: ReviewService, 
+        public snackBar: MatSnackBar, 
+        public auth:AuthService, 
+        private userService:UserService,
+        private notificationService: NotificationService){ }
 
     ngOnInit(): void {
         this.auth.user$.subscribe(data =>{
@@ -67,20 +72,8 @@ export class HomePageComponent implements OnInit{
 
     newReview(review: Review){
         if(review){
-            let snack = this.snackBar.open('Publicado exitosamente!', 'x', {
-                duration: 500,
-                panelClass: ['success-snackbar']
-            });
-            snack.afterDismissed().subscribe(()=>{
-                window.location.reload();
-            })
-
-        }
-        else{
-            this.snackBar.open('No se ha realizado la publicación 😟', 'x',{
-                duration: 3000,
-                panelClass: ['fail-snackbar']
-             });
+            this.notificationService.showSuccess('Publicado exitosamente!');
         }
     }
+    
 }
