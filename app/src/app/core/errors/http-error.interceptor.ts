@@ -23,6 +23,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
           // refresh token
           this.router.navigate(['/401'])
         } else {
+          console.log("httpRequest")
           return throwError(error);
         }
       })

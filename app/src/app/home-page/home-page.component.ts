@@ -53,8 +53,7 @@ export class HomePageComponent implements OnInit{
     getReviews(){
         if(this.finished) return;
 
-        this.reviewService.getReviews(this.size, this.page).subscribe((response)=>{
-            console.log(response)
+        this.reviewService.getReviews(this.size, this.page, '').subscribe((response)=>{
             const reviewList = this.reviews$.value;
             this.reviews$.next([...reviewList, ...response.content]);
             this.finished = response.last;

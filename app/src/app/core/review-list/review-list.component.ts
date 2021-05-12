@@ -27,26 +27,13 @@ export class ReviewListComponent implements OnInit {
     ngOnInit(): void {
         this.filter$?.subscribe((f)=>{
             this.page = 0;
-            this.searchOption();
+            this.getReviews();
         });
     }
 
     getReviews(){
-        if(this.finished) return;
         this.reviewService.getReviews(this.size, this.page, this.filter$?.value).subscribe((response)=>{
-            const reviewList = this.filter$?.value !== '' ? [] : this.reviews$.value;
-
-            this.reviews$.next([...reviewList, ...response.content]);
-            this.finished = response.last;
-            this.showSpinner = !this.finished;
-            this.page+=1;
-        });
-    }
-
-    searchOption(){
-        this.reviewService.getSearchReviews(this.size, this.page, this.filter$?.value).subscribe((response)=>{
             const reviewList = this.page === 0 ? [] : this.reviews$.value;
-
             this.reviews$.next([...reviewList, ...response.content]);
             this.finished = response.last;
             this.showSpinner = !this.finished;
