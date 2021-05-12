@@ -18,16 +18,8 @@ export class ReviewService {
 
   public getReviews(size?:number, page?: number, filter?: string) : Observable<any> {
     const pageAndSize = size === null && page === null ? '' : `&page=${page}&size=${size}`;
-    const path = `${this.basePath}?sort=id&order=desc${pageAndSize}`;
-    return this.httpClient.get(path, { 
-      headers: this.headers 
-    });
-  }
-
-  public getSearchReviews(size?:number, page?: number, filter?: string) : Observable<any> {
-    const pageAndSize = size === null && page === null ? '' : `&page=${page}&size=${size}`;
-    const endpoint = `?${filter}&`;
-    const path = `${this.basePath}${endpoint}sort=id&order=desc${pageAndSize}`;
+    const endpoint = filter === null || filter === '' ? '' : `&${filter}`;
+    const path = `${this.basePath}?sort=id&order=desc${pageAndSize}${endpoint}`;
     return this.httpClient.get(path, { 
       headers: this.headers 
     });
