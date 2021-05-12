@@ -17,6 +17,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
         if (error.status === 401) {
           // refresh token
         } else {
+          console.log("httpRequest")
           return throwError(error);
         }
       })
