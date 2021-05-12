@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, forwardRef, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { ControlValueAccessor, FormBuilder, FormControl, FormGroup, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '@auth0/auth0-angular';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { ReviewService } from 'src/app/services/review.service';
@@ -29,12 +29,26 @@ export class UserComponent implements OnInit {
   user: User;
   faCoffee = faCoffee;
 
+  userId?: number;
+
   @Output() newUser = new EventEmitter<User>();
 
-  constructor(private reviewService: ReviewService, public snackBar: MatSnackBar, private fb: FormBuilder, public auth: AuthService, private userService: UserService) { 
+  constructor(private reviewService: ReviewService,
+     public snackBar: MatSnackBar,
+      private fb: FormBuilder, 
+      public auth: AuthService, 
+      private userService: UserService,
+      private activatedRoute: ActivatedRoute) { 
+        
+        
   }
 
   ngOnInit(): void {
+    // setTimeout(() => {
+    //   this.userId = +this.activatedRoute.snapshot.paramMap.get('id');
+    //   console.log(this.userId)
+    // });
+    this.userId = +this.activatedRoute.snapshot.paramMap.get('id');
     this.startForm(this.disabled);
     this.getReviews();
   }
@@ -43,7 +57,6 @@ export class UserComponent implements OnInit {
     if(this.finished) return;
 
     this.reviewService.getReviews(this.size, this.page).subscribe((response)=>{
-        console.log(response)
         const reviewList = this.reviews$.value;
         this.reviews$.next([...reviewList, ...response.content]);
         this.finished = response.last;
@@ -60,7 +73,8 @@ export class UserComponent implements OnInit {
   }
 
   startForm(disabled: Boolean){
-    this.userService.get(sessionStorage.getItem('userId')).subscribe(data => {
+    const idUsuario = this.userId !== 0?  this.userId : sessionStorage.getItem('userId')
+    this.userService.get(idUsuario).subscribe(data => {
       this.user = data;
       this.formUser = this.fb.group(
         {
