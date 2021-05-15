@@ -69,7 +69,7 @@ describe('ReviewService', () => {
         }
         }
     ]
-    service.getReviews(10, 0).subscribe((data) => {
+    service.getReviews(10, 0, '').subscribe((data) => {
       expect(data).toEqual(mockReviews);
     });
 
