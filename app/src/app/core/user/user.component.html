@@ -7,8 +7,8 @@
     <a target="_blank">{{user.name}} (@{{user.userName}})</a>
     <h6 title="Followers"><i class="fas fa-users"></i> <span class="followers">90</span></h6>
   </div>
-  <div class="button">
-    <a href="#" class="btn" onmousedown="follow();">Seguidos <i class="fas fa-user-plus"></i></a>
+  <div class="button" *ngIf="displayButton">
+    <a class="btn" (click)="follow();">{{messageOfButton}} <i class="fas fa-user-plus"></i></a>
   </div>
   <div class="ds-info">
     <div class="ds pens">

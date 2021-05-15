@@ -9,6 +9,7 @@ import { UserService } from '../../services/user.service';
 import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 import { Review } from '../models/review-model';
 import { User } from '../models/user.model';
+import { catchError, retry } from 'rxjs/operators';
 
 @Component({
   selector: 'app-user',
@@ -31,6 +32,9 @@ export class UserComponent implements OnInit {
 
   userId?: number;
 
+  messageOfButton: String = 'Seguir';
+  displayButton: Boolean = false;
+
   @Output() newUser = new EventEmitter<User>();
 
   constructor(private reviewService: ReviewService,
@@ -38,17 +42,16 @@ export class UserComponent implements OnInit {
       private fb: FormBuilder, 
       public auth: AuthService, 
       private userService: UserService,
-      private activatedRoute: ActivatedRoute) { 
-        
+      private activatedRoute: ActivatedRoute,
+      private router: Router){
         
   }
 
   ngOnInit(): void {
-    // setTimeout(() => {
-    //   this.userId = +this.activatedRoute.snapshot.paramMap.get('id');
-    //   console.log(this.userId)
-    // });
     this.userId = +this.activatedRoute.snapshot.paramMap.get('id');
+    this.displayButton = 
+              this.activatedRoute.snapshot.routeConfig.path.includes('user') &&
+              sessionStorage.getItem('userId') !== this.userId.toString()
     this.startForm(this.disabled);
     this.getReviews();
   }
@@ -74,7 +77,9 @@ export class UserComponent implements OnInit {
 
   startForm(disabled: Boolean){
     const idUsuario = this.userId !== 0?  this.userId : sessionStorage.getItem('userId')
-    this.userService.get(idUsuario).subscribe(data => {
+    this.userService.get(idUsuario).pipe(
+      catchError(async (error) => this.errorHandle(error))
+    ).subscribe(data => {
       this.user = data;
       this.formUser = this.fb.group(
         {
@@ -103,6 +108,10 @@ export class UserComponent implements OnInit {
     )*/  
   }
 
+  errorHandle(error){
+    this.router.navigate(['/401'])
+  }
+
   edit(){
     this.disabled = false;
     this.startForm(this.disabled);
@@ -118,4 +127,14 @@ export class UserComponent implements OnInit {
     }
   }
 
+  follow(){
+    const body ={
+      idTo: parseInt(sessionStorage.getItem('userId')),
+      idFrom: this.userId
+    }
+    this.userService.followUser(body).subscribe((response)=>{
+      console.log(response)
+      this.messageOfButton = "Seguido";
+    });
+  }
 }
