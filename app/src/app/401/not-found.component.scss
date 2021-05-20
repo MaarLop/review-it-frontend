@@ -11,6 +11,14 @@ $bouncer-skin: #FFB482;
 $pole: #F5AE4E;
 $pole-shadow: #DF9D41;
 
+::ng-deep.navbar{
+  display: none;
+}
+
+::ng-deep .footer-page{
+  display: none !important;
+}
+
 .container{
   z-index: 3;
   background-color: #38434A;

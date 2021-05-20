@@ -68,6 +68,9 @@ ul {
     // padding: .2em .5em;
     background-color: #39394d;
     color: #fff;
+    ::ng-deep .mat-focused .mat-form-field-underline {
+        display: block;
+    }
 }
 
 .widget-post__title {
@@ -156,11 +159,15 @@ ul {
 }
 
 ::ng-deep.mat-form-field-empty.mat-form-field-label {
-    color: #666 !important;
+    color: rgb(255, 250, 250) !important;
+    margin-left: 10px;
 }
 
 ::ng-deep.mat-form-field-appearance-legacy .mat-form-field-underline {
     background-color: #666 !important;
+}
+::ng-deep.mat-form-field-appearance-legacy .mat-form-field-infix {
+    padding: 0.4375em 7px;
 }
 
 ::ng-deep .mat-focused .mat-form-field-underline {

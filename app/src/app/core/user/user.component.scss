@@ -144,12 +144,12 @@ body {
     .pens, .projects, .posts {
       position: relative;
       left: -300px;
-      width: calc(250px / 3);
+      width: calc(335px / 3);
       text-align: center;
       color: white;
       animation: fadeInMove 2s;
       animation-fill-mode: forwards;
-      h6 {
+      h4 {
         text-transform: uppercase;
         color: crimson;
       }
