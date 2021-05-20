@@ -34,6 +34,7 @@ export class UserService {
     }
 
     signUp(data: any): Observable<any> {
+      console.log("asjdaskj")
       const headers = this.headers;
       const path = this.basePath + '/signUp';
       return this.httpClient.post(path, {
@@ -57,6 +58,12 @@ export class UserService {
       const headers = this.headers;
       const body = id;
       return this.httpClient.post(path, body, { headers });
+    }
+
+    public followUser(body: any){
+      const path = this.basePath + `/follow`;
+      const headers = this.headers;
+      return this.httpClient.post(path, body, { headers })
     }
 
 }

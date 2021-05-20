@@ -86,3 +86,55 @@ $break-medium: 1500px;
 	opacity: 0.05;
 	background-image: linear-gradient(-270deg, rgba(255,255,255,0.00) 0%, #FFFFFF 20%, #FFFFFF 80%, rgba(255,255,255,0.00) 100%);
 }
+
+#btn {
+	background: #222;
+	height: 35px;
+	min-width: 80px;
+	border: none;
+	border-radius: 10px;
+	color: #eee;
+	font-size: 40px;
+	font-family: 'Cookie', cursive;
+	position: relative;
+	transition: 1s;
+	-webkit-tap-highlight-color: transparent;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	padding-top: 5px;
+  }
+  
+  #btn #circle {
+	width: 5px;
+	height: 5px;
+	background: transparent;
+	border-radius: 50%;
+	position: absolute;
+	top: 0;
+	left: 50%;
+	overflow: hidden;
+	transition: 500ms;
+  }
+  
+  .noselect {
+	-webkit-touch-callout: none;
+	  -webkit-user-select: none;
+	   -khtml-user-select: none;
+		 -moz-user-select: none;
+		  -ms-user-select: none;
+			  user-select: none;
+  }
+  
+  #btn:hover {
+	background: rgb(88, 149, 82);
+  }
+  
+  #btn:hover #circle {
+	height: 35px;
+	min-width: 80px;
+	left: 0;
+	border-radius: 0;
+	border-bottom: 2px solid #eee;
+  }

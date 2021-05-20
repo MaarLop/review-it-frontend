@@ -20,4 +20,8 @@ export class LandingPageComponent {
   scrollToTop(){
     this.scroll.scrollToPosition([0,0]);
   }
+
+  goToSearchUser(){
+    console.log(5334125)
+  }
 }

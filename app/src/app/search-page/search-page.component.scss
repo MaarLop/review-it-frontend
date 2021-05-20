@@ -108,16 +108,10 @@ transition: all .2s ease-in-out;
         font-size: 11px;
         letter-spacing: 1px;
         font-weight: bold;
-        
-   
-      
+       
     }
    }
    
-   
-   
-
-
 ::ng-deep.mat-input-element {
     color: #fff !important;
 }
@@ -131,4 +125,8 @@ transition: all .2s ease-in-out;
 
 ::ng-deep.mat-form-field-label, .mat-form-field-empty, .mat-form-field-label{
     color: white !important;
+}
+
+::ng-deep .mat-focused .mat-form-field-underline {
+    display: block;
 }

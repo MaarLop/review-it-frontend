@@ -62,11 +62,16 @@ export class SearchComponent implements OnInit{
 
         }
         const filtrerToApply = arrayFilter.filter((filter)=> !!filter).join('&');
-        this.filter$.next(filtrerToApply);
-
-        // else{
-        //     alert('Seleccionar algo');
-        //     return;
-        // }   
+        this.filter$.next(filtrerToApply); 
     } 
+
+    cleanFilter(){
+        this.formGroup.get('todo').setValue('');
+        this.formGroup.get('genre').setValue('');
+        this.formGroup.get('title').setValue('');
+        this.formGroup.get('description').setValue('');
+        this.formGroup.get('points').setValue('');
+        this.formGroup.get('userName').setValue('');
+        this.goSearch();
+    }
 }
