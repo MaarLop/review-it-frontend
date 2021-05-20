@@ -61,7 +61,7 @@ describe('HomePageComponent', () => {
       expect(service).toBeTruthy();
   })
 
-  it('should call reviewService and the method getReviews', async () => {
+  xit('should call reviewService and the method getReviews', async () => {
     let mockReviews: any = [
       {
         id: 1,
@@ -98,7 +98,7 @@ describe('HomePageComponent', () => {
   });
   
 
-  xit('should call the method getReviews and return the reviews', async () => {
+  it('should call the method getReviews and return the reviews', async () => {
     let mockReviews: any = [
         {
           id: 1,
