@@ -10,6 +10,8 @@ import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 import { Review } from '../models/review-model';
 import { User } from '../models/user.model';
 import { catchError, retry } from 'rxjs/operators';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogElementsExampleDialog } from './modal-followers/modal.component';
 
 @Component({
   selector: 'app-user',
@@ -35,6 +37,14 @@ export class UserComponent implements OnInit {
   messageOfButton: String = 'Seguir';
   displayButton: Boolean = false;
 
+
+  reviews:number = 0;
+  followers:number = 0;
+  likes:number = 0;
+  followings:number = 0;
+
+  followers$ = new BehaviorSubject<User[]>([]);
+
   @Output() newUser = new EventEmitter<User>();
 
   constructor(private reviewService: ReviewService,
@@ -43,6 +53,7 @@ export class UserComponent implements OnInit {
       public auth: AuthService, 
       private userService: UserService,
       private activatedRoute: ActivatedRoute,
+      public dialog: MatDialog,
       private router: Router){
         
   }
@@ -54,6 +65,15 @@ export class UserComponent implements OnInit {
               sessionStorage.getItem('userId') !== this.userId.toString()
     this.startForm(this.disabled);
     this.getReviews();
+    this.getInformationOfUser();
+  }
+
+  getInformationOfUser(){
+    this.reviews = this.reviews$.value.length;
+    this.userService.getExtraInfo(+sessionStorage.getItem('userId')).subscribe((data)=>{
+      this.followers$.next(data.content);
+      this.followers = this.followers$.value.length;
+    });
   }
 
   getReviews(){
@@ -79,7 +99,7 @@ export class UserComponent implements OnInit {
     const idUsuario = this.userId !== 0?  this.userId : sessionStorage.getItem('userId')
     this.userService.get(idUsuario).pipe(
       catchError(async (error) => this.errorHandle(error))
-    ).subscribe(data => {
+    ).subscribe((data) => {
       this.user = data;
       this.formUser = this.fb.group(
         {
@@ -133,8 +153,14 @@ export class UserComponent implements OnInit {
       idFrom: this.userId
     }
     this.userService.followUser(body).subscribe((response)=>{
-      console.log(response)
       this.messageOfButton = "Seguido";
     });
   }
+
+  showFollowers(){
+    console.log('hola')
+    this.dialog.open(DialogElementsExampleDialog);
+  }
 }
+
+

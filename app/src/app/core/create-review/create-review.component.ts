@@ -34,13 +34,11 @@ export class CreateReviewComponent implements OnInit {
     this.startForm();
 
     this.formNewReview.get('title').valueChanges.subscribe((title)=>{
-      console.log(title)
       this.apiClient
         .get(`https://api.themoviedb.org/3/search/movie?api_key=d83d9bf26a31066155e617cf070d3004&query=${title}&language=es`)
         .subscribe((content)=>{
           if(content.results.length >0){
             const result = content.results[0];
-            console.log(result)
             this.formNewReview.get('img').setValue(result.backdrop_path);
             this.formNewReview.get('genresId').setValue(result.genre_ids);
             this.formNewReview.get('overview').setValue(result.overview);
@@ -69,7 +67,6 @@ export class CreateReviewComponent implements OnInit {
 
   createReview(){
     if(this.formNewReview.valid){
-      console.log(this.formNewReview.getRawValue() as Review)
       this.reviewService.save(this.formNewReview.getRawValue() as Review).subscribe((review: Review) => {
         this.newReview.emit(review);
         this.startForm();
