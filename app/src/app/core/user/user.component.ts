@@ -70,8 +70,9 @@ export class UserComponent implements OnInit {
 
   getInformationOfUser(){
     this.reviews = this.reviews$.value.length;
-    this.userService.getExtraInfo(+sessionStorage.getItem('userId')).subscribe((data)=>{
-      this.followers$.next(data.content);
+    this.userService.getFollowers(+sessionStorage.getItem('userId')).subscribe((response)=>{
+      console.log(response)
+      this.followers$.next(response.content);
       this.followers = this.followers$.value.length;
     });
   }
@@ -159,7 +160,13 @@ export class UserComponent implements OnInit {
 
   showFollowers(){
     console.log('hola')
-    this.dialog.open(DialogElementsExampleDialog);
+    this.dialog.open(DialogElementsExampleDialog, {
+      width: '100%',
+      height: '60%',
+      data: {
+        dataKey: this.followers$.value
+      }
+    });
   }
 }
 
