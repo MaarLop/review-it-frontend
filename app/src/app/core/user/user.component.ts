@@ -71,7 +71,7 @@ export class UserComponent implements OnInit {
   getInformationOfUser(){
     this.reviews = this.reviews$.value.length;
     this.userService.getExtraInfo(+sessionStorage.getItem('userId')).subscribe((data)=>{
-      this.followers$.next(data.content);
+      //this.followers$.next(data.content);
       this.followers = this.followers$.value.length;
     });
   }

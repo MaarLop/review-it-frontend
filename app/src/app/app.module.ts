@@ -17,6 +17,8 @@ import { AuthModule } from '@auth0/auth0-angular';
 import { PreHomePageComponent } from './pre-home-page/pre-home-page.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { CommentComponent } from './core/comment/comment.component';
+import { CommentListComponent } from './core/comment-list/comment-list.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     SideNavComponent,
     SearchComponent,
     FooterComponent,
-    PreHomePageComponent
+    PreHomePageComponent,
   ],
   imports: [
     BrowserModule,

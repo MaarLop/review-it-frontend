@@ -81,6 +81,8 @@ import { ApiClientService } from './api-client.service';
 import { GlobalErrorHandler } from './errors/global-error-handler';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpErrorInterceptor } from './errors/http-error.interceptor';
+import { CommentComponent } from './comment/comment.component';
+import { CommentListComponent } from './comment-list/comment-list.component';
 
 @NgModule({
   declarations: [
@@ -107,7 +109,9 @@ import { HttpErrorInterceptor } from './errors/http-error.interceptor';
     SpinnerComponent,
     UserComponent,
     SpinnerComponent,
-    UserReviewCardComponent
+    UserReviewCardComponent,
+    CommentComponent,
+    CommentListComponent
   ],
   imports: [
     CommonModule,
@@ -206,8 +210,7 @@ import { HttpErrorInterceptor } from './errors/http-error.interceptor';
     ScrollingModule,
     ReviewListComponent,
     SpinnerComponent,
-    FormsModule,
-
+    FormsModule
   ],
 })
 export class CoreModule {}
