@@ -1,5 +1,4 @@
 @import '../rate-stars/rate-stats.component.scss';
-@import url('https://fonts.googleapis.com/css?family=Krub:400,700');
 $customBackCol: #8855DD;
 $pink: #F58;
 $c1: #a6aad1;
@@ -378,6 +377,9 @@ html {
         display: flex;
         align-items: center;
         justify-content: space-between;
+        color:#fff;
+        z-index: 1;
+        margin-right: 10px;
         .bronze & {
             display: none;
         }

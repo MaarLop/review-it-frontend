@@ -10,7 +10,8 @@ import { ReviewService } from 'src/app/services/review.service';
 import { CommentListComponent } from '../comment-list/comment-list.component';
 import { NotificationService } from '../shared/errors/notification.service';
 import { Comment } from '../models/comment.model';
-
+import { faComment } from '@fortawesome/free-solid-svg-icons';
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'app-review-card',
   templateUrl: 'review-card.component.html',
@@ -20,7 +21,8 @@ import { Comment } from '../models/comment.model';
 export class ReviewCardComponent implements OnInit{
   @Input() review : Review;
   currentRate: Number;
-
+  comment = faComment;
+  heart = faHeart;
   constructor(private reviewService: ReviewService, private userService: UserService, private modalService: NgbModal, private notificationService: NotificationService){ 
    }
   

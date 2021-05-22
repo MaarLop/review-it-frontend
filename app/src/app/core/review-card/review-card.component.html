@@ -6,22 +6,18 @@
         <div class="pxc-subcard">
             <div class="pxc-title">{{review.title}}</div>
             <div class="pxc-sub">
-                <i class="far fa-comment"></i>
-                <i class="fas fa-users"></i>
                 <ngb-rating [max]="5" [(rate)]="currentRate" [readonly]="true"></ngb-rating>
             </div>
             <div class="pxc-feats">
                 {{review.description}}
             </div>
-            <i class="far fa-comment"></i>
-            <button class="btn post-actions__comment" (click)="comments()" data-testid="comments">Comentarios</button>
             <div class="pxc-tags">
                 <div *ngFor="let item of review.hashtags">{{item}}</div>
             </div>
         </div>
         <div class="bottom-row">
             <div class="pxc-info">
-                5 M Gusta
+                <button class="btn post-actions__comment" (click)="comments()" data-testid="comments"><fa-icon [icon]="comment"></fa-icon></button>
             </div>
         </div>
     </div>
