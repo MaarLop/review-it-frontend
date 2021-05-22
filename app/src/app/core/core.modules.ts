@@ -74,8 +74,6 @@ import { ScrollToTopComponent } from './scroll-up/scroll.component';
 import { ReviewListComponent } from './review-list/review-list.component';
 import { SpinnerComponent } from './spinner/spinner-component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
-import { UserReviewCardComponent } from './user-review-card/user-review-card.component';
-import { UserComponent } from './user/user.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ApiClientService } from './api-client.service';
 import { GlobalErrorHandler } from './errors/global-error-handler';
@@ -105,9 +103,7 @@ import { HttpErrorInterceptor } from './errors/http-error.interceptor';
     ScrollToTopComponent,
     ReviewListComponent,
     SpinnerComponent,
-    UserComponent,
     SpinnerComponent,
-    UserReviewCardComponent
   ],
   imports: [
     CommonModule,

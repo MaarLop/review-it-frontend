@@ -3,10 +3,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
 import { PageNotFoundComponent } from './401/not-found.component';
-import { UserComponent } from './core/user/user.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { SearchComponent } from './search-page/search-page.component';
 import { AuthGuard } from './services/auth.guard';
+import { UserComponent } from './user/user.component';
 
 const routes: Routes = [];
 
