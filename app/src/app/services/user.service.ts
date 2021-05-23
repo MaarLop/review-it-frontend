@@ -65,8 +65,8 @@ export class UserService {
       return this.httpClient.post(path, body, { headers })
     }
 
-    public getExtraInfo(userId: number){
-      const path = this.basePath + `/extrainfo/${userId}`;
+    public getFollowers(userId: number){
+      const path = this.basePath + `/followers/${userId}`;
       return this.httpClient.get(path, { 
         headers: this.headers 
       });

@@ -74,13 +74,13 @@ import { ScrollToTopComponent } from './scroll-up/scroll.component';
 import { ReviewListComponent } from './review-list/review-list.component';
 import { SpinnerComponent } from './spinner/spinner-component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
-import { UserReviewCardComponent } from './user-review-card/user-review-card.component';
-import { UserComponent } from './user/user.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ApiClientService } from './api-client.service';
 import { GlobalErrorHandler } from './errors/global-error-handler';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpErrorInterceptor } from './errors/http-error.interceptor';
+import { CommentComponent } from './comment/comment.component';
+import { CommentListComponent } from './comment-list/comment-list.component';
 
 @NgModule({
   declarations: [
@@ -105,9 +105,9 @@ import { HttpErrorInterceptor } from './errors/http-error.interceptor';
     ScrollToTopComponent,
     ReviewListComponent,
     SpinnerComponent,
-    UserComponent,
     SpinnerComponent,
-    UserReviewCardComponent
+    CommentComponent,
+    CommentListComponent
   ],
   imports: [
     CommonModule,
@@ -206,8 +206,7 @@ import { HttpErrorInterceptor } from './errors/http-error.interceptor';
     ScrollingModule,
     ReviewListComponent,
     SpinnerComponent,
-    FormsModule,
-
+    FormsModule
   ],
 })
 export class CoreModule {}

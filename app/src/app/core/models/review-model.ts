@@ -1,6 +1,7 @@
 import { User } from "./user.model";
 
 export class Review{
+    id: number;
     title: string;
     description: string;
     points: number;
@@ -12,7 +13,7 @@ export class Review{
     img?: string;
     genresId?: any;
 
-    constructor(titulo: string, descripcion: string, fecha: Date,
+    constructor(id: number, titulo: string, descripcion: string, fecha: Date,
         puntaje: number, hashtags, user: User, userId: string, overview?: string,
         img?: string, genres?: any){
         this.title=titulo;

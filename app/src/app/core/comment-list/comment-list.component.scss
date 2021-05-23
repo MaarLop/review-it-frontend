@@ -1,0 +1,12 @@
+.modal {
+    display: block !important;
+}
+
+.modal-dialog {
+    overflow-y: initial !important
+}
+
+.search-results {
+    max-height: 500px;
+    overflow-y: scroll;
+}

@@ -377,6 +377,9 @@ html {
         display: flex;
         align-items: center;
         justify-content: space-between;
+        color: #fff;
+        z-index: 1;
+        margin-right: 10px;
         .bronze & {
             display: none;
         }
@@ -450,4 +453,12 @@ html {
     bottom: 5px;
     justify-content: space-around;
     align-items: center;
+}
+
+.post-actions__comment {
+    margin-top: -100px;
+    width: 40px;
+    background-color: #008391;
+    color: #fff;
+    border-radius: 1.5em;
 }
