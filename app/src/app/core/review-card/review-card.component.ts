@@ -34,10 +34,6 @@ export class ReviewCardComponent implements OnInit{
     if(this.review.id){
       localStorage.setItem('reviewId', this.review.id.toString());
       const modalRef = this.modalService.open(CommentListComponent);
-      this.reviewService.get(this.review.id).subscribe(data => {
-        const commentList = modalRef.componentInstance.comments$.value;
-        modalRef.componentInstance.comments$.next([...commentList, ...data.commentaries]);
-      });
     }
     // modalRef.componentInstance.message = 'World'
   }

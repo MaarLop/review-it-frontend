@@ -33,9 +33,9 @@ export class ReviewService {
     return this.httpClient.post(path, body, { headers });
   }
 
-  public get(id: any): Observable<any>{
+  public getComments(id: any, page?: number): Observable<any>{
     const headers = this.headers;
-    const path = `${this.basePath}/${id}`;
+    const path = `${this.basePath}/${id}/comments?sort=id&order=desc&page=${page}&size=5`;
     return this.httpClient.get(path, { headers });
   }
 

@@ -18,7 +18,6 @@ export class CommentComponent implements OnInit {
   constructor(private userService: UserService, private reviewService: ReviewService) { }
 
   ngOnInit(): void {
-    console.log(this.comment.user);
   }
 
 }
