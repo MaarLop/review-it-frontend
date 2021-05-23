@@ -19,7 +19,6 @@ export class CommentListComponent implements OnInit {
   @Output() newComment = new EventEmitter<Comment>();
   page: number = 0;
   finished = false;
-  maxHeightModal = window.innerHeight;
 
   constructor(private fb: FormBuilder, private reviewService: ReviewService, private notifier: NotificationService) { }
 
