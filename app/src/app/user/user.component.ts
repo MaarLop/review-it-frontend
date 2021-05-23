@@ -5,13 +5,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '@auth0/auth0-angular';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { ReviewService } from 'src/app/services/review.service';
-import { UserService } from '../../services/user.service';
 import { faCoffee } from '@fortawesome/free-solid-svg-icons';
-import { Review } from '../models/review-model';
-import { User } from '../models/user.model';
 import { catchError, retry } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
-import { DialogElementsExampleDialog } from './modal-followers/modal.component';
+import { Pageable } from '../core/models/pageable.model';
+import { Review } from '../core/models/review-model';
+import { User } from '../core/models/user.model';
+import { UserService } from '../services/user.service';
+import { FollowersModalCOmponent } from './modal-followers/modal.component';
 
 @Component({
   selector: 'app-user',
@@ -70,8 +71,9 @@ export class UserComponent implements OnInit {
 
   getInformationOfUser(){
     this.reviews = this.reviews$.value.length;
-    this.userService.getExtraInfo(+sessionStorage.getItem('userId')).subscribe((data)=>{
-      //this.followers$.next(data.content);
+    this.userService.getFollowers(+sessionStorage.getItem('userId')).subscribe((response: Pageable)=>{
+      const followers = response.content.map((follow)=> follow.from);
+      this.followers$.next(followers);
       this.followers = this.followers$.value.length;
     });
   }
@@ -158,8 +160,13 @@ export class UserComponent implements OnInit {
   }
 
   showFollowers(){
-    console.log('hola')
-    this.dialog.open(DialogElementsExampleDialog);
+    this.dialog.open(FollowersModalCOmponent, {
+      width: '100%',
+      height: '60%',
+      data: {
+        dataKey: this.followers$.value
+      }
+    });
   }
 }
 

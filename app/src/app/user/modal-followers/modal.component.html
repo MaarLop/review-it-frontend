@@ -1,0 +1,17 @@
+<h1 mat-dialog-title>Followers</h1>
+<div mat-dialog-content>
+  <div >
+    <img src="">
+    
+  </div>
+  <main class="leaderboard__profiles" *ngFor="let user of data">
+    <article class="leaderboard__profile">
+      <img src="{{user.avatar? user.avatar : 'https://www.adl-logistica.org/wp-content/uploads/2019/07/imagen-perfil-sin-foto.png'}}" alt="Mark Zuckerberg" class="leaderboard__picture">
+      <span class="leaderboard__name">{{user.name}}</span>
+      <span class="leaderboard__value">7</span>
+    </article>
+  </main>
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Close</button>
+</div>

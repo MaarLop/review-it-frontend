@@ -17,8 +17,8 @@ import { AuthModule } from '@auth0/auth0-angular';
 import { PreHomePageComponent } from './pre-home-page/pre-home-page.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { CommentComponent } from './core/comment/comment.component';
-import { CommentListComponent } from './core/comment-list/comment-list.component';
+import { UserComponent } from './user/user.component';
+import { FollowersModalCOmponent } from './user/modal-followers/modal.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +29,8 @@ import { CommentListComponent } from './core/comment-list/comment-list.component
     SearchComponent,
     FooterComponent,
     PreHomePageComponent,
+    UserComponent,
+    FollowersModalCOmponent
   ],
   imports: [
     BrowserModule,
