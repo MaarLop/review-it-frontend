@@ -1,11 +1,10 @@
-import { ThrowStmt } from '@angular/compiler';
-import { Component, EventEmitter, HostListener, OnInit, Output, NgModule, NgModuleRef, ViewChild, Input } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
 import { ReviewService } from 'src/app/services/review.service';
 import { NotificationService } from '../shared/errors/notification.service';
 import { Comment } from '../models/comment.model';
-import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-comment-list',
