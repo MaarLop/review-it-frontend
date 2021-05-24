@@ -109,11 +109,6 @@
     }
   }
   
-  
-  
-  
-  // bare minimuu styles
-  
   body {
     margin: 0;
     background-color: #2d3436;
@@ -141,4 +136,8 @@
 ::ng-deep .mat-button, .mat-icon-button, .mat-stroked-button {
     color: antiquewhite;
     background: #151515;
+}
+
+button{ 
+  float: right;
 }

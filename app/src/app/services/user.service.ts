@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
 import { Observable } from 'rxjs';
+import { Pageable } from '../core/models/pageable.model';
 import { User } from '../core/models/user.model';
 
 
@@ -72,4 +73,17 @@ export class UserService {
       });
     }
 
+    public getUsers(filter?: string){
+      const path = this.basePath + (filter ? `/?search=${filter}` : '');
+      return this.httpClient.get(path,{
+        headers:this.headers
+      });
+    }
+
+    public getFollowings(userId){
+      const path = this.basePath + `/followings/${userId}`;
+      return this.httpClient.get(path,{
+        headers:this.headers
+      });
+    }
 }

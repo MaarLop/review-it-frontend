@@ -42,7 +42,7 @@ export class UserComponent implements OnInit {
   reviews:number = 0;
   followers:number = 0;
   likes:number = 0;
-  followings:number = 0;
+  followings:number = JSON.parse(localStorage.getItem('listOfFollowings')).length;
 
   followers$ = new BehaviorSubject<User[]>([]);
 
@@ -71,7 +71,9 @@ export class UserComponent implements OnInit {
 
   getInformationOfUser(){
     this.reviews = this.reviews$.value.length;
-    this.userService.getFollowers(+sessionStorage.getItem('userId')).subscribe((response: Pageable)=>{
+    const userId = this.activatedRoute.snapshot.routeConfig.path.includes('user') ?
+        this.userId : +sessionStorage.getItem('userId');
+    this.userService.getFollowers(userId).subscribe((response: Pageable)=>{
       const followers = response.content.map((follow)=> follow.from);
       this.followers$.next(followers);
       this.followers = this.followers$.value.length;
@@ -154,7 +156,7 @@ export class UserComponent implements OnInit {
       idTo: parseInt(sessionStorage.getItem('userId')),
       idFrom: this.userId
     }
-    this.userService.followUser(body).subscribe((response)=>{
+    this.userService.followUser(body).subscribe((_)=>{
       this.messageOfButton = "Seguido";
     });
   }
