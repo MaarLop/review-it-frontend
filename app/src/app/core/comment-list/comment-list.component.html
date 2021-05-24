@@ -2,6 +2,7 @@
     <div class="modal-dialog" style="overflow-y: scroll; max-height:85%;  margin-top: 50px; margin-bottom:50px;">
         <div class="modal-content">
             <div class="container justify-content-center mt-3 border-left border-right">
+                <button type="button" class="close" (click)="close()">&times;</button>
                 <form [formGroup]="formNewComment">
                     <div class="d-flex justify-content-center pt-3 pb-2"> <input (keyup.enter)="onEnter()" type="text" [formControlName]="'message'" [name]="'message'" placeholder="Deja tu comentario" class="form-control addtxt"> </div>
                 </form>

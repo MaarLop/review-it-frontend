@@ -1,10 +1,11 @@
 import { ThrowStmt } from '@angular/compiler';
-import { Component, EventEmitter, HostListener, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, OnInit, Output, NgModule, NgModuleRef, ViewChild, Input } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
 import { ReviewService } from 'src/app/services/review.service';
 import { NotificationService } from '../shared/errors/notification.service';
 import { Comment } from '../models/comment.model';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-comment-list',
@@ -19,6 +20,8 @@ export class CommentListComponent implements OnInit {
   @Output() newComment = new EventEmitter<Comment>();
   page: number = 0;
   finished = false;
+  modal : NgbModalRef;
+  reviewId : Number;
 
   constructor(private fb: FormBuilder, private reviewService: ReviewService, private notifier: NotificationService) { }
 
@@ -33,7 +36,7 @@ export class CommentListComponent implements OnInit {
 
   getComments(){
     if(this.finished) return;
-    this.reviewService.getComments(localStorage.getItem('reviewId'), this.page).subscribe((response) => {
+    this.reviewService.getComments(this.reviewId, this.page).subscribe((response) => {
       const commentList = this.page === 0 ? [] : this.comments$.value;
       this.comments$.next([...commentList, ...response.content]);
       this.finished = response.last;
@@ -46,7 +49,7 @@ export class CommentListComponent implements OnInit {
     this.formNewComment = this.fb.group(
       {
         message: [{value: '', disabled: false}],
-        reviewId: localStorage.getItem('reviewId'),
+        reviewId: this.reviewId,
         userId: sessionStorage.getItem('userId'),
       }
     )
@@ -74,6 +77,10 @@ export class CommentListComponent implements OnInit {
     }else{
       this.getComments();
     }
+  }
+
+  close(){
+    this.modal.close();
   }
 
 }
