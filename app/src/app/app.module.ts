@@ -19,6 +19,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { UserComponent } from './user/user.component';
 import { FollowersModalCOmponent } from './user/modal-followers/modal.component';
+import { UserSearchComponent } from './search-user/search-user.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { FollowersModalCOmponent } from './user/modal-followers/modal.component'
     FooterComponent,
     PreHomePageComponent,
     UserComponent,
-    FollowersModalCOmponent
+    FollowersModalCOmponent,
+    UserSearchComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,169 @@
+$break-small: 700px;
+ .container {
+    margin: 16px 100px;
+    color: #fff;
+    @media screen and (max-width: 1000px) and (min-width: $break-small){
+        left: 120px;
+        margin: 21px 10px 0px 16px;
+        padding:15px 4px 15px 5px;
+      }
+      @media screen and (max-width: $break-small) {
+        height: auto;
+        padding: 15px;
+        margin: 17px ;
+        flex: 0 1 auto;
+      }
+    .no-gutters{
+        box-shadow: 0 0 10px rgb(82, 82, 82);
+        border-radius: 5%;
+    }
+ }
+
+ select,
+ input,
+ button
+ {
+    background-color: #fff;
+    height: calc(1.5em + 0.75rem + 12px);
+ }
+ .searchButton{
+        width: 0%;
+        text-align: right;
+        color: #fff;
+    }
+
+   
+   
+   .button-container {
+    position: relative;
+    width: 94px;
+    height: 48px;
+    background-color: #39394d;
+    border-radius: 8px;
+    color: #fff;
+    float: right;
+    margin-right: 71px;
+    button {
+        border-radius: 8px;
+        float: right;
+        width: 101%;
+        height: 100%;
+        font-family: 'Lato', sans-serif;
+        font-weight: 300;
+        font-size: 11px;
+        letter-spacing: 1px;
+        font-weight: bold;
+       
+    }
+   }
+   
+::ng-deep.mat-input-element {
+    color: #fff !important;
+}
+::ng-deep.mat-select-value{
+    color: #fff !important;
+}
+
+::ng-deep.mat-select-arrow{
+    color: #fff !important;
+}
+
+::ng-deep.mat-form-field-label, .mat-form-field-empty, .mat-form-field-label{
+    color: white !important;
+}
+
+::ng-deep .mat-focused .mat-form-field-underline {
+    display: block;
+}
+
+.leaderboard {
+    max-width: 490px;
+    width: 100%;
+    border-radius: 12px;
+    
+    
+    &__profiles {
+      border-radius: 0 0 12px 12px;
+      padding: 15px 15px 20px;
+      display: grid;
+      row-gap: 8px;
+    }
+    
+    &__profile {
+      display: grid;
+      grid-template-columns: 1.1fr 7fr 1fr;
+      align-items: center;
+      padding: 10px 30px 10px 36px;
+      overflow: hidden;
+      border-radius: 10px;
+      box-shadow: 0 5px 7px -1px rgba(51, 51, 51, 0.23);
+      cursor: pointer;
+      transition: transform 1.25s cubic-bezier(0.7, 1.98, 0.86, 1.98), box-shadow 0.25s cubic-bezier(0.7, 1.98, 0.86, 1.98);
+      background-color: #151515;
+      
+      &:hover {
+        transform: scale(1.1);
+        box-shadow: 0 9px 47px 11px rgba(51, 51, 51, 0.18);
+      }
+    }
+    
+    &__picture {
+      max-width: 100%;
+      width: 60px;
+      border-radius: 50%;
+      box-shadow: 0 0 0 10px #ebeef3, 0 0 0 22px #f3f4f6;
+    }
+    
+    &__name {
+      color: #979cb0;
+      font-weight: 600;
+      font-size: 20px;
+      letter-spacing: 0.64px;
+      margin-left: 12px;
+    }
+    
+    &__value {
+      
+      & > span {
+        opacity: .8;
+        font-weight: 600;
+        font-size: 13px;
+        margin-left: 3px;
+      }
+    }
+  }
+  
+  body {
+    margin: 0;
+    background-color: #2d3436;
+    display: grid;
+    height: 100vh;
+    place-items: center;
+    font-family: 'Source Sans Pro', sans-serif;
+  }
+  
+  .leaderboard {
+    box-shadow: 0 0 40px -10px rgba(0, 0, 0, .4);
+  }
+
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: 130px;
+    
+    &__filter{
+        margin-left: 21px;
+    }
+    button{
+      border-radius: 10px;
+      color:#fff;
+      background-color: #2d3436;
+    }
+  }
+
+  .noResults{
+    text-align: center;
+    color: #fff;
+  }
+

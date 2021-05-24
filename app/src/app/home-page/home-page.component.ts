@@ -34,7 +34,13 @@ export class HomePageComponent implements OnInit{
             if(data){
                 this.userService.signUp(data).subscribe((user) => {
                     sessionStorage.setItem('userId', user.id);
-                })
+                    this.userService.getFollowings(user.id).subscribe((listOfFollowers: any[])=>{
+                        const listOfTo = listOfFollowers.map((f)=>{
+                            return f.to.id;
+                        });
+                        localStorage.setItem('listOfFollowings',  JSON.stringify(listOfTo));
+                    })
+                });
             }
         });
         this.auth.isAuthenticated$.subscribe(
