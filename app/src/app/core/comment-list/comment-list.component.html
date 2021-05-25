@@ -4,9 +4,26 @@
             <div class="container justify-content-center mt-3 border-left border-right">
                 <button type="button" class="close" (click)="close()">&times;</button>
                 <form [formGroup]="formNewComment">
-                    <div class="d-flex justify-content-center pt-3 pb-2"> <input (keyup.enter)="onEnter()" type="text" [formControlName]="'message'" [name]="'message'" placeholder="Deja tu comentario" class="form-control addtxt"> </div>
+                    <div class="header d-flex justify-content-center pt-3 pb-2">
+                        <textarea [(ngModel)]="textArea" (keyup.enter)="onEnter()" type="text" [formControlName]="'message'" [name]="'message'" placeholder="Deja tu comentario" class="form-control addtxt"></textarea>
+                        <button (click)="isEmojiPickerVisible = !isEmojiPickerVisible;">😀</button>
+                    </div>
                 </form>
-                <div class="modal-body">
+                <emoji-mart class="emoji-mart" [i18n]="{ 
+                    search: 'Buscar', 
+                    categories: { 
+                        search: 'Resultados de la busqueda', recent: 'Recientes',
+                        people: 'Caritas y Personas',
+                        nature: 'Animales & Naturaleza',
+                        foods: 'Comida & Bebida',
+                        activity: 'Actividad',
+                        places: 'Viajes & Lugares',
+                        objects: 'Objetos',
+                        symbols: 'Simbolos',
+                        flags: 'Banderas',
+                        custom: 'Personalizado' } 
+                    }" darkMode="true" *ngIf="isEmojiPickerVisible" (emojiSelect)="addEmoji($event)" title="Elije tu emoji"></emoji-mart>
+                <div class="modal-body" *ngIf="!isEmojiPickerVisible">
                     <div infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollUpDistance]="1.5" [infiniteScrollThrottle]="100" (scrolled)="onScroll()" [scrollWindow]="false" class="search-results">
                         <div class="commentList" *ngFor="let item of (comments$ | async); let i = index">
                             <app-comment [comment]="item"></app-comment>

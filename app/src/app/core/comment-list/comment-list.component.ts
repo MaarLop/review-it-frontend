@@ -21,6 +21,8 @@ export class CommentListComponent implements OnInit {
   finished = false;
   modal : NgbModalRef;
   reviewId : Number;
+  public isEmojiPickerVisible: boolean;
+  public textArea: string = '';
 
   constructor(private fb: FormBuilder, private reviewService: ReviewService, private notifier: NotificationService) { }
 
@@ -81,5 +83,10 @@ export class CommentListComponent implements OnInit {
   close(){
     this.modal.close();
   }
+
+  public addEmoji(event) {
+    this.textArea = `${this.textArea}${event.emoji.native}`;
+    this.isEmojiPickerVisible = false;
+ }
 
 }

@@ -1,5 +1,7 @@
 import { ViewportScroller } from '@angular/common';
 import { Component, HostListener } from '@angular/core';
+import { Router } from '@angular/router';
+import { faUserPlus } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-landing-page',
@@ -9,12 +11,12 @@ import { Component, HostListener } from '@angular/core';
 export class LandingPageComponent {
   title = 'landing-page';
   pageYoffset = 0;
-
+  icon = faUserPlus;
   @HostListener('window:scroll', ['$event']) onScroll(event){
     this.pageYoffset = window.pageYOffset;
   }
 
-  constructor(private scroll: ViewportScroller){
+  constructor(private scroll: ViewportScroller, private router: Router){
   }
 
   scrollToTop(){
@@ -22,6 +24,6 @@ export class LandingPageComponent {
   }
 
   goToSearchUser(){
-    console.log(5334125)
+    this.router.navigate(['/search-user'])
   }
 }

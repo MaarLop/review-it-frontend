@@ -81,6 +81,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpErrorInterceptor } from './errors/http-error.interceptor';
 import { CommentComponent } from './comment/comment.component';
 import { CommentListComponent } from './comment-list/comment-list.component';
+import { PickerModule } from '@ctrl/ngx-emoji-mart';
 
 @NgModule({
   declarations: [
@@ -121,6 +122,7 @@ import { CommentListComponent } from './comment-list/comment-list.component';
     NgbModule,
     InfiniteScrollModule,
     FontAwesomeModule,
+    PickerModule 
   ],
   providers: [
     DynamicFormService,
