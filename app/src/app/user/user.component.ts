@@ -11,6 +11,7 @@ import { Pageable } from '../core/models/pageable.model';
 import { User } from '../core/models/user.model';
 import { UserService } from '../services/user.service';
 import { FollowersModalCOmponent } from './modal-followers/modal.component';
+import { NotificationService } from '../core/shared/errors/notification.service';
 
 @Component({
   selector: 'app-user',
@@ -29,7 +30,7 @@ export class UserComponent implements OnInit {
 
   userId?: number;
 
-  messageOfButton: String = 'Seguir';
+  messageOfButton: String = this.followingUser ? 'Seguido' : 'Seguir';
   displayButton: Boolean = false;
 
 
@@ -51,6 +52,7 @@ export class UserComponent implements OnInit {
       private userService: UserService,
       private activatedRoute: ActivatedRoute,
       public dialog: MatDialog,
+      private notificationService: NotificationService,
       private router: Router){
         
   }
@@ -134,7 +136,11 @@ export class UserComponent implements OnInit {
       idFrom: parseInt(sessionStorage.getItem('userId'))
     }
     this.userService.followUser(body).subscribe((_)=>{
-      this.messageOfButton = "Seguido";
+      this.notificationService.showSuccess('Usuario seguido')
+      
+      const followings =  JSON.parse(localStorage.getItem('listOfFollowings'));
+      followings.push(this.userId);
+      localStorage.setItem('listOfFollowings', JSON.stringify(followings));
     });
   }
 
@@ -147,6 +153,11 @@ export class UserComponent implements OnInit {
       }
     });
   }
+
+  followingUser(){
+    return JSON.parse(localStorage.getItem('listOfFollowings')).includes(this.userId);
+  }
+
 }
 
 
