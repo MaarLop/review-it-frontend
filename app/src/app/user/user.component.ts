@@ -13,6 +13,8 @@ import { Review } from '../core/models/review-model';
 import { User } from '../core/models/user.model';
 import { UserService } from '../services/user.service';
 import { FollowersModalCOmponent } from './modal-followers/modal.component';
+import { ModalEditComponent } from './modal-edit/modal-edit.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-user',
@@ -46,8 +48,6 @@ export class UserComponent implements OnInit {
 
   followers$ = new BehaviorSubject<User[]>([]);
 
-  @Output() newUser = new EventEmitter<User>();
-
   constructor(private reviewService: ReviewService,
      public snackBar: MatSnackBar,
       private fb: FormBuilder, 
@@ -55,7 +55,8 @@ export class UserComponent implements OnInit {
       private userService: UserService,
       private activatedRoute: ActivatedRoute,
       public dialog: MatDialog,
-      private router: Router){
+      private router: Router,
+      private modalService: NgbModal){
         
   }
 
@@ -116,20 +117,7 @@ export class UserComponent implements OnInit {
           avatar: [{value: this.user.avatar, disabled: disabled}]
         }
       )
-    })
-    /*this.auth.user$.subscribe(
-      user => {
-        this.formUser = this.fb.group(
-          {
-            id: [{value: this.user.id, disabled: disabled}],
-            name: [{value: user.given_name, disabled: disabled}],
-            userName: [{value: this.user.userName, disabled: disabled}],
-            password: [{value: user.sub, disabled: disabled}],
-            email: [{value: this.user.email, disabled: disabled }, Validators.required ]
-          }
-        )
-      }
-    )*/  
+    }) 
   }
 
   errorHandle(error){
@@ -137,17 +125,10 @@ export class UserComponent implements OnInit {
   }
 
   edit(){
-    this.disabled = false;
-    this.startForm(this.disabled);
-  }
-
-  update(){
-    if(this.formUser.valid){
-      this.userService.save(this.formUser.getRawValue() as User).subscribe((user: User) => {
-        this.newUser.emit(user);
-        this.disabled = true;
-        this.startForm(this.disabled);
-      });
+    if(this.user){
+      const modalRef = this.modalService.open(ModalEditComponent);
+      modalRef.componentInstance.modal = modalRef;
+      modalRef.componentInstance.user = this.user;
     }
   }
 

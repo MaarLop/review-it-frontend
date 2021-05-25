@@ -1,0 +1,19 @@
+<form [formGroup]="formUser">
+    <div class="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" style="overflow-y: scroll; max-height:85%;  margin-top: 50px; margin-bottom:50px;">
+            <div class="modal-content">
+                <div class="container justify-content-center mt-3 border-left border-right">
+                    <div class="d-flex justify-content-center pt-3 pb-2">
+                        <div class="col-md-12">
+                            <label for="form_name">Nombre*</label>
+                            <input type="text" [formControlName]="'name'" [name]="'name'" placeholder="Nombre" class="form-control addtxt">
+                            <label style="margin-top: 10px" for="form_pass">Contraseña*</label>
+                            <input type="text" [formControlName]="'password'" [name]="'password'" placeholder="Contraseña" class="form-control addtxt">
+                        </div>
+                    </div>
+                    <button class="btn post-actions__publish" (click)="update()" data-testid="updateUser">Actualizar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
