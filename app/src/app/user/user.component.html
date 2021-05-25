@@ -1,10 +1,9 @@
 <div class="card">
-    <div class="ds-top"><button class="btn post-actions__edit" (click)="edit()">Editar</button></div>
     <div class="avatar-holder">
         <img src="{{user.avatar? user.avatar : 'https://www.adl-logistica.org/wp-content/uploads/2019/07/imagen-perfil-sin-foto.png'}}">
     </div>
     <div class="name">
-        <a target="_blank">{{user.name}} (@{{user.userName}})</a>
+        <a target="_blank" (click)="edit()">{{user.name}} (@{{user.userName}}) <fa-icon [icon]="faEdit"></fa-icon></a>
         <h6 title="Seguidos"><i class="fas fa-users"></i> <span class="followers">{{followings}}</span></h6>
     </div>
     <div class="button" *ngIf="displayButton">

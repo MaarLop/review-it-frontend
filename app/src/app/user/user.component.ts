@@ -6,6 +6,7 @@ import { AuthService } from '@auth0/auth0-angular';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { ReviewService } from 'src/app/services/review.service';
 import { faCoffee } from '@fortawesome/free-solid-svg-icons';
+import { faUserEdit } from '@fortawesome/free-solid-svg-icons';
 import { catchError, retry } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
 import { Pageable } from '../core/models/pageable.model';
@@ -35,6 +36,7 @@ export class UserComponent implements OnInit {
   user: User;
   faCoffee = faCoffee;
 
+  faEdit = faUserEdit;
   userId?: number;
 
   messageOfButton: String = 'Seguir';
