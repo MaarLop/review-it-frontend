@@ -153,8 +153,8 @@ export class UserComponent implements OnInit {
 
   follow(){
     const body ={
-      idTo: parseInt(sessionStorage.getItem('userId')),
-      idFrom: this.userId
+      idTo: this.userId,
+      idFrom: parseInt(sessionStorage.getItem('userId'))
     }
     this.userService.followUser(body).subscribe((_)=>{
       this.messageOfButton = "Seguido";

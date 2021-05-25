@@ -68,8 +68,8 @@ export class UserSearchComponent implements OnInit{
 
     followUser(user: User){
         const body ={
-            idTo: parseInt(sessionStorage.getItem('userId')),
-            idFrom: user.id
+            idTo: user.id,
+            idFrom: parseInt(sessionStorage.getItem('userId'))
           }
           this.userService.followUser(body).subscribe((_)=>{
               const followings =  JSON.parse(localStorage.getItem('listOfFollowings'));

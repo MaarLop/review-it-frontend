@@ -1,3 +1,4 @@
+@import '~@ctrl/ngx-emoji-mart/picker';
 .modal {
     display: block !important;
 }
@@ -9,4 +10,19 @@
 .search-results {
     max-height: 500px;
     overflow-y: scroll;
+}
+
+.header {
+    display: grid;
+    grid-template-columns: 100% 0%;
+    width: 100%;
+    button {
+        background: transparent;
+        border: 0;
+        transform: translateX(-40px);
+        cursor: pointer;
+        &:focus {
+            outline: 0;
+        }
+    }
 }
