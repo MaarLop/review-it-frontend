@@ -1,18 +1,17 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, forwardRef, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { ControlValueAccessor, FormBuilder, FormControl, FormGroup, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '@auth0/auth0-angular';
-import { BehaviorSubject, Subscription } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { ReviewService } from 'src/app/services/review.service';
-import { faCoffee } from '@fortawesome/free-solid-svg-icons';
-import { catchError, retry } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
 import { Pageable } from '../core/models/pageable.model';
-import { Review } from '../core/models/review-model';
 import { User } from '../core/models/user.model';
 import { UserService } from '../services/user.service';
 import { FollowersModalCOmponent } from './modal-followers/modal.component';
+import { NotificationService } from '../core/shared/errors/notification.service';
 
 @Component({
   selector: 'app-user',
@@ -22,20 +21,16 @@ import { FollowersModalCOmponent } from './modal-followers/modal.component';
 
 export class UserComponent implements OnInit {
   formUser: FormGroup;
-  
-  reviews$ = new BehaviorSubject<Review[]>([]);
-
   size: number = 2;
   page: number = 0;
   finished = false;
   showSpinner = false;
   disabled = true;
   user: User;
-  faCoffee = faCoffee;
 
   userId?: number;
 
-  messageOfButton: String = 'Seguir';
+  messageOfButton: String = this.followingUser ? 'Seguido' : 'Seguir';
   displayButton: Boolean = false;
 
 
@@ -48,6 +43,8 @@ export class UserComponent implements OnInit {
 
   @Output() newUser = new EventEmitter<User>();
 
+  filter$: BehaviorSubject<string> = new BehaviorSubject('');
+
   constructor(private reviewService: ReviewService,
      public snackBar: MatSnackBar,
       private fb: FormBuilder, 
@@ -55,6 +52,7 @@ export class UserComponent implements OnInit {
       private userService: UserService,
       private activatedRoute: ActivatedRoute,
       public dialog: MatDialog,
+      private notificationService: NotificationService,
       private router: Router){
         
   }
@@ -63,14 +61,14 @@ export class UserComponent implements OnInit {
     this.userId = +this.activatedRoute.snapshot.paramMap.get('id');
     this.displayButton = 
               this.activatedRoute.snapshot.routeConfig.path.includes('user') &&
-              sessionStorage.getItem('userId') !== this.userId.toString()
+              sessionStorage.getItem('userId') !== this.userId.toString();
+    const filter = `userId=${this.displayButton ? this.userId : sessionStorage.getItem('userId')}`;
+    this.filter$.next(filter);
     this.startForm(this.disabled);
-    this.getReviews();
     this.getInformationOfUser();
   }
 
   getInformationOfUser(){
-    this.reviews = this.reviews$.value.length;
     const userId = this.activatedRoute.snapshot.routeConfig.path.includes('user') ?
         this.userId : +sessionStorage.getItem('userId');
     this.userService.getFollowers(userId).subscribe((response: Pageable)=>{
@@ -78,25 +76,6 @@ export class UserComponent implements OnInit {
       this.followers$.next(followers);
       this.followers = this.followers$.value.length;
     });
-  }
-
-  getReviews(){
-    if(this.finished) return;
-
-    this.reviewService.getReviews(this.size, this.page).subscribe((response)=>{
-        const reviewList = this.reviews$.value;
-        this.reviews$.next([...reviewList, ...response.content]);
-        this.finished = response.last;
-        this.showSpinner = !this.finished;
-        this.page+=1;
-    });
-  }
-
-  onScroll(){
-    setTimeout(() => {
-        this.getReviews();
-        this.showSpinner = false;
-    }, 2000);
   }
 
   startForm(disabled: Boolean){
@@ -157,7 +136,11 @@ export class UserComponent implements OnInit {
       idFrom: parseInt(sessionStorage.getItem('userId'))
     }
     this.userService.followUser(body).subscribe((_)=>{
-      this.messageOfButton = "Seguido";
+      this.notificationService.showSuccess('Usuario seguido')
+      
+      const followings =  JSON.parse(localStorage.getItem('listOfFollowings'));
+      followings.push(this.userId);
+      localStorage.setItem('listOfFollowings', JSON.stringify(followings));
     });
   }
 
@@ -170,6 +153,11 @@ export class UserComponent implements OnInit {
       }
     });
   }
+
+  followingUser(){
+    return JSON.parse(localStorage.getItem('listOfFollowings')).includes(this.userId);
+  }
+
 }
 
 
