@@ -75,7 +75,7 @@ export class UserSearchComponent implements OnInit{
               const followings =  JSON.parse(localStorage.getItem('listOfFollowings'));
               followings.push(user.id);
 
-              localStorage.setItem('listOfFollowings', JSON.stringify(followings))
+              localStorage.setItem('listOfFollowings', JSON.stringify(followings));
           });    
     }
 

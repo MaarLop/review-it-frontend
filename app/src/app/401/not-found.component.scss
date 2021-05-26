@@ -11,9 +11,6 @@ $bouncer-skin: #FFB482;
 $pole: #F5AE4E;
 $pole-shadow: #DF9D41;
 
-::ng-deep.navbar{
-  display: none;
-}
 
 ::ng-deep .footer-page{
   display: none !important;
@@ -21,10 +18,12 @@ $pole-shadow: #DF9D41;
 
 .container{
   z-index: 3;
+  margin-top: -74px;
   background-color: #38434A;
 }
 
 .background {
+  margin-top: -74px;
   position: absolute;
   left: 50%;
   bottom: 0;
@@ -58,6 +57,7 @@ $pole-shadow: #DF9D41;
 }
 
 .door {
+  margin-top: -74px;
   position: relative;
   width: 180px;
   height: 300px;
@@ -94,21 +94,16 @@ $pole-shadow: #DF9D41;
 }
 
 .rug {
+  margin-top: -74px;
   width: 180px;
   border-bottom: 120px solid $red;
 	border-left: 50px solid transparent;
 	border-right: 50px solid transparent;
-  &::before {
-    display: block;
-    content: '';
-    position: relative;
-    width: 100%;
-    height: 10px;
-    background: $dark-red;
-  }
+ 
 }
 
 .foreground {
+  margin-top: -74px;
   position: absolute;
   left: 50%;
   bottom: 0;
@@ -116,6 +111,7 @@ $pole-shadow: #DF9D41;
 }
 
 .bouncer {
+  margin-top: -74px;
   position: relative;
   left: -130px;
   transition: left 1.5s;
@@ -285,6 +281,7 @@ $pole-shadow: #DF9D41;
 }
 
 .poles {
+  margin-top: -74px;
   position: absolute;
   left: 50%;
   bottom: 0;
@@ -345,6 +342,7 @@ $pole-shadow: #DF9D41;
 }
 
 .hover:hover {
+  margin-top: -74px;
   .bouncer {
     left: 130px;
   }

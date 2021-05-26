@@ -27,12 +27,13 @@ export class ModalEditComponent implements OnInit {
   }
 
   startForm(){
+    console.log(this.user)
     this.formUser = this.fb.group(
       {
         id: [{value: this.user.id, disabled: true}],
         name: [{value: this.user.name, disabled: false}],
+        avatar: [{value: this.user.avatar, disabled: false}],
         userName: [{value: this.user.userName, disabled: false}],
-        password: [{value: this.user.password, disabled: false}]
       }
     )
   }
