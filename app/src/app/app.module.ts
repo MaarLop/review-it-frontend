@@ -20,6 +20,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { UserComponent } from './user/user.component';
 import { FollowersModalCOmponent } from './user/modal-followers/modal.component';
 import { UserSearchComponent } from './search-user/search-user.component';
+import { ModalEditComponent } from './user/modal-edit/modal-edit.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,8 @@ import { UserSearchComponent } from './search-user/search-user.component';
     PreHomePageComponent,
     UserComponent,
     FollowersModalCOmponent,
-    UserSearchComponent
+    UserSearchComponent,
+    ModalEditComponent,
   ],
   imports: [
     BrowserModule,
@@ -47,6 +50,7 @@ import { UserSearchComponent } from './search-user/search-user.component';
     }),
     NgbModule,
     FontAwesomeModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
