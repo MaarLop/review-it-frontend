@@ -48,7 +48,7 @@ export class UserService {
     }
 
     public save(body: User){
-      const path = this.basePath + '/save';
+      const path = this.basePath;
       const headers = this.headers;
       return this.httpClient.post(path, body, { headers });
     }

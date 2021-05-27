@@ -1,29 +1,42 @@
 @import url('https://fonts.googleapis.com/css?family=Krub:400,700');
+$break-small: 700px;
 
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-html, body {
-  width: 100%;
-  height: 100%;
+html,
+body {
+    width: 100%;
+    height: 100%;
 }
 
 body {
   background: #202020;
   font-family: 'Krub', sans-serif;
+  @media screen and (max-width: $break-small) {
+    height: auto;
+    width: auto;
+    flex-direction: column;
+    border-radius: 2px;
+    margin: 25px 15px;
 }
-
+}
 .card {
-    // z-index: -1;
-  position: absolute;
-  margin: auto;
-  top: -14px;
-  right: 100px;
-  bottom: 41px;
-  left: 110px;
+  @media screen and (max-width: 1000px) and (min-width: $break-small) {
+    left: 120px;
+    margin: 21px 10px 0px 16px;
+    padding: 15px 4px 15px 5px;
+}
+@media screen and (max-width: $break-small) {
+    height: auto;
+    padding: 15px;
+    margin: 17px;
+    flex: 0 1 auto;
+}
+  margin: 18px 0px 10px 66px;
   height: 254px;
   border-radius: 10px;
   box-shadow: 0 10px 25px 5px rgba(0, 0, 0, 0.2);
@@ -32,11 +45,6 @@ body {
   -webkit-box-shadow: 0 0 10px rgb(92, 92, 92);
   box-shadow: 0 0 10px rgb(82, 82, 82);
   .ds-top {
-    position: absolute;
-    margin: auto;
-    top: 0;
-    right: 0;
-    left: 0;
     height: 80px;
     background: #39394d;
     box-shadow: 0 1px 1rem rgba(10, 10, 25, .5);
@@ -45,8 +53,7 @@ body {
   .avatar-holder {
     position: absolute;
     margin: auto;
-    top: 40px;
-    left: 70px;
+    margin: 38px;
     width: 100px;
     height: 100px;
     border-radius: 50%;
@@ -65,16 +72,11 @@ body {
     }
   }
   .name {
-    position: absolute;
-    margin: auto;
-    top: -37px;
-    right: 0;
-    bottom: 0px;
-    left: -305px;
-    width: inherit;
+    width: fit-content;
     height: 40px;
     text-align: center;
     animation: fadeIn 2s ease-in;
+    margin: 6px 0px 31px 157px;
     a {
       color: white;
       text-decoration: none;
@@ -85,29 +87,11 @@ body {
           color: crimson;
       }
     }
-    h6 {
-      position: absolute;
-      margin: auto;
-      right: 0;
-      bottom: 0px;
-      left: -305px;
-      color: white;
-      width: 40px;
-    }
+    
   }
   .button {
-    position: absolute;
     margin: auto;
     padding: 8px;
-    top: 21px;
-    right: 0;
-    bottom: 0;
-    left: -571px;
-    width: inherit;
-    height: 40px;
-    text-align: center;
-    animation: fadeIn 2s ease-in;
-    outline: none;
     a {
       padding: 5px 20px;
       border-radius: 10px;
@@ -122,157 +106,74 @@ body {
       }
     }
   }
-  .ds-info {
-    position: absolute;
-    margin: auto;
-    top: 120px;
-    bottom: 135px;
-    right: 0px;
-    left: 705px;
-    
-    height: 40px;
-    display: flex;
-
-    // position: absolute;
-    // margin: auto;
-    // top: 96px;
-    // left: 300px;
-    // right: 0;
-    // width: inherit;
-    // height: 100px;
-
-    .pens, .projects, .posts {
-      position: relative;
-      left: -300px;
-      width: calc(335px / 3);
-      text-align: center;
-      color: white;
-      animation: fadeInMove 2s;
-      animation-fill-mode: forwards;
-      h4 {
-        text-transform: uppercase;
-        color: crimson;
-      }
-      p {
-        font-size: 12px;
-      }
-    }
-    .ds {
-      &:nth-of-type(2) {
-        animation-delay: .5s;
-      }
-      &:nth-of-type(1) {
-        animation-delay: 1s;
-      }
-    }
+}
+h6 {
+    margin-left: 81px;
+    color: white;
+    width: 583px;
   }
-  .ds-skill {
-    position: absolute;
-    margin: auto;
-    bottom: 10px;
-    right: 0;
-    left: 0;
-    width: 200px;
-    height: 100px;
-    animation: mvBottom 1.5s;
-    h6 {
-      margin-bottom: 5px;
-      font-weight: 700;
+.ds-info {
+  margin-top: -104px !important;
+  margin-left: calc(65% - 1px);
+  height: 40px;
+  display: -webkit-inline-box;
+  float: right;
+
+  .pens, .projects, .posts {
+    width: calc(335px / 3);
+    text-align: center;
+    color: white;
+    animation-fill-mode: forwards;
+    h4 {
       text-transform: uppercase;
       color: crimson;
     }
-    .skill {
-      h6 {
-        font-weight: 400;
-        font-size: 8px;
-        letter-spacing: 0.05em;
-        margin: 4px 0;
-        color: white;
-      }
-      .fab {
-        color: crimson;
-        font-size: 14px;
-      }
-      .bar {
-        height: 5px;
-        background: crimson;
-        text-align: right;
-        p {
-          color: white;
-          font-size: 8px;
-          padding-top: 5px;
-          animation: fadeIn 5s;
-        }
-        &:hover {
-          background: white;
-        }
-      }
-      .bar-html {
-        width: 95%;
-        animation: htmlSkill 1s;
-        animation-delay: .4s;
-      }
-      .bar-css {
-        width: 90%;
-        animation: cssSkill 2s;
-        animation-delay: .4s;
-      }
-      .bar-js {
-        width: 75%;
-        animation: jsSkill 3s;
-        animation-delay: .4s;
-      }
+    p {
+      font-size: 12px;
     }
   }
-}
-
-@keyframes fadeInMove {
-  0% {
-    opacity: 0;
-    left: -300px;
-  }
-  100% {
-    opacity: 1;
-    left: 0;
+  .ds {
+    &:nth-of-type(2) {
+      animation-delay: .5s;
+    }
+    &:nth-of-type(1) {
+      animation-delay: 1s;
+    }
   }
 }
 
 @keyframes fadeIn {
-  0% {opacity: 0;}
-  100% {opacity: 1;}
-}
-
-@keyframes htmlSkill {
-  0% {width: 0;}
-  100% {width: 95%;}
-}
-
-@keyframes cssSkill {
-  0% {width: 0;}
-  100% {width: 90%;}
-}
-
-@keyframes jsSkill {
-  0% {width: 0;}
-  100% {width: 75%;}
-}
-
-@keyframes mvBottom {
-  0% {bottom: -150px;}
-  100% {bottom: 10px;}
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
 
 @keyframes mvTop {
-  0% {top: -150px;}
-  100% {top: 40px;}
+  0% {top: -100px;}
+  70% {top: 0px;}
 }
 
 @keyframes dsTop {
-  0% {top: -150px;}
-  100% {top: 0;}
+    0% {
+        top: -150px;
+    }
+    100% {
+        top: 0;
+    }
 }
 
 .following {
-  color: white;
-  background: crimson;
+    color: white;
+    background: crimson;
+}
+
+.post-actions__edit {
+    width: 100px;
+    background-color: #151515;
+    color: #fff;
+    border-radius: 1.5em;
+    float: right;
 }
