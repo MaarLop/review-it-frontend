@@ -1,15 +1,16 @@
-.post-actions__publish, .cancel-actions {
+.post-actions__publish,
+.cancel-actions {
     width: 100%;
     color: #fff;
     border-radius: 1.5em;
     margin-top: 15px;
 }
 
-.post-actions__publish{
+.post-actions__publish {
     background-color: #008391;
 }
 
-.cancel-actions{
+.cancel-actions {
     background-color: rgb(109, 109, 109);
 }
 
@@ -32,6 +33,10 @@
     padding: 10px;
 }
 
-label{
+label {
     color: #fff;
+}
+
+.avatar-pic {
+    width: 150px;
 }

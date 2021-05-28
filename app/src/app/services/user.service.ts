@@ -47,10 +47,20 @@ export class UserService {
       });
     }
 
-    public save(body: User){
+    public save(body: FormData){
       const path = this.basePath;
-      const headers = this.headers;
+      const headers = new HttpHeaders({
+        'Authorization': 'Bearer ' + localStorage.getItem('auth_token')
+      });
       return this.httpClient.post(path, body, { headers });
+    }
+
+    public getImage(userId: number): Observable<any>{
+      const headers = new HttpHeaders({
+        'Authorization': 'Bearer ' + localStorage.getItem('auth_token')
+      });
+      const path = this.basePath + `/avatar/${userId}`;
+      return this.httpClient.get(path, { headers, responseType: "blob"});
     }
 
     public get(id: any): Observable<any>{
