@@ -83,7 +83,8 @@ export class UserComponent implements OnInit {
       this.followers$.next(followers);
       this.followers = this.followers$.value.length;
     });
-    this.userService.getImage(parseInt(sessionStorage.getItem('userId'))).subscribe(data => {
+    this.userService.getImage(parseInt(sessionStorage.getItem('userId'))).subscribe(
+      (data) => {
       let reader = new FileReader();
       reader.addEventListener("load", () => {
           this.user.image = reader.result;
@@ -92,7 +93,8 @@ export class UserComponent implements OnInit {
       if (data) {
         reader.readAsDataURL(data);
       }
-    });
+    },
+    ((err:Error)=>{ console.log(err)}));
   }
 
   startForm(disabled: Boolean){
