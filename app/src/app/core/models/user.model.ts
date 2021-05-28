@@ -11,6 +11,7 @@ export class User {
   email: string;
   avatar: string;
   password: string;
+  image: any;
 
   constructor(id: number, userName: string, name: string, lastName: string, email, avatar: string, password: string){
     this.id=id;

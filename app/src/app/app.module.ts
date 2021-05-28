@@ -22,6 +22,7 @@ import { FollowersModalCOmponent } from './user/modal-followers/modal.component'
 import { UserSearchComponent } from './search-user/search-user.component';
 import { ModalEditComponent } from './user/modal-edit/modal-edit.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NgFallimgModule } from 'ng-fallimg';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,12 @@ import { ReactiveFormsModule } from '@angular/forms';
     }),
     NgbModule,
     FontAwesomeModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgFallimgModule.forRoot({
+      default: 'https://www.adl-logistica.org/wp-content/uploads/2019/07/imagen-perfil-sin-foto.png',
+      profile: 'https://www.adl-logistica.org/wp-content/uploads/2019/07/imagen-perfil-sin-foto.png',
+      editProfile: 'https://mdbootstrap.com/img/Photos/Others/placeholder-avatar.jpg'
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

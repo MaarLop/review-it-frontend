@@ -69,8 +69,8 @@ export class UserComponent implements OnInit {
               sessionStorage.getItem('userId') !== this.userId.toString();
     const filter = `userId=${this.displayButton ? this.userId : sessionStorage.getItem('userId')}`;
     this.filter$.next(filter);
-    this.startForm(this.disabled);
     this.getInformationOfUser();
+    this.startForm(this.disabled);
   }
 
   getInformationOfUser(){
@@ -80,6 +80,16 @@ export class UserComponent implements OnInit {
       const followers = response.content.map((follow)=> follow.from);
       this.followers$.next(followers);
       this.followers = this.followers$.value.length;
+    });
+    this.userService.getImage(parseInt(sessionStorage.getItem('userId'))).subscribe(data => {
+      let reader = new FileReader();
+      reader.addEventListener("load", () => {
+          this.user.image = reader.result;
+      }, false);
+
+      if (data) {
+        reader.readAsDataURL(data);
+      }
     });
   }
 
