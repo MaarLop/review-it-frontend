@@ -34,7 +34,7 @@ export class UserComponent implements OnInit {
   faEdit = faUserEdit;
   userId?: number;
 
-  messageOfButton: String = this.followingUser ? 'Seguido' : 'Seguir';
+  messageOfButton: String = this.followingUser() ? 'Seguido' : 'Seguir';
   displayButton: Boolean = false;
 
 
@@ -129,6 +129,7 @@ export class UserComponent implements OnInit {
   }
 
   followingUser(){
+    console.log(JSON.parse(localStorage.getItem('listOfFollowings')).includes(this.userId))
     return JSON.parse(localStorage.getItem('listOfFollowings')).includes(this.userId);
   }
 
