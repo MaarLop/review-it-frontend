@@ -7,10 +7,17 @@
                         <div class="col-md-12">
                             <label for="form_name">Nombre</label>
                             <input type="text" [formControlName]="'name'" [name]="'name'" placeholder="Nombre" class="form-control addtxt">
-                            <label for="form_name">Avatar</label>
-                            <input type="text" [formControlName]="'avatar'" [name]="'avatar'" placeholder="Avatar" class="form-control addtxt">
                             <label for="form_name">Username</label>
                             <input type="text" [formControlName]="'userName'" [name]="'nuserNameame'" placeholder="Username" class="form-control addtxt">
+                            <label for="form_name">Foto de Perfil</label>
+                            <div class="file-field">
+                                <div class="mb-4">
+                                    <img src="{{image}}" fallimg="editProfile" class="rounded-circle z-depth-1-half avatar-pic" alt="example placeholder avatar">
+                                </div>
+                                <div class="btn btn-primary btn-sm float-center">
+                                    <input type="file" name="file" class="file-input" (change)="onFileChanged($event)" #fileInput>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <button class="btn post-actions__publish" (click)="update()" data-testid="updateUser">Actualizar</button>

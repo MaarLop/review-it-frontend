@@ -35,8 +35,9 @@ export class UserComponent implements OnInit {
   userId?: number;
 
   messageOfButton: String = this.followingUser() ? 'Seguido' : 'Seguir';
-  displayButton: Boolean = false;
+  displayButton: boolean = false;
 
+  isOwnProfile: boolean;
 
   reviews:number = 0;
   followers:number = 0;
@@ -69,8 +70,9 @@ export class UserComponent implements OnInit {
               sessionStorage.getItem('userId') !== this.userId.toString();
     const filter = `userId=${this.displayButton ? this.userId : sessionStorage.getItem('userId')}`;
     this.filter$.next(filter);
-    this.startForm(this.disabled);
     this.getInformationOfUser();
+    this.startForm(this.disabled);
+    this.isOwnProfile = !this.displayButton;
   }
 
   getInformationOfUser(){
@@ -80,6 +82,16 @@ export class UserComponent implements OnInit {
       const followers = response.content.map((follow)=> follow.from);
       this.followers$.next(followers);
       this.followers = this.followers$.value.length;
+    });
+    this.userService.getImage(parseInt(sessionStorage.getItem('userId'))).subscribe(data => {
+      let reader = new FileReader();
+      reader.addEventListener("load", () => {
+          this.user.image = reader.result;
+      }, false);
+
+      if (data) {
+        reader.readAsDataURL(data);
+      }
     });
   }
 
@@ -129,7 +141,6 @@ export class UserComponent implements OnInit {
   }
 
   followingUser(){
-    console.log(JSON.parse(localStorage.getItem('listOfFollowings')).includes(this.userId))
     return JSON.parse(localStorage.getItem('listOfFollowings')).includes(this.userId);
   }
 

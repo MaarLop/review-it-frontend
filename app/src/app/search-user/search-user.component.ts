@@ -39,10 +39,10 @@ export class UserSearchComponent implements OnInit{
         });
         this.userService.getUsers().subscribe((user:Pageable)=>{
             this.users$.next(user.content.filter((us)=> {
-                console.log(us.id != +sessionStorage.getItem('userId'))
                 return us.id != +sessionStorage.getItem('userId')
             }));
         });
+
     }
         
     
@@ -55,7 +55,6 @@ export class UserSearchComponent implements OnInit{
 
         this.userService.getUsers(filter).subscribe((user:Pageable)=>{
             this.users$.next(user.content.filter((us)=> {
-                console.log(us.id != +sessionStorage.getItem('userId'))
                 return us.id != +sessionStorage.getItem('userId')
             }));
         });
