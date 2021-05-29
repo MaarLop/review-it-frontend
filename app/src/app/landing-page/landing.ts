@@ -23,7 +23,8 @@ export class LandingPageComponent {
     this.scroll.scrollToPosition([0,0]);
   }
 
-  goToSearchUser(){
-    this.router.navigate(['/search-user'])
+  
+  goHome(){
+    this.router.navigate(['/'])
   }
 }

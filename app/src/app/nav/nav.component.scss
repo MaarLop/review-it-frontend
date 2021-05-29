@@ -24,6 +24,9 @@ nav {
 		font: 400 36px/20px Roboto, "Helvetica Neue", sans-serif;
 		text-shadow: 4px 5px rgb(41, 39, 39);
 	}
+	fa-icon{
+		text-shadow: 40px 5px rgb(41, 39, 39);
+	}
 	button{
 		color:#fff
 	}
@@ -79,6 +82,11 @@ nav ul li:nth-child(2):after {
 
 nav ul li:nth-child(3):after { 
 	content: "Buscar";
+	line-height: 88px;
+}
+
+nav ul li:nth-child(4):after { 
+	content: "Agregar";
 	line-height: 88px;
 }
 
