@@ -90,11 +90,10 @@ export class UserComponent implements OnInit {
           this.user.image = reader.result;
       }, false);
 
-      if (data) {
+      if (data.size > 0) {
         reader.readAsDataURL(data);
       }
-    },
-    ((err:Error)=>{ console.log(err)}));
+    });
   }
 
   startForm(disabled: Boolean){
