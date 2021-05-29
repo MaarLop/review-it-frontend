@@ -11,7 +11,8 @@
                 <a class="btn" (click)="follow();">{{messageOfButton}} <i class="fas fa-user-plus"></i></a>
             </div>
         </div>
-        <h6 title="Seguidores"><i class="fas fa-users"></i> <span class="followers">{{followings}}</span></h6>
+        <h6 title="Seguidores">
+            <a class="fas fa-users" (click)="showFollowers();"></a> <span class="followers">{{followers}}</span></h6>
 
         <div class="ds-info">
             <div class="ds pens">
@@ -19,9 +20,9 @@
                 <p>{{reviews}}</p>
             </div>
             <div class="ds projects">
-                <a class="btn" (click)="showFollowers();">
-                    <h4 title="Cantidad de seguidores">Seguidos <i class="fas fa-project-diagram"></i></h4>
-                    <p>{{followers}}</p>
+                <a class="btn" (click)="showFollowings();">
+                    <h4 title="Cantidad de seguidos">Seguidos <i class="fas fa-project-diagram"></i></h4>
+                    <p>{{followings}}</p>
                 </a>
             </div>
             <div class="ds posts">

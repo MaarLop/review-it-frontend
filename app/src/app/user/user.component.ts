@@ -45,6 +45,7 @@ export class UserComponent implements OnInit {
   followings:number = JSON.parse(localStorage.getItem('listOfFollowings')).length;
 
   followers$ = new BehaviorSubject<User[]>([]);
+  followings$ = new BehaviorSubject<User[]>([]);
 
   @Output() newUser = new EventEmitter<User>();
 
@@ -67,7 +68,8 @@ export class UserComponent implements OnInit {
     this.userId = +this.activatedRoute.snapshot.paramMap.get('id');
     this.displayButton = 
               this.activatedRoute.snapshot.routeConfig.path.includes('user') &&
-              sessionStorage.getItem('userId') !== this.userId.toString();
+              sessionStorage.getItem('userId') !== this.userId.toString() &&
+              !this.followingUser()
     const filter = `userId=${this.displayButton ? this.userId : sessionStorage.getItem('userId')}`;
     this.filter$.next(filter);
     this.getInformationOfUser();
@@ -82,6 +84,11 @@ export class UserComponent implements OnInit {
       const followers = response.content.map((follow)=> follow.from);
       this.followers$.next(followers);
       this.followers = this.followers$.value.length;
+    });
+    this.userService.getFollowings(userId).subscribe((response: Pageable)=>{
+      const followings = response.content.map((follow)=> follow.to);
+      this.followings$.next(followings);
+      this.followings = this.followings$.value.length;
     });
     this.userService.getImage(parseInt(sessionStorage.getItem('userId'))).subscribe(
       (data) => {
@@ -141,8 +148,27 @@ export class UserComponent implements OnInit {
     });
   }
 
+  showFollowings(){
+    this.dialog.open(FollowersModalCOmponent, {
+      width: '100%',
+      height: '60%',
+      data: {
+        dataKey: this.followings$.value
+      }
+    });
+  }
+
   followingUser(){
-    return JSON.parse(localStorage.getItem('listOfFollowings')).includes(this.userId);
+    this.userId = +this.activatedRoute.snapshot.paramMap.get('id');
+    console.log(this.userId)
+    let followings: any[];
+    this.userService.getFollowings(parseInt(sessionStorage.getItem('userId'))).subscribe((response: Pageable)=>{
+      followings = response.content.map((follow)=> follow.to.id);
+      followings.push(parseInt(sessionStorage.getItem('userId')));
+      console.log(followings);
+      localStorage.setItem('listOfFollowings',  JSON.stringify(followings));
+    });
+    return localStorage.getItem('listOfFollowings').includes(this.userId.toString());
   }
 
 }
