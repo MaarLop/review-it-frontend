@@ -27,6 +27,17 @@ export class ReviewCardComponent implements OnInit{
    }
   
   ngOnInit(): void {
+    this.userService.getImage(this.review.user.userName).subscribe(
+      (data) => {
+      let reader = new FileReader();
+      reader.addEventListener("load", () => {
+        this.review.user.image = reader.result;
+      }, false);
+
+      if (data.size > 0) {
+        reader.readAsDataURL(data);
+      }
+    });
     this.currentRate=this.review.points;
   }
 

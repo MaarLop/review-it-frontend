@@ -1,7 +1,7 @@
 <div translate="no" class="animate__animated animate__lightSpeedInRight">
     <div class="plx-card gold">
         <div class="pxc-bg" style="background-image:url('https://png.pngtree.com/thumb_back/fw800/background/20190221/ourmid/pngtree-texture-geometric-black-metal-gradient-image_17809.jpg')"> </div>
-        <div class="pxc-avatar"><img src="{{review.user?.avatar? review.user?.avatar : 'https://www.adl-logistica.org/wp-content/uploads/2019/07/imagen-perfil-sin-foto.png' }}"></div>
+        <div class="pxc-avatar"><img src="{{review?.user?.image? review.user.image : review?.user?.avatar }}" fallimg></div>
         <div class="pxc-stopper"> </div>
         <div class="pxc-subcard">
             <div class="pxc-title">{{review.title}}</div>

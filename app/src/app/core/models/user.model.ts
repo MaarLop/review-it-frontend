@@ -1,12 +1,10 @@
-import { Model, genderTypes } from './model.model';
-
 export class User {
   id: number;
   userName: string;
   name: string;
   firstName?: string;
   lastName: string;
-  isSuperuser?: boolean;
+  isPrivate?: boolean;
   telefono?: string;
   email: string;
   avatar: string;

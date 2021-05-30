@@ -33,9 +33,10 @@ export class UserComponent implements OnInit {
 
   faEdit = faUserEdit;
   userId?: number;
+  userName?: string;
 
-  messageOfButton: String = this.followingUser() ? 'Seguido' : 'Seguir';
   displayButton: boolean = false;
+  isFollowing: boolean;
 
   isOwnProfile: boolean;
 
@@ -65,47 +66,47 @@ export class UserComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.userId = +this.activatedRoute.snapshot.paramMap.get('id');
+    this.userName = this.activatedRoute.snapshot.paramMap.get('username');
     this.displayButton = 
               this.activatedRoute.snapshot.routeConfig.path.includes('user') &&
-              sessionStorage.getItem('userId') !== this.userId.toString() &&
-              !this.followingUser()
-    const filter = `userId=${this.displayButton ? this.userId : sessionStorage.getItem('userId')}`;
+              sessionStorage.getItem('userName') !== this.userName
+    this.isOwnProfile = !this.displayButton;
+    this.isFollowing = this.followingUser();
+    const filter = `userName=${this.displayButton ? this.userName : sessionStorage.getItem('userName')}`;
     this.filter$.next(filter);
     this.getInformationOfUser();
     this.startForm(this.disabled);
-    this.isOwnProfile = !this.displayButton;
   }
 
   getInformationOfUser(){
-    const userId = this.activatedRoute.snapshot.routeConfig.path.includes('user') ?
-        this.userId : +sessionStorage.getItem('userId');
-    this.userService.getFollowers(userId).subscribe((response: Pageable)=>{
+    const userName = this.activatedRoute.snapshot.routeConfig.path.includes('user') ?
+        this.userName : sessionStorage.getItem('userName');
+      this.userService.getImage(userName).subscribe(
+        (data) => {
+        let reader = new FileReader();
+        reader.addEventListener("load", () => {
+            this.user.image = reader.result;
+        }, false);
+  
+        if (data.size > 0) {
+          reader.readAsDataURL(data);
+        }
+      });
+      this.userService.getFollowers(userName).subscribe((response: Pageable)=>{
       const followers = response.content.map((follow)=> follow.from);
       this.followers$.next(followers);
       this.followers = this.followers$.value.length;
     });
-    this.userService.getFollowings(userId).subscribe((response: Pageable)=>{
+    this.userService.getFollowings(userName).subscribe((response: Pageable)=>{
       const followings = response.content.map((follow)=> follow.to);
       this.followings$.next(followings);
       this.followings = this.followings$.value.length;
     });
-    this.userService.getImage(parseInt(sessionStorage.getItem('userId'))).subscribe(
-      (data) => {
-      let reader = new FileReader();
-      reader.addEventListener("load", () => {
-          this.user.image = reader.result;
-      }, false);
-
-      if (data.size > 0) {
-        reader.readAsDataURL(data);
-      }
-    });
   }
 
   startForm(disabled: Boolean){
-    const idUsuario = this.userId !== 0?  this.userId : sessionStorage.getItem('userId')
-    this.userService.get(idUsuario).pipe(
+    const userName = this.userName !== null?  this.userName : sessionStorage.getItem('userName')
+    this.userService.getByUsername(userName).pipe(
       catchError(async (error) => this.errorHandle(error))
     ).subscribe((data) => {
       this.user = data;
@@ -117,7 +118,7 @@ export class UserComponent implements OnInit {
   }
 
   edit(){
-    if(this.user){
+    if(this.user.id === parseInt(sessionStorage.getItem('userId'))){
       const modalRef = this.modalService.open(ModalEditComponent);
       modalRef.componentInstance.modal = modalRef;
       modalRef.componentInstance.user = this.user;
@@ -126,14 +127,14 @@ export class UserComponent implements OnInit {
 
   follow(){
     const body ={
-      idTo: this.userId,
+      idTo: this.user.id,
       idFrom: parseInt(sessionStorage.getItem('userId'))
     }
     this.userService.followUser(body).subscribe((_)=>{
-      this.notificationService.showSuccess('Usuario seguido')
+      this.notificationService.showSuccess('Empezaste a seguir a ' + this.user.userName)
       
       const followings =  JSON.parse(localStorage.getItem('listOfFollowings'));
-      followings.push(this.userId);
+      followings.push(this.userName);
       localStorage.setItem('listOfFollowings', JSON.stringify(followings));
     });
   }
@@ -143,6 +144,7 @@ export class UserComponent implements OnInit {
       width: '100%',
       height: '60%',
       data: {
+        title: 'Seguidores',
         dataKey: this.followers$.value
       }
     });
@@ -153,22 +155,20 @@ export class UserComponent implements OnInit {
       width: '100%',
       height: '60%',
       data: {
+        title: 'Seguidos',
         dataKey: this.followings$.value
       }
     });
   }
 
   followingUser(){
-    this.userId = +this.activatedRoute.snapshot.paramMap.get('id');
-    console.log(this.userId)
     let followings: any[];
-    this.userService.getFollowings(parseInt(sessionStorage.getItem('userId'))).subscribe((response: Pageable)=>{
-      followings = response.content.map((follow)=> follow.to.id);
-      followings.push(parseInt(sessionStorage.getItem('userId')));
-      console.log(followings);
+    this.userService.getFollowingsAll(sessionStorage.getItem('userName')).subscribe((response)=>{
+      followings = response.map((follow)=> follow.to.userName);
+      //followings.push(parseInt(sessionStorage.getItem('userName')));
       localStorage.setItem('listOfFollowings',  JSON.stringify(followings));
     });
-    return localStorage.getItem('listOfFollowings').includes(this.userId.toString());
+    return localStorage.getItem('listOfFollowings').includes(this.userName);
   }
 
 }
