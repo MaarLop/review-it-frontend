@@ -39,10 +39,20 @@ export class UserSearchComponent implements OnInit{
         });
         this.userService.getUsers().subscribe((user:Pageable)=>{
             this.users$.next(user.content.filter((us)=> {
+                this.userService.getImage(us.userName).subscribe(
+                    (data) => {
+                    let reader = new FileReader();
+                    reader.addEventListener("load", () => {
+                      us.image = reader.result;
+                    }, false);
+              
+                    if (data.size > 0) {
+                      reader.readAsDataURL(data);
+                    }
+                });
                 return us.id != +sessionStorage.getItem('userId')
             }));
         });
-
     }
         
     
@@ -72,17 +82,28 @@ export class UserSearchComponent implements OnInit{
           }
           this.userService.followUser(body).subscribe((_)=>{
               const followings =  JSON.parse(localStorage.getItem('listOfFollowings'));
-              followings.push(user.id);
+              followings.push(user.userName);
 
               localStorage.setItem('listOfFollowings', JSON.stringify(followings));
           });    
     }
 
     followingUser(user:User){
-        return JSON.parse(localStorage.getItem('listOfFollowings')).includes(user.id);
+        return JSON.parse(localStorage.getItem('listOfFollowings')).includes(user.userName);
     }
 
     goToUserProfile(user){
-        this.router.navigate([`/user/${user.id}`]);
+        this.userService.getImage(user.userName).subscribe(
+            (data) => {
+            let reader = new FileReader();
+            reader.addEventListener("load", () => {
+              user.image = reader.result;
+            }, false);
+      
+            if (data.size > 0) {
+              reader.readAsDataURL(data);
+            }
+        });
+        this.router.navigate([`/user/${user.userName}`]);
     }
 }

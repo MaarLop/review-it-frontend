@@ -33,8 +33,9 @@ export class HomePageComponent implements OnInit{
     ngOnInit(): void {
         this.auth.user$.subscribe(data =>{
             if(data){
-                this.userService.signUp(data).subscribe((user) => {
+                this.userService.login(data).subscribe((user) => {
                     sessionStorage.setItem('userId', user.id);
+                    sessionStorage.setItem('userName', user.userName);
                 });
             }
         });

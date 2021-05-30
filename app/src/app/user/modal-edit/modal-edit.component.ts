@@ -4,6 +4,8 @@ import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { User } from 'src/app/core/models/user.model';
 import { NotificationService } from 'src/app/core/shared/errors/notification.service';
 import { UserService } from 'src/app/services/user.service';
+import Swal from 'sweetalert2';
+import { emailPattern } from '../../utils/regex-pattern';
 
 @Component({
   selector: 'app-modal-edit',
@@ -34,7 +36,8 @@ export class ModalEditComponent implements OnInit {
       {
         id: [{value: this.user.id, disabled: true}],
         name: [{value: this.user.name, disabled: false}],
-        userName: [{value: this.user.userName, disabled: false}],
+        lastName: [{value: this.user.lastName, disabled: false}],
+        email: [{value: this.user.email, disabled: false}]
       }
     )
   }
@@ -42,14 +45,32 @@ export class ModalEditComponent implements OnInit {
   update(){
     if(this.formUser.valid){
       const uploadData = new FormData();
-      uploadData.append('name', this.user.name);
       uploadData.append('userName', this.user.userName);
       uploadData.append('password', this.user.password);
-      uploadData.append('avatarFileForView', this.selectedFile);
+      uploadData.append('avatar', this.user.avatar);
+      uploadData.append('name', this.formUser.get('name').value);
+      uploadData.append('lastName', this.formUser.get('lastName').value);
+      uploadData.append('email', this.formUser.get('email').value);
+      if(this.selectedFile){
+        uploadData.append('avatarFileForView', this.selectedFile);
+      }
       this.userService.save(uploadData).subscribe((user: User) => {
         this.modal.close();
         this.notificationService.showSuccess('Perfil actualizado!');
-      });
+      },
+        err => {
+          console.log(err)
+          let first = err.error.name ? err.error.name+'\n' : '';
+          const second = err.error.lastName ? err.error.lastName+'\n' : '';
+          const third = err.error.email ? err.error.email : '';
+          first = !err.error.name && !err.error.lastName && !err.error.email ? err.error : first;
+          //this.notificationService.showError(name+lastName+email);
+          Swal.fire({
+            icon: 'error',
+            html:first+'</br>'+second+'</br>'+third,
+          })
+        }
+      );
     }
   }
 
@@ -62,6 +83,7 @@ export class ModalEditComponent implements OnInit {
 
       if (this.selectedFile) {
         reader.readAsDataURL(this.selectedFile);
+        //this.formUser.get('avatarFileForView').setValue(this.selectedFile);
       }
   }
 

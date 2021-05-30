@@ -2,13 +2,14 @@
     <div class="card col-sm-10 col-sm-offset-1">
         <div class="ds-top"></div>
         <div class="avatar-holder">
-            <img src="{{user?.image? user.image : user?.avatar}}" fallimg="profile">
+            <img src="{{user?.image? user?.image : user?.avatar}}" fallimg="profile">
         </div>
         <div class="name">
             <a target="_blank" *ngIf="isOwnProfile" (click)="edit()">{{user?.name}} (@{{user?.userName}}) <fa-icon [icon]="faEdit"></fa-icon></a>
             <div *ngIf="!isOwnProfile">{{user?.name}} (@{{user?.userName}})</div>
             <div class="button" *ngIf="displayButton">
-                <a class="btn" (click)="follow();">{{messageOfButton}} <i class="fas fa-user-plus"></i></a>
+                <a class="btn" *ngIf="!isFollowing" (click)="follow();">Seguir <i class="fas fa-user-plus"></i></a>
+                <a class="btn" *ngIf="isFollowing">Siguiendo </a>
             </div>
         </div>
         <h6 title="Seguidores">
@@ -26,7 +27,7 @@
                 </a>
             </div>
             <div class="ds posts">
-                <h4 title="Cantidad de liks">Likes <i class="fa fa-thumbs-o-up"></i></h4>
+                <h4 title="Cantidad de likes">Likes <i class="fa fa-thumbs-o-up"></i></h4>
                 <p>0</p>
             </div>
         </div>

@@ -1,16 +1,16 @@
-<div class="row__filter" >
+<div class="row__filter">
     <div class="col-lg-12 card-margin">
         <div class="row no-gutters">
             <div class="col-lg-7 col-md-7 col-sm-12" style="padding-right: 35px;">
                 <app-input [group]="formGroup" [key]="'userName'" [inputType]="'text'" [label]="'Usuario/nombre/mail'">
                 </app-input>
             </div>
-             <div class="col-md-1  col-sm-12 button-container">
-                    <button (click)="goSearch()"> <i class="fa fa-search"></i></button>
-                </div>
-                <div class="col-md-1  col-sm-12 button-container">
-                    <button (click)="cleanFilter()"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                </div>
+            <div class="col-md-1  col-sm-12 button-container">
+                <button (click)="goSearch()"> <i class="fa fa-search"></i></button>
+            </div>
+            <div class="col-md-1  col-sm-12 button-container">
+                <button (click)="cleanFilter()"><i class="fa fa-trash" aria-hidden="true"></i></button>
+            </div>
         </div>
     </div>
 </div>
@@ -19,22 +19,22 @@
     <div class="col-sm-10 col-sm-offset-2">
         <main class="leaderboard__profiles" *ngFor="let user of users$ | async;">
             <article class="leaderboard__profile">
-            <img src="{{user.avatar? user.avatar : 'https://www.adl-logistica.org/wp-content/uploads/2019/07/imagen-perfil-sin-foto.png'}}" alt="Mark Zuckerberg" class="leaderboard__picture">
-            <a (click)="goToUserProfile(user);">
-                <span class="leaderboard__name">{{user.name}}</span>
-            </a>
-            <button (click)="followUser(user)" class="leaderboard__value" *ngIf="!followingUser(user)">
+                <img src="{{user?.image? user?.image : user?.avatar}}" fallimg="profile" class="leaderboard__picture">
+                <a (click)="goToUserProfile(user);">
+                    <span class="leaderboard__name">{{user.name}}</span>
+                </a>
+                <button (click)="followUser(user)" class="leaderboard__value" *ngIf="!followingUser(user)">
                 <fa-icon [icon]="follow"></fa-icon>
             </button>
-            <button class="leaderboard__value" *ngIf="followingUser(user)">
+                <button class="leaderboard__value" *ngIf="followingUser(user)">
                 <fa-icon [icon]="unfollow"></fa-icon>
             </button>
             </article>
         </main>
 
-    <div *ngIf="(users$ | async).length === 0" class="noResults col-sm-2 col-sm-offset-2">
-        No hay resultados
-    </div>
+        <div *ngIf="(users$ | async).length === 0" class="noResults col-sm-2 col-sm-offset-2">
+            No hay usuarios
+        </div>
     </div>
 
 </div>
