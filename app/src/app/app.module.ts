@@ -7,7 +7,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LandingPageComponent } from './landing-page/landing';
 import { HomePageComponent } from './home-page/home-page.component';
 import { CoreModule } from './core/core.modules';
-import { ReviewListComponent } from './core/review-list/review-list.component';
 import { HttpClientModule } from '@angular/common/http';
 import {InfiniteScrollModule} from 'ngx-infinite-scroll';
 import { SideNavComponent } from './nav/nav.component';
@@ -21,8 +20,9 @@ import { UserComponent } from './user/user.component';
 import { FollowersModalCOmponent } from './user/modal-followers/modal.component';
 import { UserSearchComponent } from './search-user/search-user.component';
 import { ModalEditComponent } from './user/modal-edit/modal-edit.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgFallimgModule } from 'ng-fallimg';
+import { ChatComponent } from './chat/chat.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +37,7 @@ import { NgFallimgModule } from 'ng-fallimg';
     FollowersModalCOmponent,
     UserSearchComponent,
     ModalEditComponent,
+    ChatComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,6 +53,7 @@ import { NgFallimgModule } from 'ng-fallimg';
     NgbModule,
     FontAwesomeModule,
     ReactiveFormsModule,
+    FormsModule,
     NgFallimgModule.forRoot({
       default: 'https://www.adl-logistica.org/wp-content/uploads/2019/07/imagen-perfil-sin-foto.png',
       profile: 'https://www.adl-logistica.org/wp-content/uploads/2019/07/imagen-perfil-sin-foto.png',

@@ -34,6 +34,7 @@ export class HomePageComponent implements OnInit{
             if(data){
                 this.userService.signUp(data).subscribe((user) => {
                     sessionStorage.setItem('userId', user.id);
+                    sessionStorage.setItem('user', `${user.name} ${user.lastName}`);
                     this.userService.getFollowings(user.id).subscribe((listOfFollowers: any[])=>{
                         const listOfTo = listOfFollowers.map((f)=>{
                             return f.to.id;
