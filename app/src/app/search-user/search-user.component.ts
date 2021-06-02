@@ -25,8 +25,7 @@ export class UserSearchComponent implements OnInit{
     users$ = new BehaviorSubject<any>([]);
 
     formGroup:FormGroup;
-    follow = faUserPlus;
-    unfollow = faUserCheck;
+   
       
     constructor(private fb: FormBuilder, 
         private router: Router,
@@ -39,20 +38,10 @@ export class UserSearchComponent implements OnInit{
         });
         this.userService.getUsers().subscribe((user:Pageable)=>{
             this.users$.next(user.content.filter((us)=> {
-                this.userService.getImage(us.userName).subscribe(
-                    (data) => {
-                    let reader = new FileReader();
-                    reader.addEventListener("load", () => {
-                      us.image = reader.result;
-                    }, false);
-              
-                    if (data.size > 0) {
-                      reader.readAsDataURL(data);
-                    }
-                });
                 return us.id != +sessionStorage.getItem('userId')
-            }));
+            })); 
         });
+
     }
         
     
@@ -75,35 +64,10 @@ export class UserSearchComponent implements OnInit{
         this.goSearch();
     }
 
-    followUser(user: User){
-        const body ={
-            idTo: user.id,
-            idFrom: parseInt(sessionStorage.getItem('userId'))
-          }
-          this.userService.followUser(body).subscribe((_)=>{
-              const followings =  JSON.parse(localStorage.getItem('listOfFollowings'));
-              followings.push(user.userName);
+    
 
-              localStorage.setItem('listOfFollowings', JSON.stringify(followings));
-          });    
-    }
-
-    followingUser(user:User){
-        return JSON.parse(localStorage.getItem('listOfFollowings')).includes(user.userName);
-    }
 
     goToUserProfile(user){
-        this.userService.getImage(user.userName).subscribe(
-            (data) => {
-            let reader = new FileReader();
-            reader.addEventListener("load", () => {
-              user.image = reader.result;
-            }, false);
-      
-            if (data.size > 0) {
-              reader.readAsDataURL(data);
-            }
-        });
         this.router.navigate([`/user/${user.userName}`]);
     }
 }

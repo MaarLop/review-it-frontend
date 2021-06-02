@@ -1,0 +1,6 @@
+<button (click)="followUser(user)" class="leaderboard__value" *ngIf="!followingUser()">
+    <fa-icon [icon]="follow"></fa-icon>
+</button>
+<button class="leaderboard__value" *ngIf="followingUser()">
+    <fa-icon [icon]="unfollow"></fa-icon>
+</button>

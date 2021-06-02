@@ -82,6 +82,7 @@ import { HttpErrorInterceptor } from './errors/http-error.interceptor';
 import { CommentComponent } from './comment/comment.component';
 import { CommentListComponent } from './comment-list/comment-list.component';
 import { PickerModule } from '@ctrl/ngx-emoji-mart';
+import { FollowButtonComponent } from './follow-button/follow-button.component';
 
 @NgModule({
   declarations: [
@@ -108,7 +109,8 @@ import { PickerModule } from '@ctrl/ngx-emoji-mart';
     SpinnerComponent,
     SpinnerComponent,
     CommentComponent,
-    CommentListComponent
+    CommentListComponent,
+    FollowButtonComponent
   ],
   imports: [
     CommonModule,
@@ -208,7 +210,8 @@ import { PickerModule } from '@ctrl/ngx-emoji-mart';
     ScrollingModule,
     ReviewListComponent,
     SpinnerComponent,
-    FormsModule
+    FormsModule,
+    FollowButtonComponent
   ],
 })
 export class CoreModule {}

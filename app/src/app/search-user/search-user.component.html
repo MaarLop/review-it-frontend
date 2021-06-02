@@ -17,18 +17,13 @@
 
 <div class="row">
     <div class="col-sm-10 col-sm-offset-2">
-        <main class="leaderboard__profiles" *ngFor="let user of users$ | async;">
+        <main class="leaderboard__profiles" *ngFor="let user of (users$ | async)">
             <article class="leaderboard__profile">
                 <img src="{{user?.image? user?.image : user?.avatar}}" fallimg="profile" class="leaderboard__picture">
                 <a (click)="goToUserProfile(user);">
                     <span class="leaderboard__name">{{user.name}}</span>
                 </a>
-                <button (click)="followUser(user)" class="leaderboard__value" *ngIf="!followingUser(user)">
-                <fa-icon [icon]="follow"></fa-icon>
-            </button>
-                <button class="leaderboard__value" *ngIf="followingUser(user)">
-                <fa-icon [icon]="unfollow"></fa-icon>
-            </button>
+                <app-follow-button [user]="user"></app-follow-button>
             </article>
         </main>
 
