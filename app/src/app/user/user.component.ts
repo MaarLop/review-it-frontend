@@ -165,7 +165,7 @@ export class UserComponent implements OnInit {
     let followings: any[];
     this.userService.getFollowingsAll(sessionStorage.getItem('userName')).subscribe((response)=>{
       followings = response.map((follow)=> follow.to.userName);
-      //followings.push(parseInt(sessionStorage.getItem('userName')));
+      //followings.push(sessionStorage.getItem('userName'));
       localStorage.setItem('listOfFollowings',  JSON.stringify(followings));
     });
     return localStorage.getItem('listOfFollowings').includes(this.userName);
