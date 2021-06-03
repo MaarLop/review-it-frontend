@@ -36,7 +36,6 @@ export class UserComponent implements OnInit {
   userName?: string;
 
   displayButton: boolean = false;
-  isFollowing: boolean;
 
   isOwnProfile: boolean;
 
@@ -60,27 +59,32 @@ export class UserComponent implements OnInit {
       private activatedRoute: ActivatedRoute,
       public dialog: MatDialog,
       private modalService: NgbModal,
-      private notificationService: NotificationService,
       private router: Router){
         
   }
 
   ngOnInit(): void {
-    this.userName = this.activatedRoute.snapshot.paramMap.get('username');
-    this.displayButton = 
-              this.activatedRoute.snapshot.routeConfig.path.includes('user') &&
+    this.userName = this.activatedRoute.snapshot.routeConfig.path.includes('user') ?
+    this.activatedRoute.snapshot.paramMap.get('username') : sessionStorage.getItem('userName');
+    this.startForm(this.userName);
+    this.getInformationOfUser(this.userName);
+    this.displayButton = this.activatedRoute.snapshot.routeConfig.path.includes('user') &&
               sessionStorage.getItem('userName') !== this.userName
     this.isOwnProfile = !this.displayButton;
-    this.isFollowing = this.followingUser();
     const filter = `userName=${this.displayButton ? this.userName : sessionStorage.getItem('userName')}`;
     this.filter$.next(filter);
-    this.getInformationOfUser();
-    this.startForm(this.disabled);
+    this.followingUser();
   }
 
-  getInformationOfUser(){
-    const userName = this.activatedRoute.snapshot.routeConfig.path.includes('user') ?
-        this.userName : sessionStorage.getItem('userName');
+  startForm(userName: string){
+    this.userService.getByUsername(userName).pipe(
+      catchError(async (error) => this.errorHandle(error))
+    ).subscribe((data) => {
+      this.user = data;
+    }) 
+  }
+
+  getInformationOfUser(userName: string){
       this.userService.getImage(userName).subscribe(
         (data) => {
         let reader = new FileReader();
@@ -104,15 +108,6 @@ export class UserComponent implements OnInit {
     });
   }
 
-  startForm(disabled: Boolean){
-    const userName = this.userName !== null?  this.userName : sessionStorage.getItem('userName')
-    this.userService.getByUsername(userName).pipe(
-      catchError(async (error) => this.errorHandle(error))
-    ).subscribe((data) => {
-      this.user = data;
-    }) 
-  }
-
   errorHandle(error){
     this.router.navigate(['/401'])
   }
@@ -123,20 +118,6 @@ export class UserComponent implements OnInit {
       modalRef.componentInstance.modal = modalRef;
       modalRef.componentInstance.user = this.user;
     }
-  }
-
-  follow(){
-    const body ={
-      idTo: this.user.id,
-      idFrom: parseInt(sessionStorage.getItem('userId'))
-    }
-    this.userService.followUser(body).subscribe((_)=>{
-      this.notificationService.showSuccess('Empezaste a seguir a ' + this.user.userName)
-      
-      const followings =  JSON.parse(localStorage.getItem('listOfFollowings'));
-      followings.push(this.userName);
-      localStorage.setItem('listOfFollowings', JSON.stringify(followings));
-    });
   }
 
   showFollowers(){
@@ -165,10 +146,8 @@ export class UserComponent implements OnInit {
     let followings: any[];
     this.userService.getFollowingsAll(sessionStorage.getItem('userName')).subscribe((response)=>{
       followings = response.map((follow)=> follow.to.userName);
-      //followings.push(sessionStorage.getItem('userName'));
       localStorage.setItem('listOfFollowings',  JSON.stringify(followings));
     });
-    return localStorage.getItem('listOfFollowings').includes(this.userName);
   }
 
 }
