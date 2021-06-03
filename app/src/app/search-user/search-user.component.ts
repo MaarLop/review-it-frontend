@@ -38,6 +38,17 @@ export class UserSearchComponent implements OnInit{
         });
         this.userService.getUsers().subscribe((user:Pageable)=>{
             this.users$.next(user.content.filter((us)=> {
+                this.userService.getImage(us.userName).subscribe(
+                    (data) => {
+                    let reader = new FileReader();
+                    reader.addEventListener("load", () => {
+                      us.image = reader.result;
+                    }, false);
+
+                    if (data.size > 0) {
+                      reader.readAsDataURL(data);
+                    }
+                });
                 return us.id != +sessionStorage.getItem('userId')
             })); 
         });
@@ -54,6 +65,17 @@ export class UserSearchComponent implements OnInit{
 
         this.userService.getUsers(filter).subscribe((user:Pageable)=>{
             this.users$.next(user.content.filter((us)=> {
+                this.userService.getImage(us.userName).subscribe(
+                    (data) => {
+                    let reader = new FileReader();
+                    reader.addEventListener("load", () => {
+                      us.image = reader.result;
+                    }, false);
+
+                    if (data.size > 0) {
+                      reader.readAsDataURL(data);
+                    }
+                });
                 return us.id != +sessionStorage.getItem('userId')
             }));
         });
@@ -68,6 +90,17 @@ export class UserSearchComponent implements OnInit{
 
 
     goToUserProfile(user){
+        this.userService.getImage(user.userName).subscribe(
+            (data) => {
+            let reader = new FileReader();
+            reader.addEventListener("load", () => {
+              user.image = reader.result;
+            }, false);
+
+            if (data.size > 0) {
+              reader.readAsDataURL(data);
+            }
+        });
         this.router.navigate([`/user/${user.userName}`]);
     }
 }

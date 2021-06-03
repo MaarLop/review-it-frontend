@@ -1,8 +1,8 @@
-<div class="row">
+<div class="row" *ngIf="user">
     <div class="card col-sm-10 col-sm-offset-1">
         <div class="ds-top"></div>
         <div class="avatar-holder">
-            <img src="{{user && user.image? user?.image : user?.avatar}}" fallimg="profile">
+            <img src="{{user.image? user.image : user?.avatar}}" fallimg="profile">
         </div>
         <div class="name">
             <a target="_blank" *ngIf="isOwnProfile" (click)="edit()">{{user?.name}} (@{{user?.userName}}) <fa-icon [icon]="faEdit"></fa-icon></a>
