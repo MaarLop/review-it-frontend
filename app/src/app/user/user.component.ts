@@ -75,7 +75,6 @@ export class UserComponent implements OnInit {
     this.isOwnProfile = !this.displayButton;
     const filter = `userName=${this.displayButton ? this.userName : sessionStorage.getItem('userName')}`;
     this.filter$.next(filter);
-    this.followingUser();
   }
 
   startForm(userName: string){
@@ -141,14 +140,6 @@ export class UserComponent implements OnInit {
         title: 'Seguidos',
         dataKey: this.followings$.value
       }
-    });
-  }
-
-  followingUser(){
-    let followings: any[];
-    this.userService.getFollowingsAll(sessionStorage.getItem('userName')).subscribe((response)=>{
-      followings = response.map((follow)=> follow.to.userName);
-      localStorage.setItem('listOfFollowings',  JSON.stringify(followings));
     });
   }
 

@@ -1,4 +1,4 @@
-<div class="row" *ngIf="user">
+<div class="row" *ngIf="this.auth.isAuthenticated$ | async;">
     <div class="card col-sm-10 col-sm-offset-1">
         <div class="ds-top"></div>
         <div class="avatar-holder">
