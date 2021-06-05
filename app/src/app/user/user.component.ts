@@ -15,6 +15,7 @@ import { FollowersModalCOmponent } from './modal-followers/modal.component';
 import { ModalEditComponent } from './modal-edit/modal-edit.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NotificationService } from '../core/shared/errors/notification.service';
+import { Review } from '../core/models/review-model';
 
 @Component({
   selector: 'app-user',
@@ -59,7 +60,8 @@ export class UserComponent implements OnInit {
       private activatedRoute: ActivatedRoute,
       public dialog: MatDialog,
       private modalService: NgbModal,
-      private router: Router){
+      private router: Router,
+      private notificationService: NotificationService){
         
   }
 
@@ -148,6 +150,12 @@ export class UserComponent implements OnInit {
       followings = response.map((follow)=> follow.to.userName);
       localStorage.setItem('listOfFollowings',  JSON.stringify(followings));
     });
+  }
+
+  newReview(review: Review){
+    if(review){
+        this.notificationService.showSuccess('Publicado exitosamente!');
+    }
   }
 
 }

@@ -32,5 +32,5 @@
         </div>
     </div>
 </div>
-<app-create-review *ngIf="!displayButton"></app-create-review>
+<app-create-review *ngIf="!displayButton" (newReview)="newReview($event)"></app-create-review>
 <app-review-list [filter$]="filter$"></app-review-list>

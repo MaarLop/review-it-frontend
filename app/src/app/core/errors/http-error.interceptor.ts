@@ -17,15 +17,9 @@ export class HttpErrorInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
     return next.handle(request).pipe(
-      retry(1),
+      retry(2),
       catchError((error: HttpErrorResponse) => {
-        if (error.status === 401) {
-          // refresh token
-          this.router.navigate(['/401'])
-        } else {
-          console.log("httpRequest")
-          return throwError(error);
-        }
+        return throwError(error);
       })
     );    
   }
