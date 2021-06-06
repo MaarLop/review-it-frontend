@@ -82,6 +82,12 @@ export class UserService {
       return this.httpClient.post(path, body, { headers })
     }
 
+    public unfollowUser(body: any){
+      const path = this.basePath + `/unfollow`;
+      const headers = this.headers;
+      return this.httpClient.post(path, body, { headers })
+    }
+
     public getFollowers(userName: string){
       const path = this.basePath + `/followers/${userName}`;
       return this.httpClient.get(path, { 

@@ -44,5 +44,11 @@ export class ReviewService {
     const headers = this.headers;
     return this.httpClient.post(path, body, { headers });
   }
+
+  public delete(id: any) {
+    const path = `${this.basePath}/${id}`;
+    const headers = this.headers;
+    return this.httpClient.delete(path, { headers });
+  }
   
 }

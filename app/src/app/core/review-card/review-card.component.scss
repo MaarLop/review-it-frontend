@@ -1,4 +1,6 @@
 @import '../rate-stars/rate-stats.component.scss';
+@import url('https://fonts.googleapis.com/css?family=Lato:100,300,400');
+@import url('https://fonts.googleapis.com/css?family=Roboto:100');
 $customBackCol: #8855DD;
 $pink: #F58;
 $c1: #a6aad1;
@@ -455,10 +457,31 @@ html {
     align-items: center;
 }
 
-.post-actions__comment {
-    margin-top: -100px;
+.post-actions {
     width: 40px;
     background-color: #008391;
     color: #fff;
     border-radius: 1.5em;
+}
+
+.button-container {
+    position: relative;
+    width: 94px;
+    height: 48px;
+    background-color: #39394d;
+    border-radius: 8px;
+    color: #fff;
+    float: right;
+    margin-right: 71px;
+    button {
+        border-radius: 8px;
+        float: right;
+        width: 101%;
+        height: 100%;
+        font-family: 'Lato', sans-serif;
+        font-weight: 300;
+        font-size: 11px;
+        letter-spacing: 1px;
+        font-weight: bold;
+    }
 }

@@ -1,17 +1,14 @@
-import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild, ViewChildren} from '@angular/core';
+import {Component, Input, OnInit } from '@angular/core';
 import { Review } from '../models/review-model';
-import { element } from 'protractor';
 import { UserService } from '../../services/user.service';
-import { User } from '../models/user.model';
 import Swal from 'sweetalert2';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { CommentComponent } from '../comment/comment.component';
 import { ReviewService } from 'src/app/services/review.service';
 import { CommentListComponent } from '../comment-list/comment-list.component';
 import { NotificationService } from '../shared/errors/notification.service';
-import { Comment } from '../models/comment.model';
-import { faComment } from '@fortawesome/free-solid-svg-icons';
+import { faComment, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
+
 @Component({
   selector: 'app-review-card',
   templateUrl: 'review-card.component.html',
@@ -23,6 +20,8 @@ export class ReviewCardComponent implements OnInit{
   currentRate: Number;
   comment = faComment;
   heart = faHeart;
+  trash = faTrash;
+  isOwner = false;
   constructor(private reviewService: ReviewService, private userService: UserService, private modalService: NgbModal, private notificationService: NotificationService){ 
    }
   
@@ -39,6 +38,7 @@ export class ReviewCardComponent implements OnInit{
       }
     });
     this.currentRate=this.review.points;
+    this.isOwner=parseInt(sessionStorage.getItem("userId"))===this.review.user.id;
   }
 
   comments(){
@@ -47,7 +47,27 @@ export class ReviewCardComponent implements OnInit{
       modalRef.componentInstance.modal = modalRef;
       modalRef.componentInstance.reviewId = this.review.id;
     }
-    // modalRef.componentInstance.message = 'World'
+  }
+
+  remove(){
+    if(this.review.id){
+      Swal.fire({
+        title: 'Estás seguro?',
+        text: "No podrás revertir esto!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        cancelButtonText:'Cancelar',
+        confirmButtonText: 'Sí, eliminar!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.reviewService.delete(this.review.id).subscribe(() => {
+            this.notificationService.showSuccess('Su reseña ha sido eliminada');
+          })
+        }
+      })
+    }
   }
 
 }

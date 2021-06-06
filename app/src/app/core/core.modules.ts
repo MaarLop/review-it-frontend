@@ -124,7 +124,7 @@ import { FollowButtonComponent } from './follow-button/follow-button.component';
     NgbModule,
     InfiniteScrollModule,
     FontAwesomeModule,
-    PickerModule 
+    PickerModule,
   ],
   providers: [
     DynamicFormService,
