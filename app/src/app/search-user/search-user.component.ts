@@ -25,7 +25,7 @@ export class UserSearchComponent implements OnInit{
     users$ = new BehaviorSubject<any>([]);
 
     formGroup:FormGroup;
-   
+    
       
     constructor(private fb: FormBuilder, 
         private router: Router,
