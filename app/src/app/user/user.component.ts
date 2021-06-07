@@ -15,6 +15,7 @@ import { FollowersModalCOmponent } from './modal-followers/modal.component';
 import { ModalEditComponent } from './modal-edit/modal-edit.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NotificationService } from '../core/shared/errors/notification.service';
+import { Review } from '../core/models/review-model';
 
 @Component({
   selector: 'app-user',
@@ -59,7 +60,8 @@ export class UserComponent implements OnInit {
       private activatedRoute: ActivatedRoute,
       public dialog: MatDialog,
       private modalService: NgbModal,
-      private router: Router){
+      private router: Router,
+      private notificationService: NotificationService){
         
   }
 
@@ -73,7 +75,6 @@ export class UserComponent implements OnInit {
     this.isOwnProfile = !this.displayButton;
     const filter = `userName=${this.displayButton ? this.userName : sessionStorage.getItem('userName')}`;
     this.filter$.next(filter);
-    this.followingUser();
   }
 
   startForm(userName: string){
@@ -142,12 +143,10 @@ export class UserComponent implements OnInit {
     });
   }
 
-  followingUser(){
-    let followings: any[];
-    this.userService.getFollowingsAll(sessionStorage.getItem('userName')).subscribe((response)=>{
-      followings = response.map((follow)=> follow.to.userName);
-      localStorage.setItem('listOfFollowings',  JSON.stringify(followings));
-    });
+  newReview(review: Review){
+    if(review){
+        this.notificationService.showSuccess('Publicado exitosamente!');
+    }
   }
 
 }

@@ -36,8 +36,7 @@ export class ModalEditComponent implements OnInit {
       {
         id: [{value: this.user.id, disabled: true}],
         name: [{value: this.user.name, disabled: false}],
-        lastName: [{value: this.user.lastName, disabled: false}],
-        email: [{value: this.user.email, disabled: false}]
+        lastName: [{value: this.user.lastName, disabled: false}]
       }
     )
   }
@@ -50,7 +49,7 @@ export class ModalEditComponent implements OnInit {
       uploadData.append('avatar', this.user.avatar);
       uploadData.append('name', this.formUser.get('name').value);
       uploadData.append('lastName', this.formUser.get('lastName').value);
-      uploadData.append('email', this.formUser.get('email').value);
+      uploadData.append('email', this.user.email);
       if(this.selectedFile){
         uploadData.append('avatarFileForView', this.selectedFile);
       }
@@ -61,13 +60,12 @@ export class ModalEditComponent implements OnInit {
         err => {
           console.log(err)
           let first = err.error.name ? err.error.name+'\n' : '';
-          const second = err.error.lastName ? err.error.lastName+'\n' : '';
-          const third = err.error.email ? err.error.email : '';
-          first = !err.error.name && !err.error.lastName && !err.error.email ? err.error : first;
-          //this.notificationService.showError(name+lastName+email);
+          const second = err.error.lastName ? err.error.lastName : '';
+          first = !err.error.name && !err.error.lastName ? err.error : first;
+          //this.notificationService.showError(name+lastName);
           Swal.fire({
             icon: 'error',
-            html:first+'</br>'+second+'</br>'+third,
+            html:first+'</br>'+second,
           })
         }
       );
