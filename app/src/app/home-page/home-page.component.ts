@@ -6,6 +6,7 @@ import { Review } from '../core/models/review-model';
 import { ReviewService } from '../services/review.service';
 import { UserService } from '../services/user.service';
 import { NotificationService } from '../core/shared/errors/notification.service';
+import { Pageable } from '../core/models/pageable.model';
 
 @Component({
     selector: 'app-home-page',
@@ -32,15 +33,9 @@ export class HomePageComponent implements OnInit{
     ngOnInit(): void {
         this.auth.user$.subscribe(data =>{
             if(data){
-                this.userService.signUp(data).subscribe((user) => {
+                this.userService.login(data).subscribe((user) => {
                     sessionStorage.setItem('userId', user.id);
-                    sessionStorage.setItem('user', `${user.name} ${user.lastName}`);
-                    this.userService.getFollowings(user.id).subscribe((listOfFollowers: any[])=>{
-                        const listOfTo = listOfFollowers.map((f)=>{
-                            return f.to.id;
-                        });
-                        localStorage.setItem('listOfFollowings',  JSON.stringify(listOfTo));
-                    })
+                    sessionStorage.setItem('userName', user.userName);
                 });
             }
         });
@@ -50,11 +45,19 @@ export class HomePageComponent implements OnInit{
                     this.userService.getToken().subscribe(data => {
                         localStorage.setItem('auth_token', data.access_token);
                     });
+                    this.followingUser();
                     this.getReviews();
                 }
             }  
-        )
-        
+        )    
+    }
+
+    followingUser(){
+        let followings: any[];
+        this.userService.getFollowingsAll(sessionStorage.getItem('userName')).subscribe((response)=>{
+          followings = response.map((follow)=> follow.to.userName);
+          localStorage.setItem('listOfFollowings',  JSON.stringify(followings));
+        });
     }
 
     getReviews(){

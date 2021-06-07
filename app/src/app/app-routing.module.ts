@@ -18,7 +18,7 @@ const routes: Routes = [];
       {path:'', component:HomePageComponent},
       {path:'search', component:SearchComponent, canActivate: [ AuthGuard ]},
       {path:'profile', component:UserComponent, canActivate: [ AuthGuard ]},
-      {path:'user/:id', component:UserComponent, canActivate: [ AuthGuard ]},
+      {path:'user/:username', component:UserComponent, canActivate: [ AuthGuard ]},
       {path:'search-user', component:UserSearchComponent, canActivate: [ AuthGuard ]},
       {path:'chat', component:ChatComponent, canActivate: [ AuthGuard ]},
       {path:'chat/:username', component:ChatComponent, canActivate: [ AuthGuard ]},

@@ -57,7 +57,7 @@ export class SearchComponent implements OnInit{
             const genresFilter = !!genre ? `genre=${genre}` : '';
             const descriptionFilter = !!description ? `description=${description}` : '';
             const pointsFilter = !!points ? `points=${points}` : '';
-            const userNameFilter = !!userName ? `userName=${userName}` : '';
+            const userNameFilter = !!userName ? `name=${userName}` : '';
             arrayFilter = [searchFilter, titleSearch, genresFilter,descriptionFilter, pointsFilter, userNameFilter];
 
         }

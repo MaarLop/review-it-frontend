@@ -15,6 +15,7 @@ import { FollowersModalCOmponent } from './modal-followers/modal.component';
 import { ModalEditComponent } from './modal-edit/modal-edit.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NotificationService } from '../core/shared/errors/notification.service';
+import { Review } from '../core/models/review-model';
 
 @Component({
   selector: 'app-user',
@@ -33,8 +34,8 @@ export class UserComponent implements OnInit {
 
   faEdit = faUserEdit;
   userId?: number;
+  userName?: string;
 
-  messageOfButton: String = this.followingUser() ? 'Seguido' : 'Seguir';
   displayButton: boolean = false;
 
   isOwnProfile: boolean;
@@ -45,6 +46,7 @@ export class UserComponent implements OnInit {
   followings:number = JSON.parse(localStorage.getItem('listOfFollowings')).length;
 
   followers$ = new BehaviorSubject<User[]>([]);
+  followings$ = new BehaviorSubject<User[]>([]);
 
   @Output() newUser = new EventEmitter<User>();
 
@@ -58,51 +60,53 @@ export class UserComponent implements OnInit {
       private activatedRoute: ActivatedRoute,
       public dialog: MatDialog,
       private modalService: NgbModal,
-      private notificationService: NotificationService,
-      private router: Router){
+      private router: Router,
+      private notificationService: NotificationService){
         
   }
 
   ngOnInit(): void {
-    this.userId = +this.activatedRoute.snapshot.paramMap.get('id');
-    this.displayButton = 
-              this.activatedRoute.snapshot.routeConfig.path.includes('user') &&
-              sessionStorage.getItem('userId') !== this.userId.toString();
-    const filter = `userId=${this.displayButton ? this.userId : sessionStorage.getItem('userId')}`;
-    this.filter$.next(filter);
-    this.getInformationOfUser();
-    this.startForm(this.disabled);
+    this.userName = this.activatedRoute.snapshot.routeConfig.path.includes('user') ?
+    this.activatedRoute.snapshot.paramMap.get('username') : sessionStorage.getItem('userName');
+    this.startForm(this.userName);
+    this.getInformationOfUser(this.userName);
+    this.displayButton = this.activatedRoute.snapshot.routeConfig.path.includes('user') &&
+              sessionStorage.getItem('userName') !== this.userName
     this.isOwnProfile = !this.displayButton;
+    const filter = `userName=${this.displayButton ? this.userName : sessionStorage.getItem('userName')}`;
+    this.filter$.next(filter);
   }
 
-  getInformationOfUser(){
-    const userId = this.activatedRoute.snapshot.routeConfig.path.includes('user') ?
-        this.userId : +sessionStorage.getItem('userId');
-    this.userService.getFollowers(userId).subscribe((response: Pageable)=>{
-      const followers = response.content.map((follow)=> follow.from);
-      this.followers$.next(followers);
-      this.followers = this.followers$.value.length;
-    });
-    this.userService.getImage(parseInt(sessionStorage.getItem('userId'))).subscribe(
-      (data) => {
-      let reader = new FileReader();
-      reader.addEventListener("load", () => {
-          this.user.image = reader.result;
-      }, false);
-
-      if (data.size > 0) {
-        reader.readAsDataURL(data);
-      }
-    });
-  }
-
-  startForm(disabled: Boolean){
-    const idUsuario = this.userId !== 0?  this.userId : sessionStorage.getItem('userId')
-    this.userService.get(idUsuario).pipe(
+  startForm(userName: string){
+    this.userService.getByUsername(userName).pipe(
       catchError(async (error) => this.errorHandle(error))
     ).subscribe((data) => {
       this.user = data;
     }) 
+  }
+
+  getInformationOfUser(userName: string){
+      this.userService.getImage(userName).subscribe(
+        (data) => {
+        let reader = new FileReader();
+        reader.addEventListener("load", () => {
+            this.user.image = reader.result;
+        }, false);
+  
+        if (data.size > 0) {
+          reader.readAsDataURL(data);
+        }
+      });
+      this.userService.getFollowers(userName).subscribe((response: Pageable)=>{
+      const followers = response.content.map((follow)=> follow.from);
+      this.followers$.next(followers);
+      this.followers = this.followers$.value.length;
+    });
+    this.userService.getFollowings(userName).subscribe((response: Pageable)=>{
+      const followings = response.content.map((follow)=> follow.to);
+      this.followings$.next(followings);
+      this.followings = this.followings$.value.length;
+    });
   }
 
   errorHandle(error){
@@ -110,25 +114,11 @@ export class UserComponent implements OnInit {
   }
 
   edit(){
-    if(this.user){
+    if(this.user.id === parseInt(sessionStorage.getItem('userId'))){
       const modalRef = this.modalService.open(ModalEditComponent);
       modalRef.componentInstance.modal = modalRef;
       modalRef.componentInstance.user = this.user;
     }
-  }
-
-  follow(){
-    const body ={
-      idTo: this.userId,
-      idFrom: parseInt(sessionStorage.getItem('userId'))
-    }
-    this.userService.followUser(body).subscribe((_)=>{
-      this.notificationService.showSuccess('Usuario seguido')
-      
-      const followings =  JSON.parse(localStorage.getItem('listOfFollowings'));
-      followings.push(this.userId);
-      localStorage.setItem('listOfFollowings', JSON.stringify(followings));
-    });
   }
 
   showFollowers(){
@@ -136,13 +126,27 @@ export class UserComponent implements OnInit {
       width: '100%',
       height: '60%',
       data: {
+        title: 'Seguidores',
         dataKey: this.followers$.value
       }
     });
   }
 
-  followingUser(){
-    return JSON.parse(localStorage.getItem('listOfFollowings')).includes(this.userId);
+  showFollowings(){
+    this.dialog.open(FollowersModalCOmponent, {
+      width: '100%',
+      height: '60%',
+      data: {
+        title: 'Seguidos',
+        dataKey: this.followings$.value
+      }
+    });
+  }
+
+  newReview(review: Review){
+    if(review){
+        this.notificationService.showSuccess('Publicado exitosamente!');
+    }
   }
 
 }

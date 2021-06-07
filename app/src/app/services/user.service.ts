@@ -34,9 +34,9 @@ export class UserService {
       return this.httpClient.post(path, body, { headers });
     }
 
-    signUp(data: any): Observable<any> {
+    login(data: any): Observable<any> {
       const headers = this.headers;
-      const path = this.basePath + '/signUp';
+      const path = this.basePath + '/login';
       return this.httpClient.post(path, {
           name: data.given_name,
           userName: data.nickname,
@@ -55,11 +55,11 @@ export class UserService {
       return this.httpClient.post(path, body, { headers });
     }
 
-    public getImage(userId: number): Observable<any>{
+    public getImage(userName: string): Observable<any>{
       const headers = new HttpHeaders({
         'Authorization': 'Bearer ' + localStorage.getItem('auth_token')
       });
-      const path = this.basePath + `/avatar/${userId}`;
+      const path = this.basePath + `/avatar/${userName}`;
       return this.httpClient.get(path, { headers, responseType: "blob"});
     }
 
@@ -70,14 +70,20 @@ export class UserService {
       return this.httpClient.post(path, body, { headers });
     }
 
+    public getByUsername(userName: string): Observable<any> {
+      const path = this.basePath + `/profile/${userName}`;
+      const headers = this.headers;
+      return this.httpClient.get(path, { headers });
+    }
+
     public followUser(body: any){
       const path = this.basePath + `/follow`;
       const headers = this.headers;
       return this.httpClient.post(path, body, { headers })
     }
 
-    public getFollowers(userId: number){
-      const path = this.basePath + `/followers/${userId}`;
+    public getFollowers(userName: string){
+      const path = this.basePath + `/followers/${userName}`;
       return this.httpClient.get(path, { 
         headers: this.headers 
       });
@@ -90,8 +96,15 @@ export class UserService {
       });
     }
 
-    public getFollowings(userId){
-      const path = this.basePath + `/followings/${userId}`;
+    public getFollowings(userName: string){
+      const path = this.basePath + `/followings/${userName}`;
+      return this.httpClient.get(path,{
+        headers:this.headers
+      });
+    }
+
+    public getFollowingsAll(userName: string): Observable<any> {
+      const path = this.basePath + `/followingsAll/${userName}`;
       return this.httpClient.get(path,{
         headers:this.headers
       });
