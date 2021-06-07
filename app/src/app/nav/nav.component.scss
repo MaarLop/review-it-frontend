@@ -21,7 +21,7 @@ nav {
 	padding-top: 10px;
 	z-index: 1;
 	.profile{
-		font: 400 36px/20px Roboto, "Helvetica Neue", sans-serif;
+		font: 350 20px/20px Roboto, "Helvetica Neue", sans-serif;
 		text-shadow: 4px 5px rgb(41, 39, 39);
 	}
 	fa-icon{
@@ -87,6 +87,11 @@ nav ul li:nth-child(3):after {
 
 nav ul li:nth-child(4):after { 
 	content: "Agregar";
+	line-height: 88px;
+}
+
+nav ul li:nth-child(5):after { 
+	content: "Chat";
 	line-height: 88px;
 }
 
