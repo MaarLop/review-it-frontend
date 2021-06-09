@@ -38,6 +38,7 @@
         "ngx-infinite-scroll": "^10.0.1",
         "rxjs": "~6.6.0",
         "sweetalert2": "^10.16.9",
+        "tooltip": "^1.6.1",
         "tslib": "^2.0.0",
         "zone.js": "~0.10.2"
     },

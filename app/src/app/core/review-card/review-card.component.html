@@ -5,7 +5,10 @@
             <img src="{{review?.user?.image? review.user.image : review?.user?.avatar }}" fallimg></div>
         <div class="pxc-stopper"> </div>
         <div class="pxc-subcard">
-            <div class="pxc-title">{{review.title}}</div>
+            <ng-template #tolTemplate>
+                <img id="tool-tip" src="https://placehold.jp/200x200.png" />
+            </ng-template>
+            <div class="pxc-title" [tooltip]="tolTemplate" placement="right">{{review.title}}</div>
             <div class="pxc-sub">
                 <ngb-rating [max]="5" [(rate)]="currentRate" [readonly]="true"></ngb-rating>
             </div>

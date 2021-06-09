@@ -3,6 +3,10 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:100');
 $customBackCol: #8855DD;
 $pink: #F58;
+$blue: #47b8e0;
+$red: #E71D36;
+$green: #2EC4B6;
+$purple: #A593E0;
 $c1: #a6aad1;
 $c2: #5f5f80;
 $break-med: 900px;
@@ -485,3 +489,73 @@ html {
         font-weight: bold;
     }
 }
+
+#tool-tip {
+    width: 180px;
+}
+
+
+/*.tooltip {
+    display: block;
+    position: absolute;
+    top: 0px;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.75) rotate(5deg);
+    transform-origin: bottom center;
+    padding: 10px 30px;
+    border-radius: 5px;
+    background: rgba(0, 0, 0, 0.75);
+    text-align: center;
+    color: white;
+    transition: 0.15s ease-in-out;
+    opacity: 0;
+    width: 100%;
+    max-width: 100vw;
+    pointer-events: none;
+    z-index: 5;
+    &.blue {
+        background: rgba($blue, 0.75);
+        &:after {
+            border-top: 5px solid rgba($blue, 0.75)
+        }
+    }
+    &.red {
+        background: rgba($red, 0.75);
+        &:after {
+            border-top: 5px solid rgba($red, 0.75)
+        }
+    }
+    &.green {
+        background: rgba($green, 0.75);
+        &:after {
+            border-top: 5px solid rgba($green, 0.75)
+        }
+    }
+    &.purple {
+        background: rgba($purple, 0.75);
+        &:after {
+            border-top: 5px solid rgba($purple, 0.75)
+        }
+    }
+    &:hover {
+        opacity: 1;
+        transform: translate(-50%, -100%) scale(1) rotate(0deg);
+        pointer-events: inherit;
+    }
+    img {
+        max-width: 100%;
+        &:after {
+            content: '';
+            display: block;
+            margin: 0 auto;
+            widtH: 0;
+            height: 0;
+            border: 5px solid transparent;
+            border-top: 5px solid rgba(0, 0, 0, 0.75);
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translate(-50%, 100%);
+        }
+    }
+}*/

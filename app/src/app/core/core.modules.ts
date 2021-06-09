@@ -83,6 +83,7 @@ import { CommentComponent } from './comment/comment.component';
 import { CommentListComponent } from './comment-list/comment-list.component';
 import { PickerModule } from '@ctrl/ngx-emoji-mart';
 import { FollowButtonComponent } from './follow-button/follow-button.component';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
 
 @NgModule({
   declarations: [
@@ -125,6 +126,7 @@ import { FollowButtonComponent } from './follow-button/follow-button.component';
     InfiniteScrollModule,
     FontAwesomeModule,
     PickerModule,
+    TooltipModule.forRoot()
   ],
   providers: [
     DynamicFormService,

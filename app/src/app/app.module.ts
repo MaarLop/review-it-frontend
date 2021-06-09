@@ -56,7 +56,7 @@ import { NgFallimgModule } from 'ng-fallimg';
       default: 'https://www.adl-logistica.org/wp-content/uploads/2019/07/imagen-perfil-sin-foto.png',
       profile: 'https://www.adl-logistica.org/wp-content/uploads/2019/07/imagen-perfil-sin-foto.png',
       editProfile: 'https://mdbootstrap.com/img/Photos/Others/placeholder-avatar.jpg'
-    }),
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
