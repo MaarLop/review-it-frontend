@@ -25,7 +25,7 @@ export class ReviewCardComponent implements OnInit{
   trash = faTrash;
   thumbs= faThumbsUp;
   isOwner = false;
-  likeCount: Number;
+  likeCount: number;
   hasLike: boolean;
 
   constructor(private reviewService: ReviewService, private userService: UserService, private modalService: NgbModal, private notificationService: NotificationService){ 
@@ -51,7 +51,6 @@ export class ReviewCardComponent implements OnInit{
   likes(){
     if(this.review.id){
       this.reviewService.likes(this.review.id).subscribe((response)=>{
-        console.log(response.some((like: Like)=>like.user.id===parseInt(sessionStorage.getItem("userId"))));
         this.likeCount = response.length;
         this.hasLike = response.some((like: Like)=>like.user.id===parseInt(sessionStorage.getItem("userId")));
       });
@@ -91,10 +90,11 @@ export class ReviewCardComponent implements OnInit{
     if(this.review.id){
       this.reviewService.likear(this.review.id).subscribe(() => {
         if(this.hasLike) {
-          this.notificationService.showSuccess('Deslikeado');
+          this.likeCount = this.likeCount-1;
         }else{
-          this.notificationService.showSuccess('Likeado');
+          this.likeCount = this.likeCount+1;
         } 
+        this.hasLike = !this.hasLike
       })
     }
   }
