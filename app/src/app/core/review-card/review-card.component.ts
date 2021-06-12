@@ -6,8 +6,10 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ReviewService } from 'src/app/services/review.service';
 import { CommentListComponent } from '../comment-list/comment-list.component';
 import { NotificationService } from '../shared/errors/notification.service';
-import { faComment, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faComment, faTrash, faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
+import { map } from 'rxjs/operators';
+import { Like } from '../models/like.model';
 
 @Component({
   selector: 'app-review-card',
@@ -21,7 +23,11 @@ export class ReviewCardComponent implements OnInit{
   comment = faComment;
   heart = faHeart;
   trash = faTrash;
+  thumbs= faThumbsUp;
   isOwner = false;
+  likeCount: Number;
+  hasLike: boolean;
+
   constructor(private reviewService: ReviewService, private userService: UserService, private modalService: NgbModal, private notificationService: NotificationService){ 
    }
   
@@ -39,6 +45,17 @@ export class ReviewCardComponent implements OnInit{
     });
     this.currentRate=this.review.points;
     this.isOwner=parseInt(sessionStorage.getItem("userId"))===this.review.user.id;
+    this.likes();
+  }
+
+  likes(){
+    if(this.review.id){
+      this.reviewService.likes(this.review.id).subscribe((response)=>{
+        console.log(response.some((like: Like)=>like.user.id===parseInt(sessionStorage.getItem("userId"))));
+        this.likeCount = response.length;
+        this.hasLike = response.some((like: Like)=>like.user.id===parseInt(sessionStorage.getItem("userId")));
+      });
+    }
   }
 
   comments(){
@@ -66,6 +83,18 @@ export class ReviewCardComponent implements OnInit{
             this.notificationService.showSuccess('Su reseña ha sido eliminada');
           })
         }
+      })
+    }
+  }
+
+  likear(){
+    if(this.review.id){
+      this.reviewService.likear(this.review.id).subscribe(() => {
+        if(this.hasLike) {
+          this.notificationService.showSuccess('Deslikeado');
+        }else{
+          this.notificationService.showSuccess('Likeado');
+        } 
       })
     }
   }

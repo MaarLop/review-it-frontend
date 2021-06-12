@@ -24,6 +24,7 @@
                 <div class="column">
                     <button class="btn post-actions" (click)="comments()" data-testid="comments"><fa-icon [icon]="comment"></fa-icon></button>
                     <button *ngIf="isOwner" (click)="remove()" class="btn post-actions"><fa-icon [icon]="trash" aria-hidden="true"></fa-icon></button>
+                    <div><span class="thumbup"><button (click)="likear()" class="thumbupo"><fa-icon [icon]="thumbs" aria-hidden="true"></fa-icon></button></span><span class="text4 text4i">{{likeCount}}</span></div>
                 </div>
             </div>
         </div>
