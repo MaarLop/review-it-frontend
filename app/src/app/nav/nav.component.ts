@@ -33,4 +33,8 @@ export class SideNavComponent implements OnInit{
   goToSearchUser(){
     this.router.navigate(['/search-user'])
   }
+
+  goToChat(){
+    this.router.navigate(['/chat'])
+  }
 }

@@ -1,0 +1,34 @@
+<div class="container">
+  <div class="chatbox">
+    <div class="chatbox__user-list">
+      <h2>Lista de usuarios</h2>
+      <div class="chatbox__user--active" *ngFor="let user of userList" >
+            <main class="leaderboard__profiles" >
+                <article class="leaderboard__profile">
+                <img src="{{user.avatar? user.avatar : 'https://www.adl-logistica.org/wp-content/uploads/2019/07/imagen-perfil-sin-foto.png'}}" class="leaderboard__picture">
+                <a (click)="sendMessageTo(user);">
+                    <span class="leaderboard__name">{{user.name}}</span>
+                </a>
+                </article>
+            </main>
+      </div>
+    </div>
+    <div class="messages_list">
+    <h2>{{chatTitle}}</h2>
+      <div class="chatbox__messages" *ngFor="let msg of webSocketService.chatMessages" [ngClass]="{mine: msg.mine}">
+        <div class="user-message">
+          <div class="message-box">
+            <p class="name">{{ msg.userName }}</p>
+            <br/>
+            <p class="message">{{ msg.message }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="send-message">
+        <input type="text" [(ngModel)]="message">
+        <button (click)="sendMessage()"><fa-icon [icon]="send"></fa-icon></button>
+    </div>
+  </div>
+  
+</div>
