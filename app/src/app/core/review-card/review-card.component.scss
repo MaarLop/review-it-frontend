@@ -1,6 +1,12 @@
 @import '../rate-stars/rate-stats.component.scss';
+@import url('https://fonts.googleapis.com/css?family=Lato:100,300,400');
+@import url('https://fonts.googleapis.com/css?family=Roboto:100');
 $customBackCol: #8855DD;
 $pink: #F58;
+$blue: #47b8e0;
+$red: #E71D36;
+$green: #2EC4B6;
+$purple: #A593E0;
 $c1: #a6aad1;
 $c2: #5f5f80;
 $break-med: 900px;
@@ -455,10 +461,121 @@ html {
     align-items: center;
 }
 
-.post-actions__comment {
-    margin-top: -100px;
+.post-actions {
     width: 40px;
     background-color: #008391;
     color: #fff;
     border-radius: 1.5em;
 }
+
+.button-container {
+    position: relative;
+    width: 94px;
+    height: 48px;
+    background-color: #39394d;
+    border-radius: 8px;
+    color: #fff;
+    float: right;
+    margin-right: 71px;
+    button {
+        border-radius: 8px;
+        float: right;
+        width: 101%;
+        height: 100%;
+        font-family: 'Lato', sans-serif;
+        font-weight: 300;
+        font-size: 11px;
+        letter-spacing: 1px;
+        font-weight: bold;
+    }
+}
+
+.text4 {
+    font-size: 13px;
+    font-weight: 500;
+    color: #828386
+}
+
+.text4i {
+    color: #00a5f4
+}
+
+.thumbup {
+    font-size: 13px;
+    font-weight: 500;
+    margin-right: 5px
+}
+
+.thumbupo {
+    color: #17a2b8
+}
+
+#tool-tip {
+    width: 180px;
+}
+
+
+/*.tooltip {
+    display: block;
+    position: absolute;
+    top: 0px;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.75) rotate(5deg);
+    transform-origin: bottom center;
+    padding: 10px 30px;
+    border-radius: 5px;
+    background: rgba(0, 0, 0, 0.75);
+    text-align: center;
+    color: white;
+    transition: 0.15s ease-in-out;
+    opacity: 0;
+    width: 100%;
+    max-width: 100vw;
+    pointer-events: none;
+    z-index: 5;
+    &.blue {
+        background: rgba($blue, 0.75);
+        &:after {
+            border-top: 5px solid rgba($blue, 0.75)
+        }
+    }
+    &.red {
+        background: rgba($red, 0.75);
+        &:after {
+            border-top: 5px solid rgba($red, 0.75)
+        }
+    }
+    &.green {
+        background: rgba($green, 0.75);
+        &:after {
+            border-top: 5px solid rgba($green, 0.75)
+        }
+    }
+    &.purple {
+        background: rgba($purple, 0.75);
+        &:after {
+            border-top: 5px solid rgba($purple, 0.75)
+        }
+    }
+    &:hover {
+        opacity: 1;
+        transform: translate(-50%, -100%) scale(1) rotate(0deg);
+        pointer-events: inherit;
+    }
+    img {
+        max-width: 100%;
+        &:after {
+            content: '';
+            display: block;
+            margin: 0 auto;
+            widtH: 0;
+            height: 0;
+            border: 5px solid transparent;
+            border-top: 5px solid rgba(0, 0, 0, 0.75);
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translate(-50%, 100%);
+        }
+    }
+}*/

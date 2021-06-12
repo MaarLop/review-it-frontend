@@ -1,17 +1,16 @@
-import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild, ViewChildren} from '@angular/core';
+import {Component, Input, OnInit } from '@angular/core';
 import { Review } from '../models/review-model';
-import { element } from 'protractor';
 import { UserService } from '../../services/user.service';
-import { User } from '../models/user.model';
 import Swal from 'sweetalert2';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { CommentComponent } from '../comment/comment.component';
 import { ReviewService } from 'src/app/services/review.service';
 import { CommentListComponent } from '../comment-list/comment-list.component';
 import { NotificationService } from '../shared/errors/notification.service';
-import { Comment } from '../models/comment.model';
-import { faComment } from '@fortawesome/free-solid-svg-icons';
+import { faComment, faTrash, faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
+import { map } from 'rxjs/operators';
+import { Like } from '../models/like.model';
+
 @Component({
   selector: 'app-review-card',
   templateUrl: 'review-card.component.html',
@@ -23,6 +22,12 @@ export class ReviewCardComponent implements OnInit{
   currentRate: Number;
   comment = faComment;
   heart = faHeart;
+  trash = faTrash;
+  thumbs= faThumbsUp;
+  isOwner = false;
+  likeCount: number;
+  hasLike: boolean;
+
   constructor(private reviewService: ReviewService, private userService: UserService, private modalService: NgbModal, private notificationService: NotificationService){ 
    }
   
@@ -39,6 +44,17 @@ export class ReviewCardComponent implements OnInit{
       }
     });
     this.currentRate=this.review.points;
+    this.isOwner=parseInt(sessionStorage.getItem("userId"))===this.review.user.id;
+    this.likes();
+  }
+
+  likes(){
+    if(this.review.id){
+      this.reviewService.likes(this.review.id).subscribe((response)=>{
+        this.likeCount = response.length;
+        this.hasLike = response.some((like: Like)=>like.user.id===parseInt(sessionStorage.getItem("userId")));
+      });
+    }
   }
 
   comments(){
@@ -47,7 +63,40 @@ export class ReviewCardComponent implements OnInit{
       modalRef.componentInstance.modal = modalRef;
       modalRef.componentInstance.reviewId = this.review.id;
     }
-    // modalRef.componentInstance.message = 'World'
+  }
+
+  remove(){
+    if(this.review.id){
+      Swal.fire({
+        title: 'Estás seguro?',
+        text: "No podrás revertir esto!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        cancelButtonText:'Cancelar',
+        confirmButtonText: 'Sí, eliminar!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.reviewService.delete(this.review.id).subscribe(() => {
+            this.notificationService.showSuccess('Su reseña ha sido eliminada');
+          })
+        }
+      })
+    }
+  }
+
+  likear(){
+    if(this.review.id){
+      this.reviewService.likear(this.review.id).subscribe(() => {
+        if(this.hasLike) {
+          this.likeCount = this.likeCount-1;
+        }else{
+          this.likeCount = this.likeCount+1;
+        } 
+        this.hasLike = !this.hasLike
+      })
+    }
   }
 
 }

@@ -3,11 +3,15 @@ import{ HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Review } from '../core/models/review-model';
 import { Comment } from '../core/models/comment.model';
+import { Like } from '../core/models/like.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReviewService {
+  deslikear(id: number) {
+    throw new Error('Method not implemented.');
+  }
   
   protected basePath = 'http://localhost:8090/reviews';
   
@@ -44,5 +48,25 @@ export class ReviewService {
     const headers = this.headers;
     return this.httpClient.post(path, body, { headers });
   }
+
+  public delete(id: any) {
+    const path = `${this.basePath}/${id}`;
+    const headers = this.headers;
+    return this.httpClient.delete(path, { headers });
+  }
+
+  public likear(reviewId: number) {
+    const path = this.basePath + '/likear';
+    const headers = this.headers;
+    const body = new Like(reviewId, parseInt(sessionStorage.getItem('userId')));
+    return this.httpClient.post(path, body, { headers });
+  }
+
+  public likes(reviewId: number): Observable<any>{
+    const path = `${this.basePath}/${reviewId}/likes`;
+    const headers = this.headers;
+    return this.httpClient.get(path, { headers });
+  }
+  
   
 }
