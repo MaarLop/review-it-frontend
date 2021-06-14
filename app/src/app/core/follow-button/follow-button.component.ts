@@ -16,10 +16,12 @@ export class FollowButtonComponent implements OnInit{
     unfollow = faUserCheck;
     @Input() user: User;
     isFollowing: boolean;
+    isSameUser: boolean;
 
     constructor(private userService: UserService, private notificationService: NotificationService){ }
     
     ngOnInit(): void {
+        this.isSameUser = this.user.id===parseInt(sessionStorage.getItem('userId'));
         this.isFollowing = this.followingUser();
     }
     

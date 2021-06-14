@@ -6,10 +6,10 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ReviewService } from 'src/app/services/review.service';
 import { CommentListComponent } from '../comment-list/comment-list.component';
 import { NotificationService } from '../shared/errors/notification.service';
-import { faComment, faTrash, faThumbsUp } from '@fortawesome/free-solid-svg-icons';
+import { faComment, faTrash, faThumbsUp, faEdit } from '@fortawesome/free-solid-svg-icons';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
-import { map } from 'rxjs/operators';
 import { Like } from '../models/like.model';
+import { ModalEditReviewComponent } from './modal-edit-review/modal-edit-review.component';
 
 @Component({
   selector: 'app-review-card',
@@ -22,11 +22,13 @@ export class ReviewCardComponent implements OnInit{
   currentRate: Number;
   comment = faComment;
   heart = faHeart;
+  faEdit = faEdit;
   trash = faTrash;
   thumbs= faThumbsUp;
   isOwner = false;
   likeCount: number;
   hasLike: boolean;
+  hasImage: boolean;
 
   constructor(private reviewService: ReviewService, private userService: UserService, private modalService: NgbModal, private notificationService: NotificationService){ 
    }
@@ -44,6 +46,7 @@ export class ReviewCardComponent implements OnInit{
       }
     });
     this.currentRate=this.review.points;
+    this.hasImage=this.review.img ? true : false;
     this.isOwner=parseInt(sessionStorage.getItem("userId"))===this.review.user.id;
     this.likes();
   }
@@ -96,6 +99,14 @@ export class ReviewCardComponent implements OnInit{
         } 
         this.hasLike = !this.hasLike
       })
+    }
+  }
+
+  edit(){
+    if(this.review.user.id === parseInt(sessionStorage.getItem('userId'))){
+      const modalRef = this.modalService.open(ModalEditReviewComponent);
+      modalRef.componentInstance.modal = modalRef;
+      modalRef.componentInstance.review = this.review;
     }
   }
 

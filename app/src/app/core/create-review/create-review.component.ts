@@ -39,7 +39,7 @@ export class CreateReviewComponent implements OnInit {
         .subscribe((content)=>{
           if(content.results.length >0){
             const result = content.results[0];
-            this.formNewReview.get('img').setValue(result.backdrop_path);
+            this.formNewReview.get('img').setValue(`http://image.tmdb.org/t/p/w342${result.poster_path}`);
             this.formNewReview.get('genresId').setValue(result.genre_ids);
             this.formNewReview.get('overview').setValue(result.overview);
           }
@@ -67,7 +67,7 @@ export class CreateReviewComponent implements OnInit {
 
   createReview(){
     if(this.formNewReview.valid){
-      this.reviewService.save(this.formNewReview.getRawValue() as Review).subscribe((review: Review) => {
+      this.reviewService.create(this.formNewReview.getRawValue() as Review).subscribe((review: Review) => {
         this.newReview.emit(review);
         this.startForm();
       },
@@ -88,6 +88,7 @@ export class CreateReviewComponent implements OnInit {
         .get(`https://api.themoviedb.org/3/search/movie?api_key=d83d9bf26a31066155e617cf070d3004&query=${title}`)
         .pipe(
           map((items) => {
+            console.log(items);
             return items.results.map(
               (item) => new SimpleOption(item.original_title, item.original_title),
             );

@@ -18,6 +18,8 @@
                                     <input type="file" name="file" class="file-input" (change)="onFileChanged($event)" #fileInput>
                                 </div>
                             </div>
+                            <label for="form_name">Privado?</label>
+                            <input type="checkbox" [formControlName]="'isPrivate'" [name]="'isPrivate'" [checked]="'isPrivate'">
                         </div>
                     </div>
                     <button class="btn post-actions__publish" (click)="update()" data-testid="updateUser">Actualizar</button>

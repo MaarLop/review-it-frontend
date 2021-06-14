@@ -115,4 +115,11 @@ export class UserService {
         headers:this.headers
       });
     }
+
+    public getLikesTo(userName: string): Observable<any> {
+      const path = this.basePath + `/likes/to/${userName}`;
+      return this.httpClient.get(path,{
+        headers:this.headers
+      });
+    }
 }

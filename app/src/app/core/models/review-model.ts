@@ -11,7 +11,8 @@ export class Review{
     userId: string;
     overview?: string;
     img?: string;
-    genresId?: any;
+    genresId?: number[];
+    genres: string[];
 
     constructor(id: number, titulo: string, descripcion: string, fecha: Date,
         puntaje: number, hashtags, user: User, userId: string, overview?: string,
