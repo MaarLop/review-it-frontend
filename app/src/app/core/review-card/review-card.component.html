@@ -2,13 +2,16 @@
     <div class="plx-card gold">
         <div class="pxc-bg" style="background-image:url('https://png.pngtree.com/thumb_back/fw800/background/20190221/ourmid/pngtree-texture-geometric-black-metal-gradient-image_17809.jpg')"> </div>
         <div class="pxc-avatar" placement="top" ngbTooltip="{{review?.user?.userName}}" container="body">
-            <img src="{{review?.user?.image? review.user.image : review?.user?.avatar }}" fallimg></div>
+            <img src="{{review?.user?.image? review.user.image : review?.user?.avatar }}" fallimg="profile"></div>
         <div class="pxc-stopper"> </div>
         <div class="pxc-subcard">
             <ng-template #tolTemplate>
-                <img id="tool-tip" src="https://placehold.jp/200x200.png" />
+                <img id="tool-tip" src="{{ review.img }}" fallimg="movie" />
             </ng-template>
             <div class="pxc-title" [tooltip]="tolTemplate" placement="right">{{review.title}}</div>
+            <div class="pxc-sub">
+                {{review.genres}}
+            </div>
             <div class="pxc-sub">
                 <ngb-rating [max]="5" [(rate)]="currentRate" [readonly]="true"></ngb-rating>
             </div>
@@ -23,9 +26,10 @@
             <div class="pxc-info">
                 <div class="column">
                     <button class="btn post-actions" (click)="comments()" data-testid="comments"><fa-icon [icon]="comment"></fa-icon></button>
+                    <button *ngIf="isOwner" (click)="edit()" class="btn post-actions"><fa-icon [icon]="faEdit" aria-hidden="true"></fa-icon></button>
                     <button *ngIf="isOwner" (click)="remove()" class="btn post-actions"><fa-icon [icon]="trash" aria-hidden="true"></fa-icon></button>
-                    <div><span class="thumbup"><button (click)="likear()" class="thumbupo"><fa-icon [icon]="thumbs" aria-hidden="true"></fa-icon></button></span><span class="text4 text4i">{{likeCount}}</span></div>
                 </div>
+                <div><span class="thumbup"><button (click)="likear()" class="thumbupo"><fa-icon [icon]="thumbs" aria-hidden="true"></fa-icon></button></span><span class="text4 text4i">{{likeCount}}</span></div>
             </div>
         </div>
     </div>

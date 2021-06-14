@@ -7,6 +7,7 @@ import { ReviewService } from '../services/review.service';
 import { UserService } from '../services/user.service';
 import { NotificationService } from '../core/shared/errors/notification.service';
 import { Pageable } from '../core/models/pageable.model';
+import { Like } from '../core/models/like.model';
 
 @Component({
     selector: 'app-home-page',
@@ -45,11 +46,18 @@ export class HomePageComponent implements OnInit{
                     this.userService.getToken().subscribe(data => {
                         localStorage.setItem('auth_token', data.access_token);
                     });
+                    this.likesToUser();
                     this.followingUser();
                     this.getReviews();
                 }
             }  
         )    
+    }
+
+    likesToUser(){
+        this.userService.getLikesTo(sessionStorage.getItem('userName')).subscribe((likes)=>{
+          localStorage.setItem('listOfLikesReceived',  JSON.stringify(likes));
+        });
     }
 
     followingUser(){

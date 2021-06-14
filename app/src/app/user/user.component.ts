@@ -42,8 +42,8 @@ export class UserComponent implements OnInit {
 
   reviews:number = 0;
   followers:number = 0;
-  likes:number = 0;
-  followings:number = JSON.parse(localStorage.getItem('listOfFollowings')).length;
+  likes:number;
+  followings:number;
 
   followers$ = new BehaviorSubject<User[]>([]);
   followings$ = new BehaviorSubject<User[]>([]);
@@ -51,6 +51,8 @@ export class UserComponent implements OnInit {
   @Output() newUser = new EventEmitter<User>();
 
   filter$: BehaviorSubject<string> = new BehaviorSubject('');
+  isPrivate: boolean;
+  isFollowing: boolean;
 
   constructor(private reviewService: ReviewService,
      public snackBar: MatSnackBar,
@@ -66,6 +68,8 @@ export class UserComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.likes = JSON.parse(localStorage.getItem('listOfLikesReceived')).length;
+    this.followings = JSON.parse(localStorage.getItem('listOfFollowings')).length;
     this.userName = this.activatedRoute.snapshot.routeConfig.path.includes('user') ?
     this.activatedRoute.snapshot.paramMap.get('username') : sessionStorage.getItem('userName');
     this.startForm(this.userName);
@@ -73,6 +77,8 @@ export class UserComponent implements OnInit {
     this.displayButton = this.activatedRoute.snapshot.routeConfig.path.includes('user') &&
               sessionStorage.getItem('userName') !== this.userName
     this.isOwnProfile = !this.displayButton;
+    this.isPrivate = this.user.isPrivate;
+    this.isFollowing = JSON.parse(localStorage.getItem('listOfFollowings')).includes(this.user.userName);
     const filter = `userName=${this.displayButton ? this.userName : sessionStorage.getItem('userName')}`;
     this.filter$.next(filter);
   }

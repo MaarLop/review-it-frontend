@@ -84,6 +84,8 @@ import { CommentListComponent } from './comment-list/comment-list.component';
 import { PickerModule } from '@ctrl/ngx-emoji-mart';
 import { FollowButtonComponent } from './follow-button/follow-button.component';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { NgFallimgModule } from 'ng-fallimg';
+import { ModalEditReviewComponent } from './review-card/modal-edit-review/modal-edit-review.component';
 
 @NgModule({
   declarations: [
@@ -111,7 +113,8 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
     SpinnerComponent,
     CommentComponent,
     CommentListComponent,
-    FollowButtonComponent
+    FollowButtonComponent,
+    ModalEditReviewComponent
   ],
   imports: [
     CommonModule,
@@ -126,7 +129,13 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
     InfiniteScrollModule,
     FontAwesomeModule,
     PickerModule,
-    TooltipModule.forRoot()
+    TooltipModule.forRoot(),
+    NgFallimgModule.forRoot({
+      default: 'https://www.adl-logistica.org/wp-content/uploads/2019/07/imagen-perfil-sin-foto.png',
+      profile: 'https://www.adl-logistica.org/wp-content/uploads/2019/07/imagen-perfil-sin-foto.png',
+      editProfile: 'https://mdbootstrap.com/img/Photos/Others/placeholder-avatar.jpg',
+      movie: 'https://placehold.jp/200x200.png'
+    })
   ],
   providers: [
     DynamicFormService,
@@ -213,7 +222,8 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
     ReviewListComponent,
     SpinnerComponent,
     FormsModule,
-    FollowButtonComponent
+    FollowButtonComponent,
+    NgFallimgModule
   ],
 })
 export class CoreModule {}

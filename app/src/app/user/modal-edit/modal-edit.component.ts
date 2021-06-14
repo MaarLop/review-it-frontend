@@ -36,7 +36,8 @@ export class ModalEditComponent implements OnInit {
       {
         id: [{value: this.user.id, disabled: true}],
         name: [{value: this.user.name, disabled: false}],
-        lastName: [{value: this.user.lastName, disabled: false}]
+        lastName: [{value: this.user.lastName, disabled: false}],
+        isPrivate: [{value: this.user.isPrivate, disabled: false}]
       }
     )
   }
@@ -49,6 +50,7 @@ export class ModalEditComponent implements OnInit {
       uploadData.append('avatar', this.user.avatar);
       uploadData.append('name', this.formUser.get('name').value);
       uploadData.append('lastName', this.formUser.get('lastName').value);
+      uploadData.append('isPrivate', this.formUser.get('isPrivate').value);
       uploadData.append('email', this.user.email);
       if(this.selectedFile){
         uploadData.append('avatarFileForView', this.selectedFile);

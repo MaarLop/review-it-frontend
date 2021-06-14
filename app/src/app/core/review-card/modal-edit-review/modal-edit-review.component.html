@@ -1,0 +1,20 @@
+<form [formGroup]="formReview">
+    <div class="modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="container ">
+                    <div class="d-flex justify-content-center pt-3 pb-2">
+                        <div class="col-md-12">
+                            <label for="form_name">{{review.title}}</label>
+                            <app-text-area class="widget-post__content" [group]="formReview" [key]="'description'" [label]="'Opinión'">
+                            </app-text-area>
+                            <ngb-rating [max]="5" [(rate)]="currentRate" [readonly]="false" (rateChange)="catchRating()"></ngb-rating>
+                        </div>
+                    </div>
+                    <button class="btn post-actions__publish" (click)="update()" data-testid="updateReview">Actualizar</button>
+                    <button class="btn cancel-actions" (click)="close()" data-testid="updateReview">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

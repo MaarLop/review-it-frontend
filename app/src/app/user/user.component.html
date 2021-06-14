@@ -27,10 +27,10 @@
             </div>
             <div class="ds posts">
                 <h4 title="Cantidad de likes">Likes <i class="fa fa-thumbs-o-up"></i></h4>
-                <p>0</p>
+                <p>{{likes}}</p>
             </div>
         </div>
     </div>
 </div>
 <app-create-review *ngIf="!displayButton" (newReview)="newReview($event)"></app-create-review>
-<app-review-list [filter$]="filter$"></app-review-list>
+<app-review-list *ngIf="isOwnProfile || !isPrivate || isFollowing" [filter$]="filter$"></app-review-list>

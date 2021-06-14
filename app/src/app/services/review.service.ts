@@ -9,9 +9,6 @@ import { Like } from '../core/models/like.model';
   providedIn: 'root'
 })
 export class ReviewService {
-  deslikear(id: number) {
-    throw new Error('Method not implemented.');
-  }
   
   protected basePath = 'http://localhost:8090/reviews';
   
@@ -31,10 +28,16 @@ export class ReviewService {
     });
   }
 
-  public save(body: Review){
+  public create(body: Review){
     const path = this.basePath;
     const headers = this.headers;
     return this.httpClient.post(path, body, { headers });
+  }
+
+  public modify(body: Review){
+    const path = this.basePath;
+    const headers = this.headers;
+    return this.httpClient.put(path, body, { headers });
   }
 
   public getComments(id: any, page?: number): Observable<any>{
