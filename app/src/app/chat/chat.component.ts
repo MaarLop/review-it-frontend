@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import { BehaviorSubject } from 'rxjs';
-import { Pageable } from '../core/models/pageable.model';
 import { User } from '../core/models/user.model';
+import { Pageable } from '../core/models/pageable.model';
 import { UserService } from '../services/user.service';
 import { WebSocketService } from '../services/web-socket.service';
 
@@ -18,8 +18,7 @@ export class ChatComponent implements OnInit, OnDestroy{
   sender = sessionStorage.getItem('userName');
   receiber = '';
   chatTitle = '';
-//   socket: any;
-
+  public isEmojiPickerVisible: boolean = false;
   send = faPaperPlane
   constructor(protected userService: UserService, public webSocketService: WebSocketService) { }
 
@@ -28,15 +27,24 @@ export class ChatComponent implements OnInit, OnDestroy{
         const followingsUser = followings.content.map((f)=> f.to)
         this.userList.push(...followingsUser)
     });
-    this.webSocketService.openWebSocket();
+
+    this.webSocketService.chatMessages$.subscribe((msgs)=>{
+      console.log(msgs);
+      const size = msgs.length;
+      if(size > 0 && !msgs[size-1].mine){
+        var audio = new Audio();
+        audio.src = "../../../assets/audio/audio_file.wav";
+        audio.load();
+        audio.play();
+      }
+
+    });
   }
 
   sendMessage(): void {
     if(this.receiber){
-      const msg = {message : this.message, userName: this.sender, to: this.receiber, mine: true}
+      const msg = {message : this.message, sender: this.sender, to: this.receiber, mine: true}
       this.webSocketService.sendMessage(msg);
-      // this.messageList.push(msg);
-      // this.messageList.push({message: 'como estas', userName: this.receiber, mine: false});
       this.message = '';
     }
     else{
@@ -47,11 +55,16 @@ export class ChatComponent implements OnInit, OnDestroy{
   sendMessageTo(user){
     this.receiber= user.userName;
     this.chatTitle = `${user.name} ${user.lastName}`
-    this.messageList = [];// get mensajes enviados
+    this.webSocketService.openWebSocket()
   }
 
   ngOnDestroy(): void {
     this.webSocketService.closeWebSocket();
+  }
+
+  toggled: boolean = false;
+  handleSelection(event) {
+    this.message += event.char;
   }
 
 }

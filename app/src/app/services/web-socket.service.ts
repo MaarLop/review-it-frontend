@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import { BehaviorSubject } from "rxjs";
 
 @Injectable({
     providedIn:'root'
@@ -6,7 +7,7 @@ import { Injectable } from "@angular/core";
 
 export class WebSocketService{
     webSocket: WebSocket;
-    chatMessages: any[] = [];
+    chatMessages$: BehaviorSubject<any[]> = new BehaviorSubject([]);
 
     constructor(){ }
 
@@ -19,10 +20,12 @@ export class WebSocketService{
 
         this.webSocket.onmessage = (event)=>{
             const msg = JSON.parse(event.data);
-            this.chatMessages.push(msg)
+            msg.mine = msg.sender === sessionStorage.getItem('userName')
+            this.chatMessages$.next([...this.chatMessages$.value, msg])
         }
 
         this.webSocket.onclose = (event)=>{
+            this.chatMessages$.next([]);
             console.log('close ', event)
         }
     }
