@@ -20,7 +20,7 @@ export class WebSocketService{
 
         this.webSocket.onmessage = (event)=>{
             const msg = JSON.parse(event.data);
-            msg.mine = msg.sender === sessionStorage.getItem('userName')
+            msg.mine = msg.idFrom === +sessionStorage.getItem('userId')
             this.chatMessages$.next([...this.chatMessages$.value, msg])
         }
 

@@ -15,8 +15,9 @@ export class ChatComponent implements OnInit, OnDestroy{
   message = '';
   messageList: {message: string, userName: string, mine: boolean}[] = [];
   userList: any[] = [];
+  senderId = sessionStorage.getItem('userId');
   sender = sessionStorage.getItem('userName');
-  receiber = '';
+  receiber = null;
   chatTitle = '';
   public isEmojiPickerVisible: boolean = false;
   send = faPaperPlane
@@ -29,7 +30,6 @@ export class ChatComponent implements OnInit, OnDestroy{
     });
 
     this.webSocketService.chatMessages$.subscribe((msgs)=>{
-      console.log(msgs);
       const size = msgs.length;
       if(size > 0 && !msgs[size-1].mine){
         var audio = new Audio();
@@ -43,7 +43,7 @@ export class ChatComponent implements OnInit, OnDestroy{
 
   sendMessage(): void {
     if(this.receiber){
-      const msg = {message : this.message, sender: this.sender, to: this.receiber, mine: true}
+      const msg = {message : this.message, idFrom: +this.senderId, idTo: +this.receiber.id, sender: this.sender}
       this.webSocketService.sendMessage(msg);
       this.message = '';
     }
@@ -53,7 +53,7 @@ export class ChatComponent implements OnInit, OnDestroy{
   }
 
   sendMessageTo(user){
-    this.receiber= user.userName;
+    this.receiber= user;
     this.chatTitle = `${user.name} ${user.lastName}`
     this.webSocketService.openWebSocket()
   }
