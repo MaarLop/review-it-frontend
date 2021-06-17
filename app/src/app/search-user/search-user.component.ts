@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { Pageable } from '../core/models/pageable.model';
@@ -26,6 +26,11 @@ export class UserSearchComponent implements OnInit{
 
     formGroup:FormGroup;
     
+    size: number = 5;
+    page: number = 0;
+    finished = false;
+    showSpinner = false;
+    @Input() filter$?: BehaviorSubject<string>;
       
     constructor(private fb: FormBuilder, 
         private router: Router,
@@ -36,8 +41,21 @@ export class UserSearchComponent implements OnInit{
         {
             userName: [{ value: '', disabled: false }],
         });
-        this.userService.getUsers().subscribe((user:Pageable)=>{
-            this.users$.next(user.content.filter((us)=> {
+        this.getUsers();
+
+    }
+
+    onScroll(){
+        setTimeout(() => {
+            this.getUsers();
+            this.showSpinner = false;
+        }, 2000);
+    }
+
+    getUsers(){
+        this.userService.getUsers(this.size, this.page, '').subscribe((response)=>{
+            const userList = this.users$.value;
+            this.users$.next([...userList, ...response.content.filter((us)=> {
                 this.userService.getImage(us.userName).subscribe(
                     (data) => {
                     let reader = new FileReader();
@@ -50,9 +68,12 @@ export class UserSearchComponent implements OnInit{
                     }
                 });
                 return us.id != +sessionStorage.getItem('userId')
-            })); 
+            })]);
+            //this.users$.next([...reviewList, ...response.content]);
+            this.finished = response.last;
+            this.showSpinner = !this.finished;
+            this.page+=1; 
         });
-
     }
         
     
@@ -63,7 +84,7 @@ export class UserSearchComponent implements OnInit{
         const userNameFilter = !!userName ? userName : '';
         filter = userNameFilter;
 
-        this.userService.getUsers(filter).subscribe((user:Pageable)=>{
+        this.userService.getUsers(this.size, this.page, filter).subscribe((user:Pageable)=>{
             this.users$.next(user.content.filter((us)=> {
                 this.userService.getImage(us.userName).subscribe(
                     (data) => {
@@ -85,9 +106,6 @@ export class UserSearchComponent implements OnInit{
         this.formGroup.get('userName').setValue('');
         this.goSearch();
     }
-
-    
-
 
     goToUserProfile(user){
         this.userService.getImage(user.userName).subscribe(
