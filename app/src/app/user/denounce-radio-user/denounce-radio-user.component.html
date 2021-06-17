@@ -1,0 +1,22 @@
+<form [formGroup]="formComplaintUser">
+    <section class="dark">
+        <h1>Buttons (Dark)</h1>
+        <label>
+        <input type="radio" formControlName="reason" value="reason.NOT_INTERESTED">
+        <span class="design"></span>
+        <span class="text">{{ reason.NOT_INTERESTED }}</span>
+      </label>
+        <label>
+        <input type="radio" formControlName="reason" value="reason.SPOILER">
+        <span class="design"></span>
+        <span class="text">{{ reason.SPOILER }}</span>
+      </label>
+        <label>
+        <input type="radio" formControlName="reason" value="reason.BAD_LANGUAGE">
+        <span class="design"></span>
+        <span class="text">{{ reason.BAD_LANGUAGE }}</span>
+      </label>
+        <button class="btn post-actions__publish" (click)="denounce()">Actualizar</button>
+        <button class="btn cancel-actions" (click)="close()">Cancelar</button>
+    </section>
+</form>
