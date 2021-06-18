@@ -97,7 +97,7 @@ export class UserService {
 
     public getUsers(size?:number, page?: number, filter?: string): Observable<any>{
       const pageAndSize = size === null && page === null ? '' : `&page=${page}&size=${size}`;
-      const endpoint = filter === null || filter === '' ? '' : `/?search=${filter}`;
+      const endpoint = filter === null || filter === '' ? '' : `&search=${filter}`;
       const path = `${this.basePath}?sort=id&order=desc${pageAndSize}${endpoint}`;
       return this.httpClient.get(path,{
         headers:this.headers
