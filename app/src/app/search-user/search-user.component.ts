@@ -22,7 +22,7 @@ export class UserSearchComponent implements OnInit{
 
     formGroup:FormGroup;
     
-    size: number = 1;
+    size: number = 2;
     page: number = 0;
     finished = false;
     showSpinner = false;
@@ -72,8 +72,10 @@ export class UserSearchComponent implements OnInit{
     } 
 
     onScroll(){
-        this.showSpinner = false;
-        this.getUsers();
+        setTimeout(() => {
+            this.getUsers();
+            this.showSpinner = false;
+        }, 2000);
     }
 
     cleanFilter(){

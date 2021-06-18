@@ -46,26 +46,10 @@ export class HomePageComponent implements OnInit{
                     this.userService.getToken().subscribe(data => {
                         localStorage.setItem('auth_token', data.access_token);
                     });
-                    this.likesToUser();
-                    this.followingUser();
                     this.getReviews();
                 }
             }  
         )    
-    }
-
-    likesToUser(){
-        this.userService.getLikesTo(sessionStorage.getItem('userName')).subscribe((likes)=>{
-          localStorage.setItem('listOfLikesReceived',  JSON.stringify(likes));
-        });
-    }
-
-    followingUser(){
-        let followings: any[];
-        this.userService.getFollowingsAll(sessionStorage.getItem('userName')).subscribe((response)=>{
-          followings = response.map((follow)=> follow.to.userName);
-          localStorage.setItem('listOfFollowings',  JSON.stringify(followings));
-        });
     }
 
     getReviews(){
