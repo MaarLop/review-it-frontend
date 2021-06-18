@@ -27,11 +27,7 @@
             </article>
         </main>
 
-        <div infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollUpDistance]="1.5" [infiniteScrollThrottle]="100" (scrolled)="onScroll()"></div>
-
-        <app-spinner [shows]="showSpinner" [isSmallSize]="true"></app-spinner>
-
-        <div *ngIf="!showSpinner && (users$ | async).length === 0" class="noResults col-sm-2 col-sm-offset-2">
+        <div *ngIf="(users$ | async).length === 0" class="noResults col-sm-2 col-sm-offset-2">
             No hay usuarios
         </div>
     </div>
