@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, combineLatest } from 'rxjs';
 import { User } from '../core/models/user.model';
 import { Pageable } from '../core/models/pageable.model';
 import { UserService } from '../services/user.service';
@@ -29,9 +29,12 @@ export class ChatComponent implements OnInit, OnDestroy{
         this.userList.push(...followingsUser)
     });
 
-    this.webSocketService.chatMessages$.subscribe((msgs)=>{
+    combineLatest([
+      this.webSocketService.chatMessages$,
+      this.webSocketService.isLoadingMessages$
+    ]).subscribe(([msgs, isLoading])=>{
       const size = msgs.length;
-      if(size > 0 && !msgs[size-1].mine){
+      if(size > 0 && !msgs[size-1].mine && !isLoading){
         var audio = new Audio();
         audio.src = "../../../assets/audio/audio_file.wav";
         audio.load();
@@ -55,7 +58,7 @@ export class ChatComponent implements OnInit, OnDestroy{
   sendMessageTo(user){
     this.receiber= user;
     this.chatTitle = `${user.name} ${user.lastName}`
-    this.webSocketService.openWebSocket()
+    this.webSocketService.openWebSocket(user.userName, this.sender)
   }
 
   ngOnDestroy(): void {

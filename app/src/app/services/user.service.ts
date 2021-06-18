@@ -122,4 +122,11 @@ export class UserService {
         headers:this.headers
       });
     }
+
+    public getMessages(userNameTo: string, userNameFrom: string): Observable<any> {
+      const path = this.basePath + `/messages/${userNameTo}/${userNameFrom}`;
+      return this.httpClient.get(path,{
+        headers:this.headers
+      });
+    }
 }
