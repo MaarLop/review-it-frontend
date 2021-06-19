@@ -40,7 +40,7 @@ export class FollowButtonComponent implements OnInit{
             idFrom: parseInt(sessionStorage.getItem('userId'))
           }
         this.userService.followUser(body).subscribe((_)=>{
-            this.notificationService.showSuccess('Empezaste a seguir a ' + this.user.userName)
+            this.notificationService.showSuccess('Empezando a seguir a ' + this.user.userName + '..')
             const followings =  JSON.parse(localStorage.getItem('listOfFollowings'));
             followings.push(this.user.userName);
             localStorage.setItem('listOfFollowings', JSON.stringify(followings));
@@ -63,7 +63,7 @@ export class FollowButtonComponent implements OnInit{
                     idFrom: parseInt(sessionStorage.getItem('userId'))
                   }
                 this.userService.unfollowUser(body).subscribe((_)=>{
-                    this.notificationService.showSuccess('Dejaste de seguir a ' + this.user.userName)
+                    this.notificationService.showSuccess('Dejando de seguir a ' + this.user.userName + '..')
                     const followings =  JSON.parse(localStorage.getItem('listOfFollowings'));
                     followings.pop(this.user.userName);
                     localStorage.setItem('listOfFollowings', JSON.stringify(followings));
