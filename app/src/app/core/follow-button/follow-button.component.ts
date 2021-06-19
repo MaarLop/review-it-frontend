@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { faUserPlus, faUserCheck } from "@fortawesome/free-solid-svg-icons";
 import { UserService } from "src/app/services/user.service";
 import Swal from "sweetalert2";
@@ -17,16 +17,21 @@ export class FollowButtonComponent implements OnInit{
     @Input() user: User;
     isFollowing: boolean;
     isSameUser: boolean;
+    @Output() toggle = new EventEmitter<boolean>();
 
     constructor(private userService: UserService, private notificationService: NotificationService){ }
     
     ngOnInit(): void {
+        this.followingUser(this.user.userName);
         this.isSameUser = this.user.id===parseInt(sessionStorage.getItem('userId'));
-        this.isFollowing = this.followingUser();
     }
-    
-    followingUser(){
-        return JSON.parse(localStorage.getItem('listOfFollowings')).includes(this.user.userName);
+
+    followingUser(userName: string){
+        //solo preguntar si lo incluye para ver si lo sigo o no, no es para la lista de followings
+        this.userService.getFollowingsAll(sessionStorage.getItem('userName')).subscribe((response)=>{
+            this.isFollowing = response.some((follow)=> userName === follow.to.userName);
+            this.toggle.emit(this.isFollowing);
+        });
     }
 
     followUser(){

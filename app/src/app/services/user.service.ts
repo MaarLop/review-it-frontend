@@ -124,4 +124,11 @@ export class UserService {
         headers:this.headers
       });
     }
+
+    public getReviews(userName: string): Observable<any> {
+      const path = this.basePath + `/${userName}/reviews/`;
+      return this.httpClient.get(path,{
+        headers:this.headers
+      });
+    }
 }
