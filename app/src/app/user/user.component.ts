@@ -16,6 +16,7 @@ import { ModalEditComponent } from './modal-edit/modal-edit.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NotificationService } from '../core/shared/errors/notification.service';
 import { Review } from '../core/models/review-model';
+import { exactLength } from '../core/form/custom-validators';
 
 @Component({
   selector: 'app-user',
@@ -38,7 +39,7 @@ export class UserComponent implements OnInit {
 
   displayButton: boolean = false;
 
-  isOwnProfile: boolean;
+  isOwnProfile: boolean = false;
 
   reviews:number = 0;
   followers:number = 0;
@@ -51,8 +52,8 @@ export class UserComponent implements OnInit {
   @Output() newUser = new EventEmitter<User>();
 
   filter$: BehaviorSubject<string> = new BehaviorSubject('');
-  isPrivate: boolean;
-  isFollowing: boolean;
+  isPrivate: boolean = true;
+  isFollowing: boolean = false;
 
   constructor(private reviewService: ReviewService,
      public snackBar: MatSnackBar,
@@ -68,19 +69,23 @@ export class UserComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.likes = JSON.parse(localStorage.getItem('listOfLikesReceived')).length;
-    this.followings = JSON.parse(localStorage.getItem('listOfFollowings')).length;
     this.userName = this.activatedRoute.snapshot.routeConfig.path.includes('user') ?
-    this.activatedRoute.snapshot.paramMap.get('username') : sessionStorage.getItem('userName');
+      this.activatedRoute.snapshot.paramMap.get('username') : sessionStorage.getItem('userName');
+    const filter = `userName=${this.userName}`;
+    this.filter$.next(filter);
+    this.likesToUser(this.userName);
     this.startForm(this.userName);
     this.getInformationOfUser(this.userName);
     this.displayButton = this.activatedRoute.snapshot.routeConfig.path.includes('user') &&
               sessionStorage.getItem('userName') !== this.userName
     this.isOwnProfile = !this.displayButton;
     this.isPrivate = this.user.isPrivate;
-    this.isFollowing = JSON.parse(localStorage.getItem('listOfFollowings')).includes(this.user.userName);
-    const filter = `userName=${this.displayButton ? this.userName : sessionStorage.getItem('userName')}`;
-    this.filter$.next(filter);
+  }
+
+  likesToUser(userName: string){
+    this.userService.getLikesTo(userName).subscribe((likes)=>{
+      this.likes = likes.length
+    });
   }
 
   startForm(userName: string){
@@ -106,12 +111,17 @@ export class UserComponent implements OnInit {
       this.userService.getFollowers(userName).subscribe((response: Pageable)=>{
       const followers = response.content.map((follow)=> follow.from);
       this.followers$.next(followers);
+      //console.log(response.totalElements);
       this.followers = this.followers$.value.length;
     });
     this.userService.getFollowings(userName).subscribe((response: Pageable)=>{
       const followings = response.content.map((follow)=> follow.to);
       this.followings$.next(followings);
       this.followings = this.followings$.value.length;
+    });
+    this.userService.getReviews(userName).subscribe((response)=>{
+      this.reviews = response.length;
+      console.log(this.reviews);
     });
   }
 

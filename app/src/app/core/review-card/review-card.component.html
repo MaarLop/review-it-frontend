@@ -24,12 +24,38 @@
         </div>
         <div class="bottom-row">
             <div class="pxc-info">
-                <div class="column">
-                    <button class="btn post-actions" (click)="comments()" data-testid="comments"><fa-icon [icon]="comment"></fa-icon></button>
-                    <button *ngIf="isOwner" (click)="edit()" class="btn post-actions"><fa-icon [icon]="faEdit" aria-hidden="true"></fa-icon></button>
-                    <button *ngIf="isOwner" (click)="remove()" class="btn post-actions"><fa-icon [icon]="trash" aria-hidden="true"></fa-icon></button>
+                <div class="row">
+                    <details id="blob-more-options-details" data-view-component="true" class="details-overlay details-reset position-relative">
+                        <summary role="button" data-view-component="true" class="btn post-actions">
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" focusable="false" width="1.0em" height="2em" style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);" preserveAspectRatio="xMidYMid meet"
+                                viewBox="0 0 13 16"><g transform="translate(13 0) scale(-1 1)"><path fill-rule="evenodd" d="M1.5 9a1.5 1.5 0 1 0 0-3a1.5 1.5 0 0 0 0 3zm5 0a1.5 1.5 0 1 0 0-3a1.5 1.5 0 0 0 0 3zM13 7.5a1.5 1.5 0 1 1-3 0a1.5 1.5 0 0 1 3 0z" fill="#17a2b8"/></g></svg>
+                        </summary>
+                        <div data-view-component="true">
+                            <ul class="dropdown-menu dropdown-menu-sw">
+                                <li data-toggle-for="blob-more-options-details">
+                                    <button (click)="comments()" class="btn-link dropdown-item"><fa-icon [icon]="comment"></fa-icon>
+                                        <span> Comentarios</span>
+                                    </button>
+                                </li>
+                                <li data-toggle-for="blob-more-options-details">
+                                    <button *ngIf="isOwner" (click)="edit()" class="btn-link dropdown-item"><fa-icon [icon]="faEdit" aria-hidden="true"></fa-icon> 
+                                        <span> Editar</span>
+                                    </button>
+                                </li>
+                                <li data-toggle-for="blob-more-options-details">
+                                    <button *ngIf="isOwner" (click)="remove()" class="btn-link dropdown-item"><fa-icon [icon]="trash" aria-hidden="true"></fa-icon>
+                                        <span> Eliminar</span>
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                    </details>
+                    <div>
+                        <span class="thumbup"><button (click)="likear()" class="thumbupo likes"><fa-icon [icon]="thumbs" aria-hidden="true"></fa-icon></button></span>
+                        <span class="text4 text4i">{{likeCount}}</span>
+                    </div>
                 </div>
-                <div><span class="thumbup"><button (click)="likear()" class="thumbupo"><fa-icon [icon]="thumbs" aria-hidden="true"></fa-icon></button></span><span class="text4 text4i">{{likeCount}}</span></div>
+
             </div>
         </div>
     </div>
