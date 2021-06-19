@@ -125,6 +125,13 @@ export class UserService {
       });
     }
 
+    public getMessages(userNameTo: string, userNameFrom: string): Observable<any> {
+      const path = this.basePath + `/messages/${userNameTo}/${userNameFrom}`;
+      return this.httpClient.get(path,{
+        headers:this.headers
+      });
+    }
+    
     public getReviews(userName: string): Observable<any> {
       const path = this.basePath + `/${userName}/reviews/`;
       return this.httpClient.get(path,{

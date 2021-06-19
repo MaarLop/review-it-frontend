@@ -22,7 +22,8 @@ import { UserSearchComponent } from './search-user/search-user.component';
 import { ModalEditComponent } from './user/modal-edit/modal-edit.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ChatComponent } from './chat/chat.component';
-
+import  {  NgxEmojiPickerModule  }  from  'ngx-emoji-picker';
+ 
 @NgModule({
   declarations: [
     AppComponent,
@@ -53,6 +54,7 @@ import { ChatComponent } from './chat/chat.component';
     FontAwesomeModule,
     ReactiveFormsModule,
     FormsModule,
+    NgxEmojiPickerModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

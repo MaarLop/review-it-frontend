@@ -15,10 +15,10 @@
     </div>
     <div class="messages_list">
     <h2>{{chatTitle}}</h2>
-      <div class="chatbox__messages" *ngFor="let msg of webSocketService.chatMessages" [ngClass]="{mine: msg.mine}">
+      <div class="chatbox__messages" *ngFor="let msg of (webSocketService.chatMessages$ | async)" [ngClass]="{mine: msg.mine}">
         <div class="user-message">
           <div class="message-box">
-            <p class="name">{{ msg.userName }}</p>
+            <p class="name">{{ msg.sender }}</p>
             <br/>
             <p class="message">{{ msg.message }}</p>
           </div>
@@ -26,8 +26,18 @@
       </div>
     </div>
     <div class="send-message">
-        <input type="text" [(ngModel)]="message">
-        <button (click)="sendMessage()"><fa-icon [icon]="send"></fa-icon></button>
+    
+        <input type="text" [(ngModel)]="message"/>
+        <i class="emoji" 
+        (click)="toggled = !toggled" 
+        [(emojiPickerIf)]="toggled" 
+        [emojiPickerDirection]="'bottom' || 'top' || 'left' || 'right'" 
+        (emojiPickerSelect)="handleSelection($event)"
+        >
+          😄
+        </i>
+        <button class="send-button" (click)="sendMessage()"><fa-icon [icon]="send"></fa-icon></button>
+        
     </div>
   </div>
   

@@ -60,7 +60,6 @@ export class ModalEditComponent implements OnInit {
         this.notificationService.showSuccess('Perfil actualizado!');
       },
         err => {
-          console.log(err)
           let first = err.error.name ? err.error.name+'\n' : '';
           const second = err.error.lastName ? err.error.lastName : '';
           first = !err.error.name && !err.error.lastName ? err.error : first;

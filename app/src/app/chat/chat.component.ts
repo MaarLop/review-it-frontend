@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
-import { BehaviorSubject } from 'rxjs';
-import { Pageable } from '../core/models/pageable.model';
+import { BehaviorSubject, combineLatest } from 'rxjs';
 import { User } from '../core/models/user.model';
+import { Pageable } from '../core/models/pageable.model';
 import { UserService } from '../services/user.service';
 import { WebSocketService } from '../services/web-socket.service';
 
@@ -15,11 +15,11 @@ export class ChatComponent implements OnInit, OnDestroy{
   message = '';
   messageList: {message: string, userName: string, mine: boolean}[] = [];
   userList: any[] = [];
+  senderId = sessionStorage.getItem('userId');
   sender = sessionStorage.getItem('userName');
-  receiber = '';
+  receiber = null;
   chatTitle = '';
-//   socket: any;
-
+  public isEmojiPickerVisible: boolean = false;
   send = faPaperPlane
   constructor(protected userService: UserService, public webSocketService: WebSocketService) { }
 
@@ -28,15 +28,26 @@ export class ChatComponent implements OnInit, OnDestroy{
         const followingsUser = followings.content.map((f)=> f.to)
         this.userList.push(...followingsUser)
     });
-    this.webSocketService.openWebSocket();
+
+    combineLatest([
+      this.webSocketService.chatMessages$,
+      this.webSocketService.isLoadingMessages$
+    ]).subscribe(([msgs, isLoading])=>{
+      const size = msgs.length;
+      if(size > 0 && !msgs[size-1].mine && !isLoading){
+        var audio = new Audio();
+        audio.src = "../../../assets/audio/audio_file.wav";
+        audio.load();
+        audio.play();
+      }
+
+    });
   }
 
   sendMessage(): void {
     if(this.receiber){
-      const msg = {message : this.message, userName: this.sender, to: this.receiber, mine: true}
+      const msg = {message : this.message, idFrom: +this.senderId, idTo: +this.receiber.id, sender: this.sender}
       this.webSocketService.sendMessage(msg);
-      // this.messageList.push(msg);
-      // this.messageList.push({message: 'como estas', userName: this.receiber, mine: false});
       this.message = '';
     }
     else{
@@ -45,13 +56,18 @@ export class ChatComponent implements OnInit, OnDestroy{
   }
 
   sendMessageTo(user){
-    this.receiber= user.userName;
+    this.receiber= user;
     this.chatTitle = `${user.name} ${user.lastName}`
-    this.messageList = [];// get mensajes enviados
+    this.webSocketService.openWebSocket(user.userName, this.sender)
   }
 
   ngOnDestroy(): void {
     this.webSocketService.closeWebSocket();
+  }
+
+  toggled: boolean = false;
+  handleSelection(event) {
+    this.message += event.char;
   }
 
 }

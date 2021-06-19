@@ -88,7 +88,6 @@ export class CreateReviewComponent implements OnInit {
         .get(`https://api.themoviedb.org/3/search/movie?api_key=d83d9bf26a31066155e617cf070d3004&query=${title}`)
         .pipe(
           map((items) => {
-            console.log(items);
             return items.results.map(
               (item) => new SimpleOption(item.original_title, item.original_title),
             );
