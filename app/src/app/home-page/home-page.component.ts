@@ -73,7 +73,7 @@ export class HomePageComponent implements OnInit{
 
     newReview(review: Review){
         if(review){
-            this.notificationService.showSuccess('Publicado exitosamente!');
+            this.notificationService.showSuccess('Publicandose reseña...');
         }
     }
     

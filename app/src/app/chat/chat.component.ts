@@ -48,7 +48,9 @@ export class ChatComponent implements OnInit, OnDestroy{
   sendMessage(): void {
     if(this.receiber && this.message){
       const msg = {message : this.message, idFrom: +this.senderId, idTo: +this.receiber.id, sender: this.sender}
-      this.webSocketService.sendMessage(msg);
+      if(this.message){
+        this.webSocketService.sendMessage(msg);
+      }
       this.message = '';
     }
     else{

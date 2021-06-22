@@ -82,7 +82,7 @@ export class ReviewCardComponent implements OnInit{
       }).then((result) => {
         if (result.isConfirmed) {
           this.reviewService.delete(this.review.id).subscribe(() => {
-            this.notificationService.showSuccess('Su reseña ha sido eliminada');
+            this.notificationService.showSuccess('Su reseña esta siendo eliminada..');
           })
         }
       })

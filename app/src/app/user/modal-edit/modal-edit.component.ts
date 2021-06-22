@@ -5,7 +5,6 @@ import { User } from 'src/app/core/models/user.model';
 import { NotificationService } from 'src/app/core/shared/errors/notification.service';
 import { UserService } from 'src/app/services/user.service';
 import Swal from 'sweetalert2';
-import { emailPattern } from '../../utils/regex-pattern';
 
 @Component({
   selector: 'app-modal-edit',
@@ -57,7 +56,7 @@ export class ModalEditComponent implements OnInit {
       }
       this.userService.save(uploadData).subscribe((user: User) => {
         this.modal.close();
-        this.notificationService.showSuccess('Perfil actualizado!');
+        this.notificationService.showSuccess('Su perfil está siendo actualizado..');
       },
         err => {
           let first = err.error.name ? err.error.name+'\n' : '';
