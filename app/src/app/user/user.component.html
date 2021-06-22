@@ -30,6 +30,15 @@
                 <p>{{likes}}</p>
             </div>
         </div>
+        <div class="ds-info">
+            <div class="ds posts">
+                <a class="btn" (click)="denounce();">
+                    <h4 title="Denounce">Denunciar
+                        <fa-icon [icon]="faBan"></fa-icon>
+                    </h4>
+                </a>
+            </div>
+        </div>
     </div>
 </div>
 <app-create-review *ngIf="!displayButton" (newReview)="newReview($event)"></app-create-review>

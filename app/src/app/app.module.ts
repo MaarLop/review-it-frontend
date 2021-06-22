@@ -22,8 +22,9 @@ import { UserSearchComponent } from './search-user/search-user.component';
 import { ModalEditComponent } from './user/modal-edit/modal-edit.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ChatComponent } from './chat/chat.component';
+import { DenounceRadioUserComponent } from './user/denounce-radio-user/denounce-radio-user.component';
 import  {  NgxEmojiPickerModule  }  from  'ngx-emoji-picker';
- 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,7 +38,8 @@ import  {  NgxEmojiPickerModule  }  from  'ngx-emoji-picker';
     FollowersModalCOmponent,
     UserSearchComponent,
     ModalEditComponent,
-    ChatComponent
+    ChatComponent,
+    DenounceRadioUserComponent
   ],
   imports: [
     BrowserModule,

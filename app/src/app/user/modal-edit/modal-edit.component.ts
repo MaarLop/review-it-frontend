@@ -5,7 +5,6 @@ import { User } from 'src/app/core/models/user.model';
 import { NotificationService } from 'src/app/core/shared/errors/notification.service';
 import { UserService } from 'src/app/services/user.service';
 import Swal from 'sweetalert2';
-import { emailPattern } from '../../utils/regex-pattern';
 
 @Component({
   selector: 'app-modal-edit',
