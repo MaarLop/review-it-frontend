@@ -8,11 +8,11 @@
             <a target="_blank" *ngIf="isOwnProfile" (click)="edit()">{{user?.name}} (@{{user?.userName}}) <fa-icon [icon]="faEdit"></fa-icon></a>
             <div *ngIf="!isOwnProfile">{{user?.name}} (@{{user?.userName}})</div>
             <div class="button" *ngIf="displayButton">
-                <app-follow-button [user]="user"></app-follow-button>
+                <app-follow-button [user]="user" (toggle)="isFollowing=$event"></app-follow-button>
             </div>
         </div>
         <h6 title="Seguidores">
-            <a class="fas fa-users" (click)="showFollowers();"></a> <span class="followers">{{followers}}</span></h6>
+            <a class="fas fa-users fa-2x" (click)="showFollowers();"></a> <span class="followers">{{followers}}</span></h6>
 
         <div class="ds-info">
             <div class="ds pens">

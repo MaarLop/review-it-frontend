@@ -23,6 +23,7 @@ import { ModalEditComponent } from './user/modal-edit/modal-edit.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ChatComponent } from './chat/chat.component';
 import { DenounceRadioUserComponent } from './user/denounce-radio-user/denounce-radio-user.component';
+import  {  NgxEmojiPickerModule  }  from  'ngx-emoji-picker';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { DenounceRadioUserComponent } from './user/denounce-radio-user/denounce-
     FontAwesomeModule,
     ReactiveFormsModule,
     FormsModule,
+    NgxEmojiPickerModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

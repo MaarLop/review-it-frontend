@@ -161,17 +161,31 @@
   }
 
 .send-message {
-    button, input{ 
+    .send-button, input{ 
         height: 51px;
         color:#fff;
     }
-    button{
+    .send-button{
         float: right;
         width: 25%;
         background-color: #008391;
     }
     input{
         background-color: #2d3436;
-        width: 75%;
-    }
+        width: 69%;
+        border-width:0px;
+        border:none;
+      }
+      .emoji{
+        background-color: #2d3436;
+        width: 44px;
+        border-width:0px;
+        border:none;
+        height: 51px;
+        font-size: 30px;
+        text-align: center;
+        padding: 2px 0px 13px 4px;
+        cursor: pointer;
+      }
 }
+
