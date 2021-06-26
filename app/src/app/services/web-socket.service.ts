@@ -43,6 +43,6 @@ export class WebSocketService{
     }
 
     public closeWebSocket(){
-        this.webSocket.close();
+        this.webSocket?.close();
     }
 }

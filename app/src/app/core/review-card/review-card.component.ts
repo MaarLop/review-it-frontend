@@ -6,10 +6,11 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ReviewService } from 'src/app/services/review.service';
 import { CommentListComponent } from '../comment-list/comment-list.component';
 import { NotificationService } from '../shared/errors/notification.service';
-import { faComment, faTrash, faThumbsUp, faEdit } from '@fortawesome/free-solid-svg-icons';
+import { faComment, faTrash, faThumbsUp, faEdit, faInfo } from '@fortawesome/free-solid-svg-icons';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { Like } from '../models/like.model';
 import { ModalEditReviewComponent } from './modal-edit-review/modal-edit-review.component';
+import { ApiClientService } from '../api-client.service';
 
 @Component({
   selector: 'app-review-card',
@@ -25,12 +26,13 @@ export class ReviewCardComponent implements OnInit{
   faEdit = faEdit;
   trash = faTrash;
   thumbs= faThumbsUp;
+  faInfo= faInfo;
   isOwner = false;
   likeCount: number;
   hasLike: boolean;
   hasImage: boolean;
 
-  constructor(private reviewService: ReviewService, private userService: UserService, private modalService: NgbModal, private notificationService: NotificationService){ 
+  constructor(private reviewService: ReviewService, public apiClient: ApiClientService, private userService: UserService, private modalService: NgbModal, private notificationService: NotificationService){ 
    }
   
   ngOnInit(): void {
@@ -87,6 +89,24 @@ export class ReviewCardComponent implements OnInit{
         }
       })
     }
+  }
+
+  moreDetails(){
+    this.apiClient
+        .get(`https://api.themoviedb.org/3/search/movie?api_key=d83d9bf26a31066155e617cf070d3004&query=${this.review.title}&language=es`)
+        .subscribe((content)=>{
+          const result = content.results[0];
+          Swal.fire({
+            title: this.review.title,
+            showCancelButton: false,
+            html: ` <img id="tool-tip" src="${this.review.img}" fallimg="movie" style="max-height:200px; width:auto;"/>
+            <p>${result.overview}</p>`,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            cancelButtonText:'Cancelar',
+            confirmButtonText: 'Cerrar'
+          })
+        });
   }
 
   likear(){
