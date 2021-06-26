@@ -92,21 +92,16 @@ export class ReviewCardComponent implements OnInit{
   }
 
   moreDetails(){
-    this.apiClient
-        .get(`https://api.themoviedb.org/3/search/movie?api_key=d83d9bf26a31066155e617cf070d3004&query=${this.review.title}&language=es`)
-        .subscribe((content)=>{
-          const result = content.results[0];
-          Swal.fire({
-            title: this.review.title,
-            showCancelButton: false,
-            html: ` <img id="tool-tip" src="${this.review.img}" fallimg="movie" style="max-height:200px; width:auto;"/>
-            <p>${result.overview}</p>`,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            cancelButtonText:'Cancelar',
-            confirmButtonText: 'Cerrar'
-          })
-        });
+    Swal.fire({
+      title: this.review.title,
+      showCancelButton: false,
+      html: ` <img id="tool-tip" src="${this.review.img}" fallimg="movie" style="max-height:200px; width:auto;"/>
+      <p>${this.review.overview}</p>`,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      cancelButtonText:'Cancelar',
+      confirmButtonText: 'Cerrar'
+    });
   }
 
   likear(){
