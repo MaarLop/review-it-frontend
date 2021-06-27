@@ -6,10 +6,11 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ReviewService } from 'src/app/services/review.service';
 import { CommentListComponent } from '../comment-list/comment-list.component';
 import { NotificationService } from '../shared/errors/notification.service';
-import { faComment, faTrash, faThumbsUp, faEdit } from '@fortawesome/free-solid-svg-icons';
+import { faComment, faTrash, faThumbsUp, faEdit, faBan } from '@fortawesome/free-solid-svg-icons';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { Like } from '../models/like.model';
 import { ModalEditReviewComponent } from './modal-edit-review/modal-edit-review.component';
+import { DenounceRadioReviewComponent } from './denounce-radio-review/denounce-radio-review.component';
 
 @Component({
   selector: 'app-review-card',
@@ -22,6 +23,7 @@ export class ReviewCardComponent implements OnInit{
   currentRate: Number;
   comment = faComment;
   heart = faHeart;
+  faBan = faBan;
   faEdit = faEdit;
   trash = faTrash;
   thumbs= faThumbsUp;
@@ -108,6 +110,12 @@ export class ReviewCardComponent implements OnInit{
       modalRef.componentInstance.modal = modalRef;
       modalRef.componentInstance.review = this.review;
     }
+  }
+
+  denounce(){
+    const modalRef = this.modalService.open(DenounceRadioReviewComponent);
+      modalRef.componentInstance.modal = modalRef;
+      modalRef.componentInstance.review = this.review;
   }
 
 }

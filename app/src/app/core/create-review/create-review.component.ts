@@ -56,7 +56,7 @@ export class CreateReviewComponent implements OnInit {
         userId: sessionStorage.getItem('userId'),
         overview: [{ value: '', disabled: false }],
         img: [{ value: '', disabled: false }],
-        genresId: [{ value: '', disabled: false }],
+        genresId: [{ value: [], disabled: false }],
       }
     )
   }

@@ -1,26 +1,26 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { User } from 'src/app/core/models/user.model';
-import { NotificationService } from 'src/app/core/shared/errors/notification.service';
-import { UserService } from 'src/app/services/user.service';
+import { ReviewService } from 'src/app/services/review.service';
 import Swal from 'sweetalert2';
-import { ComplaintReason } from '../../core/models/complaintReason.model';
-import { ComplaintUser } from '../../core/models/complaintUser.model';
+import { ComplaintReason } from '../../models/complaintReason.model';
+import { ComplaintReview } from '../../models/complaintReview.model';
+import { Review } from '../../models/review-model';
+import { NotificationService } from '../../shared/errors/notification.service';
 
 @Component({
-  selector: 'app-denounce-radio-user',
-  templateUrl: './denounce-radio-user.component.html',
-  styleUrls: ['./denounce-radio-user.component.scss']
+  selector: 'app-denounce-radio-review',
+  templateUrl: './denounce-radio-review.component.html',
+  styleUrls: ['./denounce-radio-review.component.scss']
 })
-export class DenounceRadioUserComponent implements OnInit {
-
-  formComplaintUser: FormGroup;
+export class DenounceRadioReviewComponent implements OnInit {
+  
+  formComplaintReview: FormGroup;
   modal : NgbModalRef;
-  @Input() user : User;
+  @Input() review : Review;
   reason=ComplaintReason;
 
-  constructor(private fb: FormBuilder, private userService: UserService, private notificationService: NotificationService) { }
+  constructor(private fb: FormBuilder, private reviewService: ReviewService, private notificationService: NotificationService) { }
 
   ngOnInit(): void {
     this.startForm();
@@ -31,10 +31,10 @@ export class DenounceRadioUserComponent implements OnInit {
   }
 
   startForm(){
-    this.formComplaintUser = this.fb.group(
+    this.formComplaintReview = this.fb.group(
       {
         userId: sessionStorage.getItem('userId'),
-        toId: [{value: this.user.id, disabled: false}],
+        reviewId: [{value: this.review.id, disabled: false}],
         reason: [{value: '', disabled: false}],
         comment: [{value: '', disabled: false}]
       }
@@ -42,7 +42,7 @@ export class DenounceRadioUserComponent implements OnInit {
   }
 
   denounce(){
-    if(this.formComplaintUser.valid){
+    if(this.formComplaintReview.valid){
       Swal.fire({
         title: 'Estás seguro?',
         text: "No podrás revertir esto!",
@@ -54,8 +54,8 @@ export class DenounceRadioUserComponent implements OnInit {
         confirmButtonText: 'Sí, denunciar!'
       }).then((result) => {
         if (result.isConfirmed) {
-          this.formComplaintUser.get('reason').setValue(this.formComplaintUser.get('reason').value.split('.')[1]);
-          this.userService.denounce(this.formComplaintUser.getRawValue() as ComplaintUser).subscribe((complaint: ComplaintUser) => {
+          this.formComplaintReview.get('reason').setValue(this.formComplaintReview.get('reason').value.split('.')[1]);
+          this.reviewService.denounce(this.formComplaintReview.getRawValue() as ComplaintReview).subscribe((complaint: ComplaintReview) => {
             //this.newReview.emit(complaint);
             //this.startForm();
             this.close();

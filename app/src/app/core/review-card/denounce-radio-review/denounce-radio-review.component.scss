@@ -14,7 +14,8 @@ body {
 
 /* section */
 
-section {
+
+/*section {
     width: 100%;
     min-height: inherit;
     justify-content: center;
@@ -26,8 +27,7 @@ section {
     padding: 10px;
 }
 
-
-/*section::before,
+section::before,
 section::after {
     content: "";
     display: block;
