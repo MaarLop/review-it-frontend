@@ -114,17 +114,15 @@ export class UserComponent implements OnInit {
       this.userService.getFollowers(userName).subscribe((response: Pageable) => {
       const followers = response.content.map((follow) => follow.from);
       this.followers$.next(followers);
-      //console.log(response.totalElements);
-      this.followers = this.followers$.value.length;
+      this.followers = response.totalElements;
     });
     this.userService.getFollowings(userName).subscribe((response: Pageable) => {
       const followings = response.content.map((follow) => follow.to);
       this.followings$.next(followings);
-      this.followings = this.followings$.value.length;
+      this.followings = response.totalElements;
     });
     this.userService.getReviews(userName).subscribe((response)=>{
       this.reviews = response.length;
-      console.log(this.reviews);
     });
   }
 

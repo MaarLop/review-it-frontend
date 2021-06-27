@@ -19,6 +19,7 @@ export class ChatComponent implements OnInit, OnDestroy{
   sender = sessionStorage.getItem('userName');
   receiber = null;
   chatTitle = '';
+  receiberAvatar = 'https://www.adl-logistica.org/wp-content/uploads/2019/07/imagen-perfil-sin-foto.png';
   public isEmojiPickerVisible: boolean = false;
   send = faPaperPlane
   constructor(protected userService: UserService, public webSocketService: WebSocketService) { }
@@ -45,7 +46,7 @@ export class ChatComponent implements OnInit, OnDestroy{
   }
 
   sendMessage(): void {
-    if(this.receiber){
+    if(this.receiber && this.message){
       const msg = {message : this.message, idFrom: +this.senderId, idTo: +this.receiber.id, sender: this.sender}
       if(this.message){
         this.webSocketService.sendMessage(msg);
@@ -53,13 +54,14 @@ export class ChatComponent implements OnInit, OnDestroy{
       this.message = '';
     }
     else{
-      alert('seleccione un destinatario');
+      alert('Seleccione un destinatario y un mensaje');
     }
   }
 
   sendMessageTo(user){
     this.receiber= user;
     this.chatTitle = `${user.name} ${user.lastName}`
+    this.receiberAvatar= user.avatar;
     this.webSocketService.openWebSocket(user.userName, this.sender)
   }
 

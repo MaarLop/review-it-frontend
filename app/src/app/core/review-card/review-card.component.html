@@ -5,10 +5,7 @@
             <img src="{{review?.user?.image? review.user.image : review?.user?.avatar }}" fallimg="profile"></div>
         <div class="pxc-stopper"> </div>
         <div class="pxc-subcard">
-            <ng-template #tolTemplate>
-                <img id="tool-tip" src="{{ review.img }}" fallimg="movie" />
-            </ng-template>
-            <div class="pxc-title" [tooltip]="tolTemplate" placement="right">{{review.title}}</div>
+            <div class="pxc-title">{{review.title}}</div>
             <div class="pxc-sub">
                 {{review.genres}}
             </div>
@@ -50,6 +47,11 @@
                                 <li data-toggle-for="blob-more-options-details">
                                     <button *ngIf="isOwner" (click)="remove()" class="btn-link dropdown-item"><fa-icon [icon]="trash" aria-hidden="true"></fa-icon>
                                         <span> Eliminar</span>
+                                    </button>
+                                </li>
+                                <li data-toggle-for="blob-more-options-details">
+                                    <button (click)="moreDetails()" class="btn-link dropdown-item"><fa-icon [icon]="faInfo" aria-hidden="true"></fa-icon>
+                                        <span> Info</span>
                                     </button>
                                 </li>
                             </ul>
