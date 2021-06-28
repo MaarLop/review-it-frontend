@@ -96,7 +96,7 @@ export class UserComponent implements OnInit {
       catchError(async (error) => this.errorHandle(error))
     ).subscribe((data) => {
       this.user = data;
-    }) 
+    })
   }
 
   async getInformationOfUser(userName: string){

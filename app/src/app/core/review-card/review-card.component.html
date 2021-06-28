@@ -35,6 +35,11 @@
                                     </button>
                                 </li>
                                 <li data-toggle-for="blob-more-options-details">
+                                    <button *ngIf="!isOwner" (click)="denounce()" class="btn-link dropdown-item"><fa-icon [icon]="faBan" aria-hidden="true"></fa-icon> 
+                                        <span> Denunciar</span>
+                                    </button>
+                                </li>
+                                <li data-toggle-for="blob-more-options-details">
                                     <button *ngIf="isOwner" (click)="edit()" class="btn-link dropdown-item"><fa-icon [icon]="faEdit" aria-hidden="true"></fa-icon> 
                                         <span> Editar</span>
                                     </button>

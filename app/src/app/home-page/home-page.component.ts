@@ -8,6 +8,7 @@ import { UserService } from '../services/user.service';
 import { NotificationService } from '../core/shared/errors/notification.service';
 import { Pageable } from '../core/models/pageable.model';
 import { Like } from '../core/models/like.model';
+import { User } from '../core/models/user.model';
 
 @Component({
     selector: 'app-home-page',
@@ -24,6 +25,7 @@ export class HomePageComponent implements OnInit{
     page: number = 0;
     finished = false;
     showSpinner = false;
+    user: User;
 
     constructor(public reviewService: ReviewService, 
         public snackBar: MatSnackBar, 
@@ -37,6 +39,7 @@ export class HomePageComponent implements OnInit{
                 this.userService.login(data).subscribe((user) => {
                     sessionStorage.setItem('userId', user.id);
                     sessionStorage.setItem('userName', user.userName);
+                    this.user = user;
                 });
             }
         });

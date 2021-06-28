@@ -1,3 +1,5 @@
+import { Review } from "./review-model";
+
 export class User {
   id: number;
   userName: string;
@@ -10,6 +12,9 @@ export class User {
   avatar: string;
   password: string;
   image: any;
+  blocked: boolean;
+  blockedUsers: User[];
+  blockedReviews: Review[];
 
   constructor(id: number, userName: string, name: string, lastName: string, email, avatar: string, password: string){
     this.id=id;

@@ -24,6 +24,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ChatComponent } from './chat/chat.component';
 import { DenounceRadioUserComponent } from './user/denounce-radio-user/denounce-radio-user.component';
 import  {  NgxEmojiPickerModule  }  from  'ngx-emoji-picker';
+import { DenounceRadioReviewComponent } from './core/review-card/denounce-radio-review/denounce-radio-review.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import  {  NgxEmojiPickerModule  }  from  'ngx-emoji-picker';
     UserSearchComponent,
     ModalEditComponent,
     ChatComponent,
-    DenounceRadioUserComponent
+    DenounceRadioUserComponent,
+    DenounceRadioReviewComponent
   ],
   imports: [
     BrowserModule,

@@ -32,8 +32,8 @@
         </div>
         <div class="ds-info">
             <div class="ds posts">
-                <a class="btn" (click)="denounce();">
-                    <h4 title="Denounce">Denunciar
+                <a class="btn" *ngIf="isFollowing" (click)="denounce();">
+                    <h4 title="Denunciar">Denunciar
                         <fa-icon [icon]="faBan"></fa-icon>
                     </h4>
                 </a>
