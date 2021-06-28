@@ -1,74 +1,16 @@
-/* body */
 
-body {
-    width: 100%;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0;
-    padding: 0;
-    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
-}
-
-
-/* section */
-
-section {
-    width: 100%;
-    min-height: inherit;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    position: absolute;
-    display: inline-table;
-    border-radius: 1.3em;
-    padding: 10px;
-}
-
-section::before,
-section::after {
-    content: "";
-    display: block;
-    border-radius: 100%;
-    position: absolute;
-}
-
-section::before {
-    width: 30px;
-    height: 30px;
-    background: var(--primary);
-    clip-path: polygon(0 100%, 100% 0, 100% 100%);
-    top: 18px;
-    left: 18px;
-}
-
-section::after {
-    width: 42px;
-    height: 42px;
-    border: 1px solid var(--primary);
-    top: 11px;
-    left: 11px;
-}
-
-.light {
-    --primary: hsl(250, 100%, 44%);
-    --other: hsl(0, 0%, 14%);
-    background: hsl(0, 0%, 98%);
-}
 
 .dark {
-    --primary: hsl(1, 100%, 68%);
+    --primary: crimson;
     --other: hsl(0, 0%, 90%);
-    background: hsl(0, 0%, 10%);
+    background: #151515;
 }
 
-
-/* h1 */
 
 h1 {
     color: var(--other);
     padding: 8px 4px;
+    margin-left: 5px;
     border-bottom: 2px solid var(--other);
 }
 
@@ -109,8 +51,7 @@ input {
     position: relative;
 }
 
-.design::before,
-.design::after {
+.design::before {
     content: "";
     display: block;
     width: 14px;
@@ -126,13 +67,6 @@ input {
     opacity: 0;
     transition: .3s;
 }
-
-.design::after {
-    background: var(--primary);
-    opacity: .4;
-    transition: .6s;
-}
-
 
 /* .text */
 
@@ -174,10 +108,11 @@ input:active+.design::after {
 
 .post-actions__publish,
 .cancel-actions {
-    width: 100%;
+    width: 96%;
     color: #fff;
     border-radius: 1.5em;
     margin-top: 15px;
+    margin-left: 10px;
 }
 
 .post-actions__publish {
@@ -186,4 +121,5 @@ input:active+.design::after {
 
 .cancel-actions {
     background-color: rgb(109, 109, 109);
+    margin-bottom: 10px;
 }
