@@ -7,7 +7,6 @@ import { ReviewService } from '../services/review.service';
 import { UserService } from '../services/user.service';
 import { NotificationService } from '../core/shared/errors/notification.service';
 import { Pageable } from '../core/models/pageable.model';
-import { Like } from '../core/models/like.model';
 
 @Component({
     selector: 'app-home-page',
@@ -55,7 +54,7 @@ export class HomePageComponent implements OnInit{
     getReviews(){
         if(this.finished) return;
 
-        this.reviewService.getReviews(this.size, this.page, '').subscribe((response)=>{
+        this.reviewService.getReviewsForUser(sessionStorage.getItem('userName'),this.size, this.page).subscribe((response:Pageable)=>{
             const reviewList = this.reviews$.value;
             this.reviews$.next([...reviewList, ...response.content]);
             this.finished = response.last;

@@ -28,6 +28,14 @@ export class ReviewService {
     });
   }
 
+  public getReviewsForUser( userName:string, size?:number, page?: number){
+    const pageAndSize = size === null && page === null ? '' : `&page=${page}&size=${size}`;
+    const path = `${this.basePath}/getForUser/${userName}?${pageAndSize}`;
+    return this.httpClient.get(path, { 
+      headers: this.headers 
+    });
+  }
+
   public create(body: Review){
     const path = this.basePath;
     const headers = this.headers;
