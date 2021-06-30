@@ -19,7 +19,7 @@ export class DenounceRadioUserComponent implements OnInit {
   modal : NgbModalRef;
   @Input() user : User;
   reason=ComplaintReason;
-
+ 
   constructor(private fb: FormBuilder, private userService: UserService, private notificationService: NotificationService) { }
 
   ngOnInit(): void {
@@ -74,4 +74,7 @@ export class DenounceRadioUserComponent implements OnInit {
     }
   }
 
+  get hasSelectedOption():boolean{
+    return !!this.formComplaintUser.get('reason').value;
+  }
 }

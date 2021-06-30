@@ -1,6 +1,6 @@
 <form [formGroup]="formComplaintUser">
     <section class="dark">
-        <h1>Denunciar usuario por</h1>
+        <h1>Denunciar</h1>
         <label>
         <input type="radio" formControlName="reason" value="reason.NOT_INTERESTED">
         <span class="design"></span>
@@ -16,7 +16,7 @@
         <span class="design"></span>
         <span class="text">{{ reason.BAD_LANGUAGE }}</span>
       </label>
-        <button class="btn post-actions__publish" (click)="denounce()">Actualizar</button>
+        <button class="btn post-actions__publish" (click)="denounce()" [disabled]="!hasSelectedOption">Actualizar</button>
         <button class="btn cancel-actions" (click)="close()">Cancelar</button>
     </section>
 </form>
