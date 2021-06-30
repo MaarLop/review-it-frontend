@@ -138,4 +138,10 @@ export class UserService {
         headers:this.headers
       });
     }
+
+    public denounce(body: any){
+      const path = this.basePath + `/denounce`;
+      const headers = this.headers;
+      return this.httpClient.post(path, body, { headers })
+    }
 }

@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Review } from '../core/models/review-model';
 import { Comment } from '../core/models/comment.model';
 import { Like } from '../core/models/like.model';
+import { ComplaintReview } from '../core/models/complaintReview.model';
 
 @Injectable({
   providedIn: 'root'
@@ -79,5 +80,9 @@ export class ReviewService {
     return this.httpClient.get(path, { headers });
   }
   
-  
+  public denounce(body: any){
+    const path = this.basePath + `/denounce`;
+    const headers = this.headers;
+    return this.httpClient.post(path, body, { headers })
+  }  
 }
