@@ -6,11 +6,13 @@
         </div>
         <div class="name">
             <a target="_blank" *ngIf="isOwnProfile" (click)="edit()">{{user?.name}} (@{{user?.userName}}) <fa-icon [icon]="faEdit"></fa-icon></a>
-            <div *ngIf="!isOwnProfile">{{user?.name}} (@{{user?.userName}}) <fa-icon [icon]="faBan" (click)="denounce();"title="Denunciar" style="color:#DC143C; cursor: pointer;"></fa-icon></div>
+            <div *ngIf="!isOwnProfile">{{user?.name}} (@{{user?.userName}})
+                <fa-icon [icon]="faBan" (click)="denounce();" title="Denunciar" style="color:#DC143C; cursor: pointer;"></fa-icon>
+            </div>
             <div class="button" *ngIf="displayButton">
                 <app-follow-button [user]="user" (toggle)="isFollowing=$event"></app-follow-button>
             </div>
-            
+
         </div>
         <h6 title="Seguidores">
             <a class="fas fa-users fa-2x" (click)="showFollowers();"></a> <span class="followers">{{followers}}</span></h6>
@@ -29,15 +31,6 @@
             <div class="ds posts">
                 <h4 title="Cantidad de likes">Likes <i class="fa fa-thumbs-o-up"></i></h4>
                 <p>{{likes}}</p>
-            </div>
-        </div>
-        <div class="ds-info">
-            <div class="ds posts">
-                <a class="btn" *ngIf="isFollowing" (click)="denounce();">
-                    <h4 title="Denunciar">Denunciar
-                        <fa-icon [icon]="faBan"></fa-icon>
-                    </h4>
-                </a>
             </div>
         </div>
     </div>
