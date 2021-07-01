@@ -74,8 +74,9 @@ export class CreateReviewComponent implements OnInit {
         err => {
           const title = err.error.title ? err.error.title+'\n' : '';
           const description = err.error.description ? err.error.description+'\n' : '';
-          const points = err.error.points ? err.error.points : ''
-          this.notifier.showError(title+description+points);
+          const points = err.error.points ? err.error.points : '';
+          const error = title+description+points == '' ? err.error : title+description+points
+          this.notifier.showError(error);
         }
       );
     }
