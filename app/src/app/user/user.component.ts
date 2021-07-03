@@ -82,7 +82,6 @@ export class UserComponent implements OnInit {
     this.displayButton = this.activatedRoute.snapshot.routeConfig.path.includes('user') &&
               sessionStorage.getItem('userName') !== this.userName
     this.isOwnProfile = !this.displayButton;
-    this.isPrivate = this.user.isPrivate;
   }
 
   likesToUser(userName: string){
@@ -91,15 +90,16 @@ export class UserComponent implements OnInit {
     });
   }
 
-  async startForm(userName: string){
+  startForm(userName: string){
     this.userService.getByUsername(userName).pipe(
       catchError(async (error) => this.errorHandle(error))
     ).subscribe((data) => {
       this.user = data;
+      this.isPrivate = data.isPrivate;
     })
   }
 
-  async getInformationOfUser(userName: string){
+  getInformationOfUser(userName: string){
       this.userService.getImage(userName).subscribe(
       (data) => {
         let reader = new FileReader();

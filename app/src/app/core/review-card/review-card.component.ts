@@ -51,7 +51,7 @@ export class ReviewCardComponent implements OnInit{
     });
     this.currentRate=this.review.points;
     this.hasImage=this.review.img ? true : false;
-    this.isOwner=parseInt(sessionStorage.getItem("userId"))===this.review.user.id;
+    this.isOwner=parseInt(localStorage.getItem("userId"))===this.review.user.id;
     this.likes();
   }
 
@@ -59,7 +59,7 @@ export class ReviewCardComponent implements OnInit{
     if(this.review.id){
       this.reviewService.likes(this.review.id).subscribe((response)=>{
         this.likeCount = response.length;
-        this.hasLike = response.some((like: Like)=>like.user.id===parseInt(sessionStorage.getItem("userId")));
+        this.hasLike = response.some((like: Like)=>like.user.id===parseInt(localStorage.getItem("userId")));
       });
     }
   }
