@@ -32,7 +32,7 @@ export class ReviewListComponent implements OnInit {
     }
 
     getReviews(){
-        this.reviewService.getReviews(this.size, this.page, this.filter$?.value).subscribe((response)=>{
+        this.reviewService.getReviews(sessionStorage.getItem('userName'), this.size, this.page, this.filter$?.value).subscribe((response)=>{
             const reviewList = this.page === 0 ? [] : this.reviews$.value;
             this.reviews$.next([...reviewList, ...response.content]);
             this.finished = response.last;

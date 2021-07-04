@@ -15,7 +15,7 @@ export class NotificationService {
       panelClass: ['success-snackbar']
     });
     snack.afterDismissed().subscribe(()=>{
-        window.location.reload();
+      this.reloadComponent();
     })
   }
 
