@@ -54,7 +54,8 @@ export class ChatComponent implements OnInit, OnDestroy{
       this.message = '';
     }
     else{
-      alert('Seleccione un destinatario y un mensaje');
+      const alertMessage = this.receiber ? 'Ingrese un mensaje' : 'Seleccione un destinatario';
+      alert(alertMessage);
     }
   }
 

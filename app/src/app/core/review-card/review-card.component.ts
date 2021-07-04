@@ -6,7 +6,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ReviewService } from 'src/app/services/review.service';
 import { CommentListComponent } from '../comment-list/comment-list.component';
 import { NotificationService } from '../shared/errors/notification.service';
-import { faComment, faTrash, faThumbsUp, faEdit, faInfo, faBan } from '@fortawesome/free-solid-svg-icons';
+import { faComment, faTrash, faThumbsUp, faEdit, faInfoCircle, faBan } from '@fortawesome/free-solid-svg-icons';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { Like } from '../models/like.model';
 import { ModalEditReviewComponent } from './modal-edit-review/modal-edit-review.component';
@@ -28,7 +28,7 @@ export class ReviewCardComponent implements OnInit{
   faEdit = faEdit;
   trash = faTrash;
   thumbs= faThumbsUp;
-  faInfo= faInfo;
+  faInfo= faInfoCircle;
   isOwner = false;
   likeCount: number;
   hasLike: boolean;

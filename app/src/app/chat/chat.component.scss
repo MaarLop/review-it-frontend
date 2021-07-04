@@ -91,7 +91,6 @@
         bottom: 0;
         left: 0;
         border: none;
-        width: 75%;
         padding: 1.2em;
         outline: none;
         color: rgba(255, 255, 255, 0.9);
@@ -172,7 +171,12 @@
     }
     input{
         background-color: #2d3436;
-        width: 69%;
+        @media (max-width: 1000px) {
+          width: 75%;
+        }
+        @media (min-width: 1001px) {
+          width: 69%;
+        }
         border-width:0px;
         border:none;
       }
