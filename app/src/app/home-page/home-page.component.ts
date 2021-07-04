@@ -39,10 +39,15 @@ export class HomePageComponent implements OnInit{
         this.auth.user$.subscribe(data =>{
             if(data){
                 this.userService.login(data).subscribe((user) => {
+                    const vUsername = sessionStorage.getItem('userName');
                     sessionStorage.setItem('userId', user.id);
                     sessionStorage.setItem('userName', user.userName);
-                    this.user = user;
-                    this.getReviews();
+                    if(vUsername !== sessionStorage.getItem('userName')){
+                        this.notificationService.reloadComponent();
+                    }else{
+                        this.user = user;
+                        this.getReviews();
+                    }
                 });
             }
         });
@@ -55,18 +60,11 @@ export class HomePageComponent implements OnInit{
                     });
                 }
             }  
-        )
-       // window.location.reload();
-        // this.router.navigateByUrl('/');
-        this.router.navigate(['/']);
-        console.log("ngOnit")
-        console.log(sessionStorage.getItem('userName'))    
+        )   
     }
 
     getReviews(){
         if(this.finished) return;
-        console.log("getReviews")
-        console.log(sessionStorage.getItem('userName'));
         this.reviewService.getReviewsForUser(sessionStorage.getItem('userName'),this.size, this.page).subscribe((response:Pageable)=>{
             const reviewList = this.page === 0 ? [] : this.reviews$.value;
             this.reviews$.next([...reviewList, ...response.content]);
