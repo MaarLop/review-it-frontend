@@ -32,8 +32,7 @@ export class HomePageComponent implements OnInit{
         public snackBar: MatSnackBar, 
         public auth:AuthService, 
         private userService:UserService,
-        private notificationService: NotificationService,
-        private router: Router){ }
+        private notificationService: NotificationService){ }
 
     ngOnInit(): void {
         this.auth.user$.subscribe(data =>{
