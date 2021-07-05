@@ -72,11 +72,16 @@ export class CreateReviewComponent implements OnInit {
         this.startForm();
       },
         err => {
-          const title = err.error.title ? err.error.title+'\n' : '';
-          const description = err.error.description ? err.error.description+'\n' : '';
-          const points = err.error.points ? err.error.points : '';
-          const error = title+description+points == '' ? err.error : title+description+points
-          this.notifier.showError(error);
+          if(err.error){
+            const title = err.error.title ? err.error.title+'\n' : '';
+            const description = err.error.description ? err.error.description+'\n' : '';
+            const points = err.error.points ? err.error.points : '';
+            const error = title+description+points == '' ? err.error : title+description+points
+            this.notifier.showError(error);
+          }
+          else{
+            this.notifier.showError('Usuario bloqueado, no podrás publicar por 30 días');
+          }
         }
       );
     }
