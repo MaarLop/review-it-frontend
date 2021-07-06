@@ -35,31 +35,33 @@ export class HomePageComponent implements OnInit{
         private notificationService: NotificationService){ }
 
     ngOnInit(): void {
+        this.userService.getToken().subscribe(data => {               
+            localStorage.setItem('auth_token', data.access_token);
+        });
         this.auth.user$.subscribe(data =>{
             if(data){
+                const vUsername = sessionStorage.getItem('userName');
                 this.userService.login(data).subscribe((user) => {
-                    const vUsername = sessionStorage.getItem('userName');
                     sessionStorage.setItem('userId', user.id);
                     sessionStorage.setItem('userName', user.userName);
                     if(vUsername !== sessionStorage.getItem('userName')){
                         this.notificationService.reloadComponent();
                     }else{
                         this.user = user;
-                        this.getReviews();
+                        if(localStorage.getItem('auth_token')){
+                            this.getReviews();
+                        }
                     }
                 });
             }
         });
-        this.auth.isAuthenticated$.subscribe(
+        /*this.auth.isAuthenticated$.subscribe(
             loggedIn =>{
-                console.log(loggedIn);
                 if(loggedIn){
-                    this.userService.getToken().subscribe(data => {
-                        localStorage.setItem('auth_token', data.access_token);
-                    });
+                    this.getReviews(); 
                 }
             }  
-        )   
+        )*/ 
     }
 
     getReviews(){
