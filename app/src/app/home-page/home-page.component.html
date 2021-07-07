@@ -1,5 +1,5 @@
 <ng-container *ngIf="(auth.isAuthenticated$ | async);">
-    <app-create-review *ngIf="!user?.blocked" (newReview)="newReview($event)">
+    <app-create-review (newReview)="newReview($event)">
     </app-create-review>
     <div class="homePage" *ngFor="let item of (reviews$ | async); let i = index">
         <app-review-card [review]="item"></app-review-card>
