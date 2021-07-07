@@ -57,9 +57,17 @@
                             </ul>
                         </div>
                     </details>
-                    <div>
-                        <span class="thumbup"><button (click)="likear()" class="thumbupo likes"><fa-icon [icon]="thumbs" aria-hidden="true"></fa-icon></button></span>
-                        <span class="text4 text4i">{{likeCount}}</span>
+                    <div *ngIf="!hasLike">
+                        <span class="thumbup">
+                            <button (click)="likear()" class="thumbupo-not-likeado likes"><fa-icon [icon]="thumbs" aria-hidden="true"></fa-icon></button>
+                        </span>
+                        <span class="text4 text4i-not-likeado">{{likeCount}}</span>
+                    </div>
+                    <div *ngIf="hasLike">
+                        <span class="thumbup">
+                            <button (click)="likear()" class="thumbupo-likeado likes"><fa-icon [icon]="thumbs" aria-hidden="true"></fa-icon></button>
+                        </span>
+                        <span class="text4 text4i-likeado">{{likeCount}}</span>
                     </div>
                 </div>
 

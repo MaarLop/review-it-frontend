@@ -523,8 +523,12 @@ html {
     color: #828386
 }
 
-.text4i {
+.text4i-likeado {
     color: #00a5f4
+}
+
+.text4i-not-likeado {
+    color: #f7f8f8
 }
 
 .thumbup {
@@ -533,8 +537,12 @@ html {
     margin-right: 5px
 }
 
-.thumbupo {
+.thumbupo-likeado {
     color: #17a2b8
+}
+
+.thumbupo-not-likeado {
+    color: #f7f8f8
 }
 
 #tool-tip {
@@ -677,4 +685,3 @@ li {
     display: list-item;
     text-align: left;
 }
-
