@@ -63,7 +63,7 @@ export class ChatComponent implements OnInit, OnDestroy{
     this.receiber= user;
     this.chatTitle = `${user.name} ${user.lastName}`
     this.receiberAvatar= user.avatar;
-    this.webSocketService.openWebSocket(user.userName, this.sender)
+    this.webSocketService.openWebSocket(user, this.sender)
   }
 
   ngOnDestroy(): void {
