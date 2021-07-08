@@ -59,7 +59,7 @@ export class DenounceRadioUserComponent implements OnInit {
             //this.newReview.emit(complaint);
             //this.startForm();
             this.close();
-            this.notificationService.showSuccessAfter('Denuncia realizada con exito.');
+            this.notificationService.showSuccessAfter('Denuncia realizada correctamente.');
           },
             err => {
               console.log(err);
