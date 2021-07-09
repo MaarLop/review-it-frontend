@@ -56,7 +56,8 @@ export class ModalEditComponent implements OnInit {
       }
       this.userService.save(uploadData).subscribe((user: User) => {
         this.modal.close();
-        this.notificationService.showSuccess('Su perfil está siendo actualizado..');
+        this.notificationService.showSuccessBeforeAfter('Su perfil está siendo actualizado..', 
+          'Su perfil ha sido actualizado correctamente.');
       },
         err => {
           let first = err.error.name ? err.error.name+'\n' : '';

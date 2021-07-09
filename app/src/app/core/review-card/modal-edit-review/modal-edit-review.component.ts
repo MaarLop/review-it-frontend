@@ -48,7 +48,8 @@ export class ModalEditReviewComponent implements OnInit {
     if(this.formReview.valid){
       this.reviewService.modify(this.formReview.getRawValue() as Review).subscribe((review: Review) => {
         this.modal.close();
-        this.notificationService.showSuccess('Su reseña está siendo actualizada..');
+        this.notificationService.showSuccessBeforeAfter('Su reseña está siendo actualizada..', 
+          'Su reseña ha sido eliminada correctamente.');
       },
         err => {
           let first = err.error.description ? err.error.description+'\n' : '';

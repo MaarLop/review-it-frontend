@@ -26,6 +26,20 @@ export class NotificationService {
       panelClass: ['success-snackbar']
     });
   }
+
+  showSuccessBeforeAfter(msgBefore: string, msgAfter: string): void {
+    let snack = this.snackBar.open(msgBefore, 'x', {
+      duration: 3000,
+      panelClass: ['success-snackbar']
+    });
+    snack.afterDismissed().subscribe(()=>{
+      this.reloadComponent();
+      this.snackBar.open(msgAfter, 'x', {
+        duration: 5000,
+        panelClass: ['success-snackbar']
+      });
+    })
+  }
   
   showError(message: string): void {
     // The second parameter is the text in the button. 
