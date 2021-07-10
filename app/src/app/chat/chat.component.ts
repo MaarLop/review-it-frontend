@@ -5,6 +5,7 @@ import { User } from '../core/models/user.model';
 import { Pageable } from '../core/models/pageable.model';
 import { UserService } from '../services/user.service';
 import { WebSocketService } from '../services/web-socket.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-chat',
@@ -55,7 +56,13 @@ export class ChatComponent implements OnInit, OnDestroy{
     }
     else{
       const alertMessage = this.receiber ? 'Ingrese un mensaje' : 'Seleccione un destinatario';
-      alert(alertMessage);
+      Swal.fire({
+        title: alertMessage,
+        icon: 'warning',
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'OK'
+      });
+      // alert(alertMessage);
     }
   }
 
