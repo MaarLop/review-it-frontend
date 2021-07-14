@@ -1,44 +1,39 @@
 <div class="container col-sm-11 col-sm-offset-1 col-xs-12">
-  <div class="chatbox">
-    <div class="chatbox__user-list">
-      <h2>Lista de usuarios</h2>
-      <div class="chatbox__user--active" *ngFor="let user of userList" >
-            <main class="leaderboard__profiles" >
-                <article class="leaderboard__profile">
-                <img src="{{user.avatar? user.avatar : 'https://www.adl-logistica.org/wp-content/uploads/2019/07/imagen-perfil-sin-foto.png'}}" class="leaderboard__picture">
-                <a (click)="sendMessageTo(user);">
-                    <span class="leaderboard__name">{{user.name}}</span>
-                </a>
-                </article>
-            </main>
-      </div>
-    </div>
-    <div class="messages_list">
-    <h2>{{chatTitle}}</h2>
-      <div class="chatbox__messages" *ngFor="let msg of (webSocketService.chatMessages$ | async)" [ngClass]="{mine: msg.mine}">
-        <div class="user-message">
-          <div class="message-box">
-            <p class="name">{{ msg.sender }}</p>
-            <br/>
-            <p class="message">{{ msg.message }}</p>
-          </div>
+    <div class="chatbox">
+        <div class="chatbox__user-list">
+            <h2>Lista de usuarios</h2>
+            <div class="chatbox__user--active" *ngFor="let user of userList">
+                <main class="leaderboard__profiles">
+                    <article class="leaderboard__profile">
+                        <img src="{{user.image? user.image : user?.avatar}}" fallimg="profile" class="leaderboard__picture">
+                        <a (click)="sendMessageTo(user);">
+                            <span class="leaderboard__name">{{user.name}}</span>
+                        </a>
+                    </article>
+                </main>
+            </div>
         </div>
-      </div>
-    </div>
-    <div class="send-message">
-    
-        <input type="text" [(ngModel)]="message"/>
-        <i class="emoji" 
-        (click)="toggled = !toggled" 
-        [(emojiPickerIf)]="toggled" 
-        [emojiPickerDirection]="'bottom' || 'top' || 'left' || 'right'" 
-        (emojiPickerSelect)="handleSelection($event)"
-        >
+        <div class="messages_list">
+            <h2>{{chatTitle}}</h2>
+            <div class="chatbox__messages" *ngFor="let msg of (webSocketService.chatMessages$ | async)" [ngClass]="{mine: msg.mine}">
+                <div class="user-message">
+                    <div class="message-box">
+                        <p class="name">{{ msg.sender }}</p>
+                        <br/>
+                        <p class="message">{{ msg.message }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="send-message">
+
+            <input type="text" [(ngModel)]="message" />
+            <i class="emoji" (click)="toggled = !toggled" [(emojiPickerIf)]="toggled" [emojiPickerDirection]="'bottom' || 'top' || 'left' || 'right'" (emojiPickerSelect)="handleSelection($event)">
           😄
         </i>
-        <button class="send-button" (click)="sendMessage()"><fa-icon [icon]="send"></fa-icon></button>
-        
+            <button class="send-button" (click)="sendMessage()"><fa-icon [icon]="send"></fa-icon></button>
+
+        </div>
     </div>
-  </div>
-  
+
 </div>

@@ -27,7 +27,20 @@ export class ChatComponent implements OnInit, OnDestroy{
 
   ngOnInit(): void {
     this.userService.getFollowings(sessionStorage.getItem('userName')).subscribe((followings: Pageable)=>{
-        const followingsUser = followings.content.map((f)=> f.to)
+        const followingsUser = followings.content.map((f)=> {
+          this.userService.getImage(f.to.userName).subscribe(
+            (data) => {
+            let reader = new FileReader();
+            reader.addEventListener("load", () => {
+              f.to.image = reader.result;
+            }, false);
+
+            if (data.size > 0) {
+              reader.readAsDataURL(data);
+            }
+          });
+          return f.to;
+        })
         this.userList.push(...followingsUser)
     });
 
